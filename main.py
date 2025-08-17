@@ -29,8 +29,7 @@ fnt_sizes=tab=get_fonts_sizes(fnt_list,list(range(6,30)))
 
 tile_size_xy= (floor(resolution_xy[0]/resolution_in_tiles[0]), floor(resolution_xy[1]/resolution_in_tiles[1]))
 resolution_in_tiles_percent_xy = {}
-for i in range(110):
-    p = i + 1
+for p in range(150):
     resolution_in_tiles_percent_xy[p] = (floor(resolution_in_tiles[0] * p / 100),
                                          floor(resolution_in_tiles[1] * p / 100))
 
