@@ -8,7 +8,6 @@ from create_menus import *
 import time
 
 
-
 pygame.init()
 pygame.display.set_caption("Marek")
 clock = pygame.time.Clock()
