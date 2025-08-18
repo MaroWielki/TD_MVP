@@ -67,21 +67,29 @@ def create_lvl_menu(database):
                    (database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "LevelMenu/Title0/button1",
                    text="Armory", color=3, action="open_armory"))
 
+    ### ACTIVE
     LM['LevelMenu/Title0/Title0'] = LM['LevelMenu/Title0'].add(
         MenuTitle(LM['LevelMenu/Title0'].px_start_xy, database,
                   (5,1),
                   (5,3), "LevelMenu/Title0/Title0", "Active",
                   tile_size_xy=database["double_tile_size_xy"], draggable=False))
 
-
     LM['LevelMenu/Title0/Title0/grid0'] = LM['LevelMenu/Title0/Title0'].add(GuiGrid(LM['LevelMenu/Title0/Title0'].px_start_xy, database, (0.5, 1.25),(4,1), "LevelMenu/Title0/Title0/grid0",tile_size_xy=database["double_tile_size_xy"]))
 
+    ### INACTIVE
     LM['LevelMenu/Title0/Title1'] = LM['LevelMenu/Title0'].add(
         MenuTitle(LM['LevelMenu/Title0'].px_start_xy, database,
                   (11, 1),
                   (5, 6), "LevelMenu/Title0/Title1", "InActive",
                   tile_size_xy=database["double_tile_size_xy"], draggable=False))
     LM['LevelMenu/Title0/Title1/grid0'] = LM['LevelMenu/Title0/Title1'].add(GuiGrid(LM['LevelMenu/Title0/Title0'].px_start_xy, database, (0.5, 1.25),(4,4), "LevelMenu/Title0/Title1/grid0",tile_size_xy=database["double_tile_size_xy"]))
+
+    inactive_item_index=0
+
+    LM['LevelMenu/Title0/Title1/grid0/item'+str(inactive_item_index)] = LM['LevelMenu/Title0/Title1/grid0'].add(
+        ItemMenu(LM['LevelMenu/Title0/Title1/grid0'].px_start_xy, database, (2, 0),  "LevelMenu/Title0/Title1/grid0/item"+str(inactive_item_index),tile_size_xy=database["double_tile_size_xy"],item_name="catapult",parent_grid=LM['LevelMenu/Title0/Title1/grid0']))
+
+
 
 
 

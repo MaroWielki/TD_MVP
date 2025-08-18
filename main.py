@@ -6,12 +6,16 @@ from sys import exit
 #from menus_utils import *
 from create_menus import *
 import time
-
+from lvl_utils import *
+from data import *
 
 pygame.init()
 pygame.display.set_caption("Marek")
 clock = pygame.time.Clock()
 last_update_time = pygame.time.get_ticks()
+
+fnt_list=["arial","comicsansms"]
+fnt_sizes=tab=get_fonts_sizes(fnt_list,list(range(6,30)))
 
 #resolution_xy = (1600, 900)
 #resolution_xy = (1400, 800)
@@ -20,11 +24,6 @@ resolution_xy = (1366,768)
 #resolution_xy = (1066, 600)
 #tile_size_xy = (16, 16)
 resolution_in_tiles=(100,56)
-#fnt_sizes=tab=get_fonts_sizes(["arial"],[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26])
-fnt_list=["arial","comicsansms"]
-
-fnt_sizes=tab=get_fonts_sizes(fnt_list,list(range(6,30)))
-
 
 tile_size_xy= (floor(resolution_xy[0]/resolution_in_tiles[0]), floor(resolution_xy[1]/resolution_in_tiles[1]))
 resolution_in_tiles_percent_xy = {}
@@ -33,11 +32,16 @@ for p in range(150):
                                          floor(resolution_in_tiles[1] * p / 100))
 
 
+
+
+
 database = {
     "fps": 60,
     "resolution_xy": resolution_xy,
     "tile_size_xy": tile_size_xy,
     "double_tile_size_xy": (tile_size_xy[0]*2, tile_size_xy[1]*2),
+    "triple_tile_size_xy": (tile_size_xy[0]*3, tile_size_xy[1]*3),
+    "quadrupal_tile_size_xy": (tile_size_xy[0]*4, tile_size_xy[1]*4),
     "half_tile_size_xy":(floor(tile_size_xy[0]/2), floor(tile_size_xy[1]/2)),
     #"resolution_in_tiles": (floor(resolution_xy[0] / tile_size_xy[0]), floor(resolution_xy[1] / tile_size_xy[1])),
     "resolution_in_tiles":resolution_in_tiles,
@@ -65,12 +69,38 @@ inv_menu_index=0
 #All_menus_groups_ordered.append(create_chest_menu(database))
 All_menus_groups_ordered.append(create_main_menu(database))
 
+### MAP
+road=read_images("img/road/",road_tiles,database["double_tile_size_xy"],(43,45,48))
+map=[]
+map_size_tiles_xy=(40,28)
+for i in range(map_size_tiles_xy[1]):
+    map.append([""]*map_size_tiles_xy[0])
+building_map={}
 
+road_map_png = "img/Paths/road_map2.png"
+road_map_png="img/Paths/road_map_40x28.png"
+road_map=pygame.image.load(road_map_png)
+road3x3_dictionary = read_road3x3_dictionary("img/Paths/")
+road3x3_dictionary_pixels=read_road3x3_dictionary_pixels("img/Paths/")
+road_map_mapping = read_road_map_mapping("img/Paths/mapping.csv")
+generate_map(map,road_map,road3x3_dictionary_pixels,road_map_mapping,map_size_tiles_xy)
 
+print(map)
+print(road)
+is_game_on=False
 while True:
 
     screen.fill("yellow")
 
+    ### MAP
+
+    if is_game_on:
+        print_road(screen, map, road,database["double_tile_size_xy"])
+
+
+
+
+    ### MENUS
     if All_menus_groups_ordered != []:
         for group in All_menus_groups_ordered:
             group[0].update()
@@ -82,8 +112,9 @@ while True:
         for group in groups:
             for mm in group.sprites(): mm.draw(screen)
 
-    #for mm in inv_menu.sprites(): mm.draw(screen)
-    #for mm in test_menu.sprites(): mm.draw(screen)
+
+
+
 
 
     for events in pygame.event.get():
@@ -132,6 +163,13 @@ while True:
             if events.dict["action"]=="start_new_game":
                 All_menus_groups_ordered= []
                 All_menus_groups_ordered.append(create_lvl_menu(database))
+
+            if events.dict["action"]=="start_battle":
+                print(events.dict)
+                All_menus_groups_ordered = []
+                is_game_on=True
+
+
 
 
         ##### QUIT
