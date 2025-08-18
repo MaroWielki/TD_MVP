@@ -31,10 +31,6 @@ for p in range(150):
     resolution_in_tiles_percent_xy[p] = (floor(resolution_in_tiles[0] * p / 100),
                                          floor(resolution_in_tiles[1] * p / 100))
 
-
-
-
-
 database = {
     "fps": 60,
     "resolution_xy": resolution_xy,
@@ -57,11 +53,7 @@ print(database)
 screen = pygame.display.set_mode(database["resolution_xy"], pygame.FULLSCREEN)
 #screen = pygame.display.set_mode(database["resolution_xy"])
 
-
-
 All_menus_groups_ordered=[]
-#inv_menu,IM = create_inventory_menu(database)
-#test_menu,TM=create_test_menu(database)
 
 inv_menu_index=0
 #All_menus_groups_ordered.append(create_inventory_menu(database))
@@ -69,19 +61,52 @@ inv_menu_index=0
 #All_menus_groups_ordered.append(create_chest_menu(database))
 All_menus_groups_ordered.append(create_main_menu(database))
 
-### MAP
+###MOBS
+mobs = pygame.sprite.Group()
+wave_mob=[]
+#mobs.add(MobSprite(goblin_sprite, database["fps"], mob_path_1.start[0] + pth_off[0], mob_path_1.start[1] + pth_off[1],mob_path_1, 2, path_offset=pth_off,init_hp=30))
 
 is_game_on=False
 while True:
 
     screen.fill("yellow")
 
-    ### MAP
-
+    ### MAP / VICTORY / STATS
     if is_game_on:
         print_road(screen, map, road,database["double_tile_size_xy"])
+        print(wawe_stats_menu)
+        wawe_stats_menu['WaveMenu/Stats/Lives'].txt = "DUPA"  ### TO CHYBA POWINNO SIE UPDATOWAC
+        if len(wave_mob)==0 and mobs==None:
+            is_game_on=False
+            All_menus_groups_ordered = []
+            #after_wave()
+
+    ### UPDATE STATS
 
 
+    ### MOBS UPDATE N DRAW
+    if mobs is not []:
+        mobs.update()
+        mobs_sprite_list = mobs.sprites()
+        mobs_sprite_list.sort(key=sort_sprites)
+        for mob in mobs_sprite_list:
+            screen.blit(mob.image, mob.rect)
+
+    ## SPAWN MOBS
+    tmp_time=pygame.time.get_ticks()
+    for w_mob in wave_mob:
+        if tmp_time >= w_mob[0]:
+            pth_off = [randint(-2, 2) * 2, randint(-2, 2) * 2]
+            mob_path_1 = MobPath(mob_path1_data["START"], mob_path1_data["FINISH"], mob_path1_data["POINTS"])
+            mobs.add(
+                MobSprite(w_mob[1], database["fps"], mob_path_1.start[0] + pth_off[0], mob_path_1.start[1] + pth_off[1],
+                          mob_path_1, 2, path_offset=pth_off, init_hp=30))
+    wave_mob = [x for x in wave_mob if x[0] > tmp_time]
+    ### TERMINATE MOBS
+    for mob in mobs:
+        if mob.reached_finish:
+            mobs.remove(mob)
+            database['lives']-=1
 
 
     ### MENUS
@@ -96,11 +121,7 @@ while True:
         for group in groups:
             for mm in group.sprites(): mm.draw(screen)
 
-
-
-
-
-
+    ### EVENTS
     for events in pygame.event.get():
 
         ###### MOUSE DOWN
@@ -146,7 +167,7 @@ while True:
 
             if events.dict["action"]=="start_new_game":
                 All_menus_groups_ordered= []
-                All_menus_groups_ordered.append(create_lvl_menu(database))
+                All_menus_groups_ordered.append(create_world_menu(database))
 
             if events.dict["action"]=="start_battle":
                 print(events.dict)
@@ -157,6 +178,26 @@ while True:
                     map, road = load_level(levels_dict["umap"]["filename"], road_tiles, database)
                 else:
                     map, road = load_level(levels_dict["zigzag"]["filename"], road_tiles, database)
+
+                wave_menu=create_wave_menu(database)
+                All_menus_groups_ordered.append(wave_menu)
+                wawe_stats_menu=wave_menu[1]
+
+
+
+                mobs_wave_units = [30, 6, 10, 15, 20]
+
+
+                wave_mob = generate_wave(mobs_wave_units.pop(0), AnimationData(goblin_sprite), pygame.time.get_ticks(),
+                                         pygame.time.get_ticks() + (10 * 1000))
+
+            if events.dict["action"]=="next_wave":
+                if len(mobs_wave_units) > 0:
+                    wave_mob = generate_wave(mobs_wave_units.pop(0), AnimationData(goblin_sprite),
+                                         pygame.time.get_ticks(),
+                                         pygame.time.get_ticks() + (10 * 1000))
+
+
 
         ##### QUIT
         if events.type == pygame.QUIT:

@@ -28,7 +28,7 @@ def create_main_menu(database):
 
 
 
-def create_lvl_menu(database):
+def create_world_menu(database):
     LM = {}
     level_menu = pygame.sprite.Group()
 
@@ -90,10 +90,6 @@ def create_lvl_menu(database):
         ItemMenu(LM['LevelMenu/Title0/Title1/grid0'].px_start_xy, database, (2, 0),  "LevelMenu/Title0/Title1/grid0/item"+str(inactive_item_index),tile_size_xy=database["double_tile_size_xy"],item_name="catapult",parent_grid=LM['LevelMenu/Title0/Title1/grid0']))
 
 
-
-
-
-
     ### WORLDS
     #lvl_menu_grid=([10,40,70],[10,75])
     lvl_menu_grid=([5,20,35],[5,37])  # Halved becouse double sized
@@ -119,3 +115,53 @@ def create_lvl_menu(database):
 
 
     return level_menu,LM
+
+
+def create_wave_menu(database):
+    LM = {}
+    level_menu = pygame.sprite.Group()
+
+    level_menu.add(MenuTitle(get_xy((0, 0), database["tile_size_xy"], 0, 0), database,
+                             (database["resolution_in_tiles_percent_xy"][80][0],
+                              database["resolution_in_tiles_percent_xy"][0][1]),
+                             (database["resolution_in_tiles_percent_xy"][20][0],
+                              database["resolution_in_tiles_percent_xy"][100][1]), "WaveMenu", "",
+                             tile_size_xy=database["tile_size_xy"], draggable=False))
+    LM['WaveMenu'] = get_member_by_name(level_menu.sprites(), "WaveMenu")
+
+    LM['WaveMenu/Stats']=LM['WaveMenu'].add(MenuTitle(LM['WaveMenu'].px_start_xy, database,
+                             (0,0),
+                             (database["resolution_in_tiles_percent_xy"][10][0],
+                              database["resolution_in_tiles_percent_xy"][10][1]), "WaveMenu/Stats", "Stats",
+                             tile_size_xy=database["double_tile_size_xy"], draggable=False))
+
+    LM['WaveMenu/Stats/Lives'] = LM['WaveMenu/Stats'].add(
+        MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (1, 1), "WaveMenu/Stats/Lives", "Lives: "))
+
+    LM['WaveMenu/Stats/NextWave']= LM['WaveMenu/Stats'].add(MenuButton(LM['WaveMenu/Stats'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][10][0], 2),
+                   (database["resolution_in_tiles_percent_xy"][7][0] * 4, 8), "WaveMenu/Stats/NextWave",
+                   text="Next Wave", color=3, action="next_wave"))
+
+
+    LM['WaveMenu/Details']=LM['WaveMenu'].add(MenuTitle(LM['WaveMenu'].px_start_xy, database,
+                             (0,
+                              database["resolution_in_tiles_percent_xy"][10][1]),
+                             (database["resolution_in_tiles_percent_xy"][10][0],
+                              database["resolution_in_tiles_percent_xy"][20][1]), "WaveMenu/Details", "Details",
+                             tile_size_xy=database["double_tile_size_xy"], draggable=False))
+
+    LM['WaveMenu/Shop']=LM['WaveMenu'].add(MenuTitle(LM['WaveMenu'].px_start_xy, database,
+                             (0,
+                              database["resolution_in_tiles_percent_xy"][30][1]),
+                             (database["resolution_in_tiles_percent_xy"][10][0],
+                              database["resolution_in_tiles_percent_xy"][17][1]), "WaveMenu/Shop", "Shop",
+                             tile_size_xy=database["double_tile_size_xy"], draggable=False))
+
+    LM['WaveMenu/Info']=LM['WaveMenu'].add(MenuTitle(LM['WaveMenu'].px_start_xy, database,
+                             (0,
+                              database["resolution_in_tiles_percent_xy"][45][1]),
+                             (database["resolution_in_tiles_percent_xy"][10][0],
+                              database["resolution_in_tiles_percent_xy"][10][1]), "WaveMenu/Info", "Info",
+                             tile_size_xy=database["double_tile_size_xy"], draggable=False))
+
+    return level_menu, LM
