@@ -1,6 +1,13 @@
 
 
-
+levels_dict={
+ "umap":{
+  "filename": "road_map1_40x28.png"
+ },
+ "zigzag":{
+  "filename": "road_map2_40x28.png"
+ }
+}
 
 
 map1=[

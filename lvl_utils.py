@@ -1,6 +1,22 @@
 import pygame
 from math import floor
 
+def load_level(road_name:str,road_tiles,database):
+    road = read_images("img/road/", road_tiles, database["double_tile_size_xy"], (43, 45, 48))
+    map = []
+    map_size_tiles_xy = (40, 28)
+    for i in range(map_size_tiles_xy[1]):
+        map.append([""] * map_size_tiles_xy[0])
+    building_map = {}
+
+
+    road_map = pygame.image.load("img/Paths/"+road_name)
+    road3x3_dictionary = read_road3x3_dictionary("img/Paths/")
+    road3x3_dictionary_pixels = read_road3x3_dictionary_pixels("img/Paths/")
+    road_map_mapping = read_road_map_mapping("img/Paths/mapping.csv")
+    generate_map(map, road_map, road3x3_dictionary_pixels, road_map_mapping, map_size_tiles_xy)
+    return map,road
+
 def print_road(screen,map2,road,tile_size_xy):
     for x in range(len(map2)):
         for y in range(len(map2[x])):

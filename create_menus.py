@@ -113,7 +113,7 @@ def create_lvl_menu(database):
             LM['LevelMenu/Title'+str(index)+'/button0'] = LM['LevelMenu/Title'+str(index)].add(
                 MenuButton(LM['LevelMenu/Title'+str(index)].px_start_xy, database,
                            (database["resolution_in_tiles_percent_xy"][7][0], database["resolution_in_tiles_percent_xy"][(lvl_menu_size_xy[1]*2)-6][1]),
-                           (database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "LevelMenu/Title0/button1",
+                           (database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), 'LevelMenu/Title'+str(index)+'/button0',
                            text="To battle!", color=3, action="start_battle"))
             index+=1
 

@@ -70,23 +70,7 @@ inv_menu_index=0
 All_menus_groups_ordered.append(create_main_menu(database))
 
 ### MAP
-road=read_images("img/road/",road_tiles,database["double_tile_size_xy"],(43,45,48))
-map=[]
-map_size_tiles_xy=(40,28)
-for i in range(map_size_tiles_xy[1]):
-    map.append([""]*map_size_tiles_xy[0])
-building_map={}
 
-road_map_png = "img/Paths/road_map2.png"
-road_map_png="img/Paths/road_map_40x28.png"
-road_map=pygame.image.load(road_map_png)
-road3x3_dictionary = read_road3x3_dictionary("img/Paths/")
-road3x3_dictionary_pixels=read_road3x3_dictionary_pixels("img/Paths/")
-road_map_mapping = read_road_map_mapping("img/Paths/mapping.csv")
-generate_map(map,road_map,road3x3_dictionary_pixels,road_map_mapping,map_size_tiles_xy)
-
-print(map)
-print(road)
 is_game_on=False
 while True:
 
@@ -168,9 +152,11 @@ while True:
                 print(events.dict)
                 All_menus_groups_ordered = []
                 is_game_on=True
-
-
-
+                print(events.dict["button_name"])
+                if "Title1" in events.dict["button_name"]:
+                    map, road = load_level(levels_dict["umap"]["filename"], road_tiles, database)
+                else:
+                    map, road = load_level(levels_dict["zigzag"]["filename"], road_tiles, database)
 
         ##### QUIT
         if events.type == pygame.QUIT:
