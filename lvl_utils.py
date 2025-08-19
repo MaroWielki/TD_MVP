@@ -1,6 +1,6 @@
 import pygame
 from math import floor
-from random import uniform
+from random import uniform, randint
 
 class MobPath:
     def __init__(self,start: list, finish: list ,points: list, offset: list = None):
@@ -146,15 +146,52 @@ def load_level(road_name:str,road_tiles,database):
     map_size_tiles_xy = (40, 28)
     for i in range(map_size_tiles_xy[1]):
         map.append([""] * map_size_tiles_xy[0])
-    building_map = {}
-
 
     road_map = pygame.image.load("img/Paths/"+road_name)
     road3x3_dictionary = read_road3x3_dictionary("img/Paths/")
     road3x3_dictionary_pixels = read_road3x3_dictionary_pixels("img/Paths/")
     road_map_mapping = read_road_map_mapping("img/Paths/mapping.csv")
     generate_map(map, road_map, road3x3_dictionary_pixels, road_map_mapping, map_size_tiles_xy)
-    return map,road
+
+
+    tmp = database["resolution_in_tiles_percent_xy"][100-database["wave_menu_width_pt"]][0]*database["tile_size_xy"][0]
+    #tmp=floor(database["resolution_xy"][0]*(100-database["wave_menu_width_pt"])/100)
+    building_allowed_map = generate_build_map((tmp, database["resolution_xy"][0]), tmp, database["resolution_xy"][1], road_map, 64)
+
+
+    return map,road,building_allowed_map
+
+def generate_build_map(menu_x:tuple,width,height,road_map:pygame.surface.Surface,disallowed_distance_from_path:int):
+
+    # TO TRWA BARDZO DLUGO TRZEBA PRZYSPIESZYC
+    map={}
+    sizex = floor(width/road_map.get_width())
+    sizey = floor(height / road_map.get_height())
+    menu_x_range = range(menu_x[0],menu_x[1])
+    tmp1=0
+    tmp2=0
+    for x in range(width+menu_x[1]-menu_x[0]):
+        for y in range(height):
+            if x in menu_x_range:
+                map[x,y]=False
+            else:
+                map[x,y]=True
+
+    for xx in range(road_map.get_width()):
+        for yy in range(road_map.get_height()):
+            if road_map.get_at((xx,yy)) == (0,0,0,255):
+                for xxx in range(xx*sizex-disallowed_distance_from_path,xx*sizex+disallowed_distance_from_path):
+                    for yyy in range(yy*sizey-disallowed_distance_from_path,yy*sizey+disallowed_distance_from_path):
+                        map[xxx,yyy]=False
+                        tmp1+=1
+
+    return map
+
+def exclude_from_build_map(map,rect:pygame.rect.Rect):
+    for x in range(rect.x,rect.x+rect.width):
+        for y in range(rect.y,rect.y+rect.height):
+            map[x,y]=False
+    return map
 
 def print_road(screen,map2,road,tile_size_xy):
     for x in range(len(map2)):
@@ -252,3 +289,15 @@ def generate_wave(number_of_mobs:int,mob_type,timestart:int,timeend:int,alghorit
 
 def sort_sprites(e):
     return e.y
+
+def spawn_mobs(wave_mob,mobs,database,mob_path1_data):
+    tmp_time = pygame.time.get_ticks()
+    for w_mob in wave_mob:
+        if tmp_time >= w_mob[0]:
+            pth_off = [randint(-2, 2) * 2, randint(-2, 2) * 2]
+            mob_path_1 = MobPath(mob_path1_data["START"], mob_path1_data["FINISH"], mob_path1_data["POINTS"])
+            mobs.add(
+                MobSprite(w_mob[1], database["fps"], mob_path_1.start[0] + pth_off[0], mob_path_1.start[1] + pth_off[1],
+                          mob_path_1, 2, path_offset=pth_off, init_hp=30))
+    wave_mob = [x for x in wave_mob if x[0] > tmp_time]
+    return mobs,wave_mob

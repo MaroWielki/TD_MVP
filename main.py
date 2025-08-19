@@ -45,7 +45,9 @@ database = {
     "lives": 10,
     "gold": 50,
     "wave_number": 1,
-    "font_sizes":fnt_sizes
+    "font_sizes":fnt_sizes,
+    "wave_menu_width_pt": 20,
+    "building_allowed_map":{}
 }
 
 
@@ -66,6 +68,9 @@ mobs = pygame.sprite.Group()
 wave_mob=[]
 #mobs.add(MobSprite(goblin_sprite, database["fps"], mob_path_1.start[0] + pth_off[0], mob_path_1.start[1] + pth_off[1],mob_path_1, 2, path_offset=pth_off,init_hp=30))
 
+
+
+
 is_game_on=False
 while True:
 
@@ -78,14 +83,14 @@ while True:
         wave_menu['WaveMenu/Stats/Lives'].update(txt="Lives: "+str(database["lives"]))
         wave_menu['WaveMenu/Info/Debug0'].update(txt=str(mobs_wave_units))
         wave_menu['WaveMenu/Info/Debug1'].update(txt=str(len(wave_mob)))
+        if database['lives']<1:
+            pass
+            #after_wave(victory=False)
+
         if len(mobs_wave_units) ==0 and len(wave_mob)==0 and len(mobs)==0:
             is_game_on=False
             All_menus_groups_ordered = []
-
-            #after_wave()
-
-
-
+            #after_wave(victory=True)
 
     ### MOBS UPDATE N DRAW
     if mobs is not []:
@@ -96,15 +101,8 @@ while True:
             screen.blit(mob.image, mob.rect)
 
     ## SPAWN MOBS
-    tmp_time=pygame.time.get_ticks()
-    for w_mob in wave_mob:
-        if tmp_time >= w_mob[0]:
-            pth_off = [randint(-2, 2) * 2, randint(-2, 2) * 2]
-            mob_path_1 = MobPath(mob_path1_data["START"], mob_path1_data["FINISH"], mob_path1_data["POINTS"])
-            mobs.add(
-                MobSprite(w_mob[1], database["fps"], mob_path_1.start[0] + pth_off[0], mob_path_1.start[1] + pth_off[1],
-                          mob_path_1, 2, path_offset=pth_off, init_hp=30))
-    wave_mob = [x for x in wave_mob if x[0] > tmp_time]
+    mobs,wave_mob=spawn_mobs(wave_mob,mobs,database,mob_path1_data)
+
     ### TERMINATE MOBS
     for mob in mobs:
         if mob.reached_finish:
@@ -115,7 +113,7 @@ while True:
     ### MENUS
     if All_menus_groups_ordered != []:
         for group in All_menus_groups_ordered:
-            group[0].update()
+            group[0].update(allowed_map=database["building_allowed_map"])
 
         groups, MMs = zip(*All_menus_groups_ordered)
         MMs=list(MMs)
@@ -173,19 +171,19 @@ while True:
                 All_menus_groups_ordered.append(create_world_menu(database))
 
             if events.dict["action"]=="start_battle":
-                print(events.dict)
                 All_menus_groups_ordered = []
                 is_game_on=True
-                print(events.dict["button_name"])
                 if "Title1" in events.dict["button_name"]:
-                    map, road = load_level(levels_dict["umap"]["filename"], road_tiles, database)
+                    map, road, building_allowed_map= load_level(levels_dict["umap"]["filename"], road_tiles, database)
                 else:
-                    map, road = load_level(levels_dict["zigzag"]["filename"], road_tiles, database)
+                    map, road,building_allowed_map = load_level(levels_dict["zigzag"]["filename"], road_tiles, database)
 
+                database["building_allowed_map"]=building_allowed_map
                 tmp=create_wave_menu(database)
                 All_menus_groups_ordered.append(tmp)
                 wave_menu=tmp[1]
-                
+
+
 
 
 

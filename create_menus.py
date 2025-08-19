@@ -120,18 +120,21 @@ def create_world_menu(database):
 def create_wave_menu(database):
     LM = {}
     level_menu = pygame.sprite.Group()
+    menu_start_x_pt=100-database["wave_menu_width_pt"]
+    menu_width_px=database["wave_menu_width_pt"]
 
     level_menu.add(MenuTitle(get_xy((0, 0), database["tile_size_xy"], 0, 0), database,
-                             (database["resolution_in_tiles_percent_xy"][80][0],
+                             (database["resolution_in_tiles_percent_xy"][menu_start_x_pt][0],
                               database["resolution_in_tiles_percent_xy"][0][1]),
-                             (database["resolution_in_tiles_percent_xy"][20][0],
+                             (database["resolution_in_tiles_percent_xy"][menu_width_px][0],
                               database["resolution_in_tiles_percent_xy"][100][1]), "WaveMenu", "",
                              tile_size_xy=database["tile_size_xy"], draggable=False))
     LM['WaveMenu'] = get_member_by_name(level_menu.sprites(), "WaveMenu")
 
+    ### STATS
     LM['WaveMenu/Stats']=LM['WaveMenu'].add(MenuTitle(LM['WaveMenu'].px_start_xy, database,
                              (0,0),
-                             (database["resolution_in_tiles_percent_xy"][10][0],
+                             (database["resolution_in_tiles_percent_xy"][menu_width_px/2][0],
                               database["resolution_in_tiles_percent_xy"][10][1]), "WaveMenu/Stats", "Stats",
                              tile_size_xy=database["double_tile_size_xy"], draggable=False))
 
@@ -142,25 +145,36 @@ def create_wave_menu(database):
                    (database["resolution_in_tiles_percent_xy"][7][0] * 4, 8), "WaveMenu/Stats/NextWave",
                    text="Next Wave", color=3, action="next_wave"))
 
-
+    ### DETAILS
     LM['WaveMenu/Details']=LM['WaveMenu'].add(MenuTitle(LM['WaveMenu'].px_start_xy, database,
                              (0,
                               database["resolution_in_tiles_percent_xy"][10][1]),
-                             (database["resolution_in_tiles_percent_xy"][10][0],
+                             (database["resolution_in_tiles_percent_xy"][menu_width_px/2][0],
                               database["resolution_in_tiles_percent_xy"][20][1]), "WaveMenu/Details", "Details",
                              tile_size_xy=database["double_tile_size_xy"], draggable=False))
-
+    ### SHOP
     LM['WaveMenu/Shop']=LM['WaveMenu'].add(MenuTitle(LM['WaveMenu'].px_start_xy, database,
                              (0,
                               database["resolution_in_tiles_percent_xy"][30][1]),
-                             (database["resolution_in_tiles_percent_xy"][10][0],
+                             (database["resolution_in_tiles_percent_xy"][menu_width_px/2][0],
                               database["resolution_in_tiles_percent_xy"][17][1]), "WaveMenu/Shop", "Shop",
                              tile_size_xy=database["double_tile_size_xy"], draggable=False))
+    LM['WaveMenu/Shop/grid0'] = LM['WaveMenu/Shop'].add(
+        GuiGrid(LM['WaveMenu/Shop'].px_start_xy, database, (0.5, 1.25), (4, 1),
+                "WaveMenu/Shop/grid0", tile_size_xy=database["quadrupal_tile_size_xy"]))
 
+    shop_item_index=0
+    LM['WaveMenu/Shop/grid0/item' + str(shop_item_index)] = LM['WaveMenu/Shop/grid0'].add(
+        ItemMenu(LM['WaveMenu/Shop/grid0'].px_start_xy, database, (0, 0),
+                 "WaveMenu/Shop/grid0/item" + str(shop_item_index),
+                 tile_size_xy=database["quadrupal_tile_size_xy"], item_name="catapult",
+                 parent_grid=LM['WaveMenu/Shop/grid0']))
+
+    ###INFO
     LM['WaveMenu/Info']=LM['WaveMenu'].add(MenuTitle(LM['WaveMenu'].px_start_xy, database,
                              (0,
                               database["resolution_in_tiles_percent_xy"][45][1]),
-                             (database["resolution_in_tiles_percent_xy"][10][0],
+                             (database["resolution_in_tiles_percent_xy"][menu_width_px/2][0],
                               database["resolution_in_tiles_percent_xy"][10][1]), "WaveMenu/Info", "Info",
                              tile_size_xy=database["double_tile_size_xy"], draggable=False))
     LM['WaveMenu/Info/Debug0'] = LM['WaveMenu/Info'].add(
