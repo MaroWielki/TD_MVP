@@ -74,14 +74,17 @@ while True:
     ### MAP / VICTORY / STATS
     if is_game_on:
         print_road(screen, map, road,database["double_tile_size_xy"])
-        print(wawe_stats_menu)
-        wawe_stats_menu['WaveMenu/Stats/Lives'].txt = "DUPA"  ### TO CHYBA POWINNO SIE UPDATOWAC
-        if len(wave_mob)==0 and mobs==None:
+
+        wave_menu['WaveMenu/Stats/Lives'].update(txt="Lives: "+str(database["lives"]))
+        wave_menu['WaveMenu/Info/Debug0'].update(txt=str(mobs_wave_units))
+        wave_menu['WaveMenu/Info/Debug1'].update(txt=str(len(wave_mob)))
+        if len(mobs_wave_units) ==0 and len(wave_mob)==0 and len(mobs)==0:
             is_game_on=False
             All_menus_groups_ordered = []
+
             #after_wave()
 
-    ### UPDATE STATS
+
 
 
     ### MOBS UPDATE N DRAW
@@ -179,9 +182,10 @@ while True:
                 else:
                     map, road = load_level(levels_dict["zigzag"]["filename"], road_tiles, database)
 
-                wave_menu=create_wave_menu(database)
-                All_menus_groups_ordered.append(wave_menu)
-                wawe_stats_menu=wave_menu[1]
+                tmp=create_wave_menu(database)
+                All_menus_groups_ordered.append(tmp)
+                wave_menu=tmp[1]
+                
 
 
 
@@ -193,7 +197,7 @@ while True:
 
             if events.dict["action"]=="next_wave":
                 if len(mobs_wave_units) > 0:
-                    wave_mob = generate_wave(mobs_wave_units.pop(0), AnimationData(goblin_sprite),
+                    wave_mob+=generate_wave(mobs_wave_units.pop(0), AnimationData(goblin_sprite),
                                          pygame.time.get_ticks(),
                                          pygame.time.get_ticks() + (10 * 1000))
 

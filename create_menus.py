@@ -136,7 +136,7 @@ def create_wave_menu(database):
                              tile_size_xy=database["double_tile_size_xy"], draggable=False))
 
     LM['WaveMenu/Stats/Lives'] = LM['WaveMenu/Stats'].add(
-        MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (1, 1), "WaveMenu/Stats/Lives", "Lives: "))
+        MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (1, 2), "WaveMenu/Stats/Lives", "Lives: "))
 
     LM['WaveMenu/Stats/NextWave']= LM['WaveMenu/Stats'].add(MenuButton(LM['WaveMenu/Stats'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][10][0], 2),
                    (database["resolution_in_tiles_percent_xy"][7][0] * 4, 8), "WaveMenu/Stats/NextWave",
@@ -163,5 +163,9 @@ def create_wave_menu(database):
                              (database["resolution_in_tiles_percent_xy"][10][0],
                               database["resolution_in_tiles_percent_xy"][10][1]), "WaveMenu/Info", "Info",
                              tile_size_xy=database["double_tile_size_xy"], draggable=False))
+    LM['WaveMenu/Info/Debug0'] = LM['WaveMenu/Info'].add(
+        MenuText(LM['WaveMenu/Info'].px_start_xy, database, (1, 2), "WaveMenu/Info/Debug0", "debug0: "))
+    LM['WaveMenu/Info/Debug1'] = LM['WaveMenu/Info'].add(
+        MenuText(LM['WaveMenu/Info'].px_start_xy, database, (1, 3), "WaveMenu/Info/Debug1", "Debug1: "))
 
     return level_menu, LM
