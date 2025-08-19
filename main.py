@@ -223,7 +223,6 @@ while True:
                     database["gold"]-=events.dict["turret"].item.data["cost"]
                     wave_menu['WaveMenu/Stats/Gold'].update(txt="Gold: " + str(database["gold"]))
                     turret_group.add(TurretSprite(turret_sprites[events.dict["turret"].item.data["sprite"]], pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], database["fps"], 500,10, database["quadrupal_tile_size_xy"], 5))
-                    print(database["quadrupal_tile_size_xy"])
                     for turret in turret_group.sprites():
                         building_allowed_map = exclude_from_build_map(building_allowed_map, turret.rect)
 

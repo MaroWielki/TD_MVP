@@ -40,7 +40,7 @@ class TurretSprite(pygame.sprite.Sprite):
         self.data=data
         self.fps=fps
         self.target_type=target_type
-        self.bordered = False
+        self.bordered = True
         self.fire_at_frame = fire_at_frame
         self.skip_fire=False
         for anim_name in data.animationdata:
