@@ -214,6 +214,36 @@ skeleton_sprite = {
 }
 
 ### /SKELETON
+
+catapult_sprite={
+ 'FIRE':{
+'path': "img/Turrets/catapult/catapult.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':0,
+'anim_fps':5,
+'start_x':0,
+'start_y':0,
+'frames_count':7,
+'img_per_row_or_col':7,
+'color_key':(0,0,0)
+},
+'IDLE': {
+'path': "img/Turrets/catapult/catapult.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':0,
+'anim_fps':5,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':1,
+'color_key':(0,0,0)
+}
+}
+
 ### ARCHER
 archer_sprite={
 'WALK_RIGHT': {

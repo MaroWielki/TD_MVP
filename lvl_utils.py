@@ -1,15 +1,7 @@
 import pygame
-from math import floor
+from math import floor,sin, cos, atan2, radians, degrees
 from random import uniform, randint
 
-class MobPath:
-    def __init__(self,start: list, finish: list ,points: list, offset: list = None):
-        self.start = start
-        self.finish = finish
-        self.offset = offset
-        self.points = []
-        for i in points:
-            self.points.append(i)
 
 class AnimationSingle:
     def __init__(self,name,kw):
@@ -32,6 +24,173 @@ class AnimationData:
         self.animationdata={}
         for key in kw:
             self.animationdata[key]=AnimationSingle(key,kw[key])
+
+
+class TurretSprite(pygame.sprite.Sprite):
+    def __init__(self,data :AnimationData,x:int,y:int,fps,turret_range,fire_at_frame,px_scale_to_xy:tuple,dmg:int,init_animation="IDLE",init_anim_speed = 0,target_type="most_hp"):
+        pygame.sprite.Sprite.__init__(self)
+        self.animation_frames = {}
+        self.dmg=dmg
+        self.px_scale_to_xy = px_scale_to_xy
+        self.is_target_available=False
+        self.text_upgrade=""
+        self.turret_range = turret_range
+        self.init_animation = init_animation
+        self.animation_index=0
+        self.data=data
+        self.fps=fps
+        self.target_type=target_type
+        self.bordered = False
+        self.fire_at_frame = fire_at_frame
+        self.skip_fire=False
+        for anim_name in data.animationdata:
+            anim_data=self.data.animationdata[anim_name]
+            self.animation_frames[anim_name] =cropp_img(anim_data.path,anim_data.frame_window_width,anim_data.frame_window_height,anim_data.border,anim_data.start_x,anim_data.start_y,anim_data.frames_count,anim_data.img_per_row_or_col,anim_data.animation_orientation,anim_data.color_key,self.px_scale_to_xy)
+        self.image=None
+        self.x=x
+        self.y=y
+        self.fps_counter=0
+        self.last_attack_time = 0
+        self.attack_speed=2000
+        self.animation_name = init_animation
+        self.rect = pygame.rect.Rect(self.x, self.y, self.px_scale_to_xy[0],
+                                     self.px_scale_to_xy[1])
+        self.rect.center = (self.x, self.y)
+        if init_anim_speed==0:
+            self.anim_fps=self.data.animationdata[self.animation_name].anim_fps
+        else:
+            self.anim_fps=init_anim_speed
+
+    def update(self,mobs:pygame.sprite.Group,database,turret_database):
+        self.fps_counter += 1
+        #self.menu_group.update(database,turret_database,self.text_upgrade)
+        self.is_target_available = False
+        self.is_target_available=get_target(self.rect.center,self.turret_range,self.target_type,mobs) is not None
+        if self.anim_fps != 0:
+
+            self.animation_index = floor(self.fps_counter / (self.fps / self.anim_fps))
+            if self.animation_index >= len(self.animation_frames[self.animation_name]):
+                self.animation_index = 0
+                self.fps_counter = 0
+        self.image = self.animation_frames[self.animation_name][self.animation_index].copy()
+        #self.rect = pygame.rect.Rect(self.x, self.y, self.data.animationdata[self.animation_name].frame_window_width,self.data.animationdata[self.animation_name].frame_window_height)
+        self.rect.center = (self.x,self.y)
+        if self.bordered:
+            pygame.draw.rect(self.image,"white",(0,0,self.rect.width-1,self.rect.height-1),1)
+
+
+        if self.is_target_available and self.last_attack_time+self.attack_speed<pygame.time.get_ticks():
+            self.last_attack_time= pygame.time.get_ticks()
+            self.animation_index = 0
+            self.fps_counter = 0
+            self.animation_name="FIRE"
+            self.skip_fire=False
+            self.anim_fps = self.data.animationdata[self.animation_name].anim_fps
+
+        if self.animation_name =="FIRE":
+            if self.animation_index == self.fire_at_frame and self.skip_fire==False:
+                self.fire()
+                self.skip_fire=True
+            if self.animation_index == len(self.animation_frames[self.animation_name])-1:
+                self.animation_name ="IDLE"
+                self.animation_index=0
+                self.fps_counter = 0
+                self.anim_fps=self.data.animationdata[self.animation_name].anim_fps
+
+
+    def fire(self):
+        ev_dic={
+            "action": "shoot_projectile",
+            "projectile_type": "arrow",
+            "start_xy": (self.rect.center),
+            "projectile_speed": 20,
+            "target_xy": (0,0),
+            "dmg" : self.dmg,
+            "turret_range": self.turret_range,
+            "target_type": self.target_type
+        }
+        ev = pygame.event.Event(pygame.USEREVENT,ev_dic)
+        pygame.event.post(ev)
+
+
+class ProjectileSprite(pygame.sprite.Sprite):
+    def __init__(self,data :AnimationData,fps:int,x:int,y:int,move_speed:int,dmg:int,target_sprite:pygame.sprite.Sprite=None,target_xy=None,init_animation="IDLE",init_anim_speed = 0,rotation=0):
+        pygame.sprite.Sprite.__init__(self)
+        self.target_sprite = target_sprite
+        self.remove_me = False
+        self.dmg=dmg
+        self.animation_frames = {}
+        self.init_animation = init_animation
+        self.animation_index = 0
+        self.move_speed = move_speed
+        self.data = data
+        self.rotation=rotation
+        self.target_xy=target_xy
+        self.fps = fps
+        for anim_name in data.animationdata:
+            anim_data = self.data.animationdata[anim_name]
+            self.animation_frames[anim_name] = cropp_img(anim_data.path, anim_data.frame_window_width,
+                                                          anim_data.frame_window_height, anim_data.border,
+                                                          anim_data.start_x, anim_data.start_y, anim_data.frames_count,
+                                                          anim_data.img_per_row_or_col, anim_data.animation_orientation,
+                                                          anim_data.color_key)
+
+        self.x = x
+        self.y = y
+        self.fps_counter = 0
+        self.animation_name = init_animation
+        self.image=self.animation_frames[self.animation_name][0]
+        self.rect = pygame.rect.Rect(self.x, self.y, self.data.animationdata[self.animation_name].frame_window_width,
+                                      self.data.animationdata[self.animation_name].frame_window_height)
+
+        if init_anim_speed == 0:
+             self.anim_fps = self.data.animationdata[self.animation_name].anim_fps
+        else:
+             self.anim_fps = init_anim_speed
+
+    def update(self,**kwargs):
+
+        self.fps_counter += 1
+        self.rotation=kwargs.get("rotation",0)
+
+        if self.anim_fps != 0:
+            self.animation_index = floor(self.fps_counter / (self.fps / self.anim_fps))
+            if self.animation_index >= len(self.animation_frames[self.animation_name]):
+                self.animation_index = 0
+                self.fps_counter = 0
+
+        if pygame.math.Vector2(self.rect.center).distance_to(pygame.math.Vector2(self.target_sprite.rect.center)) < self.move_speed:
+
+            self.target_sprite.hp-=self.dmg
+            self.remove_me = True
+        self.move(**kwargs)
+
+    def move(self, **kwargs):
+
+        if self.target_xy is not None:
+            self.rotation=degrees(atan2(self.rect.center[0] - self.target_xy[0], self.rect.center[1] - self.target_xy[1]))
+            self.image = pygame.transform.rotozoom(self.animation_frames[self.animation_name][self.animation_index],self.rotation,1)
+            self.x -= self.move_speed * sin(radians(self.rotation))
+            self.y -= self.move_speed * cos(radians(self.rotation))
+        elif self.target_sprite is not None:
+            self.rotation=degrees(atan2(self.rect.center[0] - self.target_sprite.rect.center[0], self.rect.center[1] - self.target_sprite.rect.center[1]))
+            self.image = pygame.transform.rotozoom(self.animation_frames[self.animation_name][self.animation_index],self.rotation,1)
+            self.x -= self.move_speed * sin(radians(self.rotation))
+            self.y -= self.move_speed * cos(radians(self.rotation))
+        else:
+            self.image =self.animation_frames[self.animation_name][self.animation_index]
+
+        self.rect = self.image.get_rect().move(self.x,self.y)
+        #pygame.draw.rect(self.image, "blue", (0,0,self.rect.width,self.rect.height), 1)
+
+class MobPath:
+    def __init__(self,start: list, finish: list ,points: list, offset: list = None):
+        self.start = start
+        self.finish = finish
+        self.offset = offset
+        self.points = []
+        for i in points:
+            self.points.append(i)
 
 
 class MobSprite(pygame.sprite.Sprite):
@@ -122,7 +281,7 @@ class MobSprite(pygame.sprite.Sprite):
 
 
 
-def cropp_img(path,frame_window_width,frame_window_height,border,start_x,start_y,frames_count,img_per_row_or_col,animation_orientation,color_key):
+def cropp_img(path,frame_window_width,frame_window_height,border,start_x,start_y,frames_count,img_per_row_or_col,animation_orientation,color_key,px_scale_to_xy=None):
     pieces = []
     img = pygame.image.load(path)
     img.set_colorkey(color_key)
@@ -136,7 +295,10 @@ def cropp_img(path,frame_window_width,frame_window_height,border,start_x,start_y
             row_index = int(frame_index % img_per_row_or_col)
         frame_x = col_index * frame_window_width +border + start_x
         frame_y = row_index * frame_window_height + border + start_y
-        pieces.append(pygame.Surface.subsurface(img,frame_x,frame_y,frame_window_width-border,frame_window_height-border))
+        if px_scale_to_xy is None:
+            pieces.append(pygame.Surface.subsurface(img,frame_x,frame_y,frame_window_width-border,frame_window_height-border))
+        else:
+            pieces.append(pygame.transform.scale(pygame.Surface.subsurface(img, frame_x, frame_y, frame_window_width - border,frame_window_height - border),px_scale_to_xy))
         frame_index+=1
     return pieces
 
@@ -301,3 +463,46 @@ def spawn_mobs(wave_mob,mobs,database,mob_path1_data):
                           mob_path_1, 2, path_offset=pth_off, init_hp=30))
     wave_mob = [x for x in wave_mob if x[0] > tmp_time]
     return mobs,wave_mob
+
+def get_target(turret_xy,turret_range: int,target_type: str,group: pygame.sprite.Group):
+
+    hps=[]
+    sprites= group.sprites()
+
+
+    max_distance = 0
+    min_distance = 9999
+    max_hp = 0
+    min_hp = 9999999
+
+    max_distance_index = None
+    min_distance_index = None
+    max_hp_index = None
+    min_hp_index = None
+    for i in range(len(sprites)):
+        distance = pygame.math.Vector2(turret_xy).distance_to(sprites[i].rect.center)
+        if distance < turret_range:
+            if distance > max_distance:
+                max_distance=distance
+                max_distance_index=i
+            if distance < min_distance:
+                min_distance=distance
+                min_distance_index=i
+            if sprites[i].hp > max_hp:
+                max_hp=sprites[i].hp
+                max_hp_index=i
+            if sprites[i].hp < min_hp:
+                min_hp=sprites[i].hp
+                min_hp_index=i
+    if max_hp_index is not None:
+
+        if target_type=="furthest":
+            return sprites[max_distance_index]
+        if target_type=="closest":
+            return sprites[min_distance_index]
+        if target_type=="most_hp":
+            return sprites[max_hp_index]
+        if target_type=="least_hp":
+            return sprites[min_hp_index]
+
+    return None

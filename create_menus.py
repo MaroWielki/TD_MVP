@@ -139,7 +139,11 @@ def create_wave_menu(database):
                              tile_size_xy=database["double_tile_size_xy"], draggable=False))
 
     LM['WaveMenu/Stats/Lives'] = LM['WaveMenu/Stats'].add(
-        MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (1, 2), "WaveMenu/Stats/Lives", "Lives: "))
+        MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (1, 3), "WaveMenu/Stats/Lives", "Lives: "))
+    LM['WaveMenu/Stats/Gold'] = LM['WaveMenu/Stats'].add(
+        MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (1, 5), "WaveMenu/Stats/Gold", "Gold: "))
+    LM['WaveMenu/Stats/Wave'] = LM['WaveMenu/Stats'].add(
+        MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (1, 7), "WaveMenu/Stats/Wave", "Wave: "))
 
     LM['WaveMenu/Stats/NextWave']= LM['WaveMenu/Stats'].add(MenuButton(LM['WaveMenu/Stats'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][10][0], 2),
                    (database["resolution_in_tiles_percent_xy"][7][0] * 4, 8), "WaveMenu/Stats/NextWave",
@@ -168,6 +172,12 @@ def create_wave_menu(database):
         ItemMenu(LM['WaveMenu/Shop/grid0'].px_start_xy, database, (0, 0),
                  "WaveMenu/Shop/grid0/item" + str(shop_item_index),
                  tile_size_xy=database["quadrupal_tile_size_xy"], item_name="catapult",
+                 parent_grid=LM['WaveMenu/Shop/grid0']))
+    shop_item_index = 1
+    LM['WaveMenu/Shop/grid0/item' + str(shop_item_index)] = LM['WaveMenu/Shop/grid0'].add(
+        ItemMenu(LM['WaveMenu/Shop/grid0'].px_start_xy, database, (1, 0),
+                 "WaveMenu/Shop/grid0/item" + str(shop_item_index),
+                 tile_size_xy=database["quadrupal_tile_size_xy"], item_name="archer",
                  parent_grid=LM['WaveMenu/Shop/grid0']))
 
     ###INFO
