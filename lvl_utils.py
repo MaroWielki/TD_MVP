@@ -27,7 +27,7 @@ class AnimationData:
 
 
 class TurretSprite(pygame.sprite.Sprite):
-    def __init__(self,data :AnimationData,x:int,y:int,fps,turret_range,fire_at_frame,px_scale_to_xy:tuple,dmg:int,init_animation="IDLE",init_anim_speed = 0,target_type="most_hp"):
+    def __init__(self,data :AnimationData,x:int,y:int,fps,turret_range,fire_at_frame,px_scale_to_xy:tuple,dmg:int,init_animation="IDLE",init_anim_speed = 0,target_type="least_hp"):
         pygame.sprite.Sprite.__init__(self)
         self.animation_frames = {}
         self.dmg=dmg
@@ -103,7 +103,7 @@ class TurretSprite(pygame.sprite.Sprite):
             "action": "shoot_projectile",
             "projectile_type": "arrow",
             "start_xy": (self.rect.center),
-            "projectile_speed": 20,
+            "projectile_speed": 10,
             "target_xy": (0,0),
             "dmg" : self.dmg,
             "turret_range": self.turret_range,
@@ -114,7 +114,7 @@ class TurretSprite(pygame.sprite.Sprite):
 
 
 class ProjectileSprite(pygame.sprite.Sprite):
-    def __init__(self,data :AnimationData,fps:int,x:int,y:int,move_speed:int,dmg:int,target_sprite:pygame.sprite.Sprite=None,target_xy=None,init_animation="IDLE",init_anim_speed = 0,rotation=0):
+    def __init__(self,data :AnimationData,fps:int,x:int,y:int,move_speed:int,dmg:int,target_sprite:pygame.sprite.Sprite=None,target_xy=None,init_animation="IDLE",init_anim_speed = 0,rotation=0,px_scale_to_xy:tuple=None):
         pygame.sprite.Sprite.__init__(self)
         self.target_sprite = target_sprite
         self.remove_me = False
@@ -133,7 +133,7 @@ class ProjectileSprite(pygame.sprite.Sprite):
                                                           anim_data.frame_window_height, anim_data.border,
                                                           anim_data.start_x, anim_data.start_y, anim_data.frames_count,
                                                           anim_data.img_per_row_or_col, anim_data.animation_orientation,
-                                                          anim_data.color_key)
+                                                          anim_data.color_key,px_scale_to_xy)
 
         self.x = x
         self.y = y
@@ -303,7 +303,8 @@ def cropp_img(path,frame_window_width,frame_window_height,border,start_x,start_y
     return pieces
 
 def load_level(road_name:str,road_tiles,database):
-    road = read_images("img/road/", road_tiles, database["double_tile_size_xy"], (43, 45, 48))
+    tile_size=database["double_tile_size_xy"]
+    road = read_images("img/road/", road_tiles, tile_size, (43, 45, 48))
     map = []
     map_size_tiles_xy = (40, 28)
     for i in range(map_size_tiles_xy[1]):
@@ -318,10 +319,29 @@ def load_level(road_name:str,road_tiles,database):
 
     tmp = database["resolution_in_tiles_percent_xy"][100-database["wave_menu_width_pt"]][0]*database["tile_size_xy"][0]
     #tmp=floor(database["resolution_xy"][0]*(100-database["wave_menu_width_pt"])/100)
-    building_allowed_map = generate_build_map((tmp, database["resolution_xy"][0]), tmp, database["resolution_xy"][1], road_map, 64)
+    building_allowed_map = generate_build_map((tmp, database["resolution_xy"][0]), tmp, database["resolution_xy"][1], road_map, 32)
 
+    mob_path=generate_mobs_path(road_map,tile_size)
+    print(mob_path)
+    return map,road,building_allowed_map, mob_path
 
-    return map,road,building_allowed_map
+def generate_mobs_path(img:pygame.surface.Surface,tile_size:tuple):
+    list = []
+    for x in range(img.get_width()):
+        for y in range(img.get_height()):
+            if img.get_at((x, y))[0] in range(1, 254):
+                list.append(((x, y), img.get_at((x, y))[0]))
+
+    list.sort(key=sort_fun)
+    dic = {}
+    offsety=-1  ### NIE WIEM CZEMU
+    st = list.pop(0)
+    dic["START"] = [st[0][0]*tile_size[0], (st[0][1]+offsety)*tile_size[1]]
+    dic["POINTS"] = []
+    for pt in list:
+        dic["POINTS"].append([pt[0][0]*tile_size[0], (pt[0][1]+offsety)*tile_size[1]])
+    dic["FINISH"] = [list[-1][0][0]*tile_size[0], (list[-1][0][1]+offsety)*tile_size[1]]
+    return dic
 
 def generate_build_map(menu_x:tuple,width,height,road_map:pygame.surface.Surface,disallowed_distance_from_path:int):
 
@@ -390,7 +410,9 @@ def read_pixels(surf:pygame.surface,width:int,height:int):
     ret = {}
     for x in range(width):
         for y in range(height):
-            ret[x,y]=surf.get_at((x,y))
+            if surf.get_at((x,y)) != (255,255,255,255):
+                #ret[x,y]=surf.get_at((x,y))
+                ret[x, y]=(0,0,0,0)
     return ret
 
 def find_in_road_dic(road_dic,lookie):
@@ -506,3 +528,6 @@ def get_target(turret_xy,turret_range: int,target_type: str,group: pygame.sprite
             return sprites[min_hp_index]
 
     return None
+
+def sort_fun(a:list):
+    return a[1]

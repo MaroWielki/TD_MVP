@@ -68,6 +68,8 @@ mobs = pygame.sprite.Group()
 wave_mob=[]
 #mobs.add(MobSprite(goblin_sprite, database["fps"], mob_path_1.start[0] + pth_off[0], mob_path_1.start[1] + pth_off[1],mob_path_1, 2, path_offset=pth_off,init_hp=30))
 
+
+
 ### TURRETS
 turret_group= pygame.sprite.Group()
 turret_database=None
@@ -101,8 +103,9 @@ while True:
         print_road(screen, map, road,database["double_tile_size_xy"])
 
         wave_menu['WaveMenu/Stats/Lives'].update(txt="Lives: "+str(database["lives"]))
+        wave_menu['WaveMenu/Stats/Gold'].update(txt="Gold: " + str(database["gold"]))
 
-        wave_menu['WaveMenu/Info/Debug1'].update(txt=str(len(wave_mob)))
+        wave_menu['WaveMenu/Info/Debug1'].update(txt=str(pygame.mouse.get_pos()))
         if database['lives']<1:
             pass
             #after_wave(victory=False)
@@ -121,13 +124,17 @@ while True:
             screen.blit(mob.image, mob.rect)
 
     ## SPAWN MOBS
-    mobs,wave_mob=spawn_mobs(wave_mob,mobs,database,mob_path1_data)
+    if is_game_on:
+        mobs,wave_mob=spawn_mobs(wave_mob,mobs,database,mob_path)
 
     ### TERMINATE MOBS
     for mob in mobs:
         if mob.reached_finish:
             mobs.remove(mob)
             database['lives']-=1
+        if mob.hp<=0:
+            mobs.remove(mob)
+            database['gold']+=10
 
 
     ### MENUS
@@ -141,6 +148,13 @@ while True:
 
         for group in groups:
             for mm in group.sprites(): mm.draw(screen)
+
+    ### DEBUG PRINT ALLOWED MAP
+    # if database["building_allowed_map"] != {}:
+    #     for x in range(database["resolution_xy"][0]):
+    #         for y in range(database["resolution_xy"][1]):
+    #             if database["building_allowed_map"][x,y]: pygame.draw.rect(screen,(255,255,255),(x,y,1,1))
+
 
     ### EVENTS
     for events in pygame.event.get():
@@ -194,16 +208,16 @@ while True:
                 All_menus_groups_ordered = []
                 is_game_on=True
                 if "Title1" in events.dict["button_name"]:
-                    map, road, building_allowed_map= load_level(levels_dict["umap"]["filename"], road_tiles, database)
+                    map, road, building_allowed_map,mob_path= load_level(levels_dict["zigzagc"]["filename"], road_tiles, database)
                 else:
-                    map, road,building_allowed_map = load_level(levels_dict["zigzag"]["filename"], road_tiles, database)
+                    map, road,building_allowed_map,mob_path = load_level(levels_dict["umapc"]["filename"], road_tiles, database)
 
 
                 database["building_allowed_map"]=building_allowed_map
                 tmp=create_wave_menu(database)
                 All_menus_groups_ordered.append(tmp)
                 wave_menu=tmp[1]
-                mobs_wave_units = [30, 6, 10, 15, 20]
+                mobs_wave_units = [7, 15, 10, 15, 20]
                 wave_mob = generate_wave(mobs_wave_units.pop(0), AnimationData(goblin_sprite), pygame.time.get_ticks(),
                                          pygame.time.get_ticks() + (10 * 1000))
                 wave_menu['WaveMenu/Stats/Gold'].update(txt="Gold: " + str(database["gold"]))
@@ -222,7 +236,7 @@ while True:
                 if database["gold"]>=events.dict["turret"].item.data["cost"]:
                     database["gold"]-=events.dict["turret"].item.data["cost"]
                     wave_menu['WaveMenu/Stats/Gold'].update(txt="Gold: " + str(database["gold"]))
-                    turret_group.add(TurretSprite(turret_sprites[events.dict["turret"].item.data["sprite"]], pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], database["fps"], 500,10, database["quadrupal_tile_size_xy"], 5))
+                    turret_group.add(TurretSprite(turret_sprites[events.dict["turret"].item.data["sprite"]], pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], database["fps"], 500,10, database["quadrupal_tile_size_xy"], 15))
                     for turret in turret_group.sprites():
                         building_allowed_map = exclude_from_build_map(building_allowed_map, turret.rect)
 
@@ -233,7 +247,7 @@ while True:
                     # projectiles.add(ProjectileSprite(arrow_sprite, fps, events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"],target_xy=target))
                     if target is not None: projectiles.add(
                         ProjectileSprite(arrow_sprite, database["fps"], events.dict["start_xy"][0], events.dict["start_xy"][1],
-                                         events.dict["projectile_speed"], events.dict["dmg"], target_sprite=target))
+                                         events.dict["projectile_speed"], events.dict["dmg"], target_sprite=target,px_scale_to_xy=database["tile_size_xy"]))
 
 
 

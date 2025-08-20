@@ -4,8 +4,14 @@ levels_dict={
  "umap":{
   "filename": "road_map1_40x28.png"
  },
+ "umapc": {
+  "filename": "road_mapc_40x28.png"
+ },
  "zigzag":{
   "filename": "road_map2_40x28.png"
+ },
+ "zigzagc": {
+  "filename": "road_map2c_40x28.png"
  }
 }
 
