@@ -20,11 +20,11 @@ print(time.time()-t)
 
 t=time.time()
 for x in range(1000):
-    for y in range(1000):
+    for y in range(100):
         if x+y%2==1:
             map2[x][y]=True
         else:
             map2[x][y]=False
 print(time.time()-t)
 
-print(map2[100][200])
+print(len(map2[1]))
