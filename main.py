@@ -76,6 +76,9 @@ turret_database=None
 #archer_sprite=AnimationData(archer_sprite)
 #catapult_sprite=AnimationData(catapult_sprite)
 
+selected_turret=None
+background=None
+
 turret_sprites={}
 turret_sprites["catapult_sprite"]=AnimationData(catapult_sprite)
 turret_sprites["archer_sprite"]=AnimationData(archer_sprite)
@@ -87,6 +90,8 @@ is_game_on=False
 while True:
 
     screen.fill("yellow")
+    if is_game_on and background is not None:
+        screen.blit(background,(0,0))
 
     ### TURRETS
     turret_group.update(mobs,database,turret_database)
@@ -162,7 +167,9 @@ while True:
         ###### MOUSE DOWN
         if events.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos=pygame.mouse.get_pos()
-            colliding_objects=find_colliding_objects(mouse_pos,MMs)
+            if selected_turret is not None:
+                selected_turret.bordered=False
+            colliding_objects=find_colliding_objects(mouse_pos,MMs,turret_group.sprites())
             if events.button == 1:
                 handle_LMB_down(colliding_objects,mouse_pos)
                 bring_root_to_front(colliding_objects, All_menus_groups_ordered)
@@ -172,7 +179,7 @@ while True:
         ###### MOUSE UP
         if events.type == pygame.MOUSEBUTTONUP:
             mouse_pos = pygame.mouse.get_pos()
-            colliding_objects = find_colliding_objects(mouse_pos, MMs)
+            colliding_objects = find_colliding_objects(mouse_pos, MMs,turret_group.sprites())
             if events.button == 1:
                 handle_LMB_up(colliding_objects,mouse_pos)
             if events.button == 3:
@@ -208,9 +215,9 @@ while True:
                 All_menus_groups_ordered = []
                 is_game_on=True
                 if "Title1" in events.dict["button_name"]:
-                    map, road, building_allowed_map,mob_path= load_level(levels_dict["zigzagc"]["filename"], road_tiles, database)
+                    map, road, building_allowed_map,mob_path,background= load_level(levels_dict["zigzagc"]["filename"], road_tiles, database)
                 else:
-                    map, road,building_allowed_map,mob_path = load_level(levels_dict["umapc"]["filename"], road_tiles, database)
+                    map, road,building_allowed_map,mob_path,background = load_level(levels_dict["umapc"]["filename"], road_tiles, database)
 
 
                 database["building_allowed_map"]=building_allowed_map
@@ -249,7 +256,9 @@ while True:
                         ProjectileSprite(arrow_sprite, database["fps"], events.dict["start_xy"][0], events.dict["start_xy"][1],
                                          events.dict["projectile_speed"], events.dict["dmg"], target_sprite=target,px_scale_to_xy=database["tile_size_xy"]))
 
-
+            if events.dict["action"]=="select_turret":
+                selected_turret=events.dict["turret"]
+                selected_turret.bordered=True
 
         ##### QUIT
         if events.type == pygame.QUIT:

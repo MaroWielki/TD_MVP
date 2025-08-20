@@ -40,7 +40,7 @@ class TurretSprite(pygame.sprite.Sprite):
         self.data=data
         self.fps=fps
         self.target_type=target_type
-        self.bordered = True
+        self.bordered = False
         self.fire_at_frame = fire_at_frame
         self.skip_fire=False
         for anim_name in data.animationdata:
@@ -111,6 +111,19 @@ class TurretSprite(pygame.sprite.Sprite):
         }
         ev = pygame.event.Event(pygame.USEREVENT,ev_dic)
         pygame.event.post(ev)
+    def LMB_down(self):
+        ev_dic = {
+            "action": "select_turret",
+            "turret": self
+        }
+        ev = pygame.event.Event(pygame.USEREVENT, ev_dic)
+        pygame.event.post(ev)
+    def LMB_up(self):
+        pass
+    def RMB_down(self):
+        pass
+    def RMB_up(self):
+        pass
 
 
 class ProjectileSprite(pygame.sprite.Sprite):
@@ -322,8 +335,9 @@ def load_level(road_name:str,road_tiles,database):
     building_allowed_map = generate_build_map((tmp, database["resolution_xy"][0]), tmp, database["resolution_xy"][1], road_map, 32)
 
     mob_path=generate_mobs_path(road_map,tile_size)
-    print(mob_path)
-    return map,road,building_allowed_map, mob_path
+
+    background = pygame.transform.scale(pygame.image.load("img/bg2.png").convert(),database["resolution_xy"])
+    return map,road,building_allowed_map, mob_path,background
 
 def generate_mobs_path(img:pygame.surface.Surface,tile_size:tuple):
     list = []
@@ -347,32 +361,34 @@ def generate_build_map(menu_x:tuple,width,height,road_map:pygame.surface.Surface
 
     # TO TRWA BARDZO DLUGO TRZEBA PRZYSPIESZYC
     map={}
+    #map2=[[True for x in range(width+menu_x[1]-menu_x[0])] for y in range(height)]
+    map2=[[True for y in range(768)] for x in range(1366)]
+
     sizex = floor(width/road_map.get_width())
     sizey = floor(height / road_map.get_height())
     menu_x_range = range(menu_x[0],menu_x[1])
     tmp1=0
     tmp2=0
+
     for x in range(width+menu_x[1]-menu_x[0]):
         for y in range(height):
             if x in menu_x_range:
-                map[x,y]=False
-            else:
-                map[x,y]=True
+                map2[x][y]=False
 
     for xx in range(road_map.get_width()):
         for yy in range(road_map.get_height()):
             if road_map.get_at((xx,yy)) == (0,0,0,255):
                 for xxx in range(xx*sizex-disallowed_distance_from_path,xx*sizex+disallowed_distance_from_path):
                     for yyy in range(yy*sizey-disallowed_distance_from_path,yy*sizey+disallowed_distance_from_path):
-                        map[xxx,yyy]=False
+                        map2[xxx][yyy]=False
                         tmp1+=1
 
-    return map
+    return map2
 
 def exclude_from_build_map(map,rect:pygame.rect.Rect):
     for x in range(rect.x,rect.x+rect.width):
         for y in range(rect.y,rect.y+rect.height):
-            map[x,y]=False
+            map[x][y]=False
     return map
 
 def print_road(screen,map2,road,tile_size_xy):
