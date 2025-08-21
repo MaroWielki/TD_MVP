@@ -142,6 +142,9 @@ def create_wave_menu(database):
         MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (1, 3), "WaveMenu/Stats/Lives", "Lives: "))
     LM['WaveMenu/Stats/Gold'] = LM['WaveMenu/Stats'].add(
         MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (1, 5), "WaveMenu/Stats/Gold", "Gold: "))
+    LM['WaveMenu/Stats/GoldChange'] = LM['WaveMenu/Stats'].add(
+        MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (8, 5), "WaveMenu/Stats/Gold", database["gold_change"]))
+
     LM['WaveMenu/Stats/Wave'] = LM['WaveMenu/Stats'].add(
         MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (1, 7), "WaveMenu/Stats/Wave", "Wave: "))
 
@@ -207,15 +210,27 @@ def create_wave_turret_details(wave_menu,selected_turret,database):
                 "WaveMenu/Details/Checkbox"+str(i), target_type[0], database["tile_size_xy"], selected_turret, True))
         i+=1
 
-    wave_menu['WaveMenu/Details/ButtonSell'] = wave_menu['WaveMenu/Details'].add(MenuButton(wave_menu['WaveMenu/Details'].px_start_xy, database, (1,7),(database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "WaveMenu/Details/ButtonSell",text="Sell", color=3, action="sell_turret"))
-    wave_menu['WaveMenu/Details/ButtonUpgrade'] = wave_menu['WaveMenu/Details'].add(MenuButton(wave_menu['WaveMenu/Details'].px_start_xy, database, (1,9),(database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "WaveMenu/Details/ButtonUpgrade",text="Upgrade", color=3, action="upgrade_turret"))
+    wave_menu['WaveMenu/Details/ButtonSell'] = wave_menu['WaveMenu/Details'].add(MenuButton(wave_menu['WaveMenu/Details'].px_start_xy, database, (1,7),(database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "WaveMenu/Details/ButtonSell",text="Sell",parent_object=selected_turret, color=3, action="sell_turret"))
+    wave_menu['WaveMenu/Details/ButtonUpgrade'] = wave_menu['WaveMenu/Details'].add(MenuButton(wave_menu['WaveMenu/Details'].px_start_xy, database, (1,9),(database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "WaveMenu/Details/ButtonUpgrade",text="Upgrade",parent_object=selected_turret, color=3, action="upgrade_turret"))
 
 
     wave_menu['WaveMenu/Details/TxtDMG'] = wave_menu['WaveMenu/Details'].add(
         MenuText(wave_menu['WaveMenu/Details'].px_start_xy, database, (1, 11), "LevelMenu/Details/TxtDMG", "DMG"))
+    wave_menu['WaveMenu/Details/TxtDMGValue'] = wave_menu['WaveMenu/Details'].add(
+        MenuText(wave_menu['WaveMenu/Details'].px_start_xy, database, (6, 11), "LevelMenu/Details/TxtDMGValue", "DMG",parent_object=selected_turret,variable_name="dmg"))
+    wave_menu['WaveMenu/Details/TxtDMGValueChange'] = wave_menu['WaveMenu/Details'].add(
+        MenuText(wave_menu['WaveMenu/Details'].px_start_xy, database, (11, 11), "LevelMenu/Details/TxtDMGValueChange", "DMG",parent_object=selected_turret,variable_name="dmg_change"))
 
     wave_menu['WaveMenu/Details/TxtRange'] = wave_menu['WaveMenu/Details'].add(
         MenuText(wave_menu['WaveMenu/Details'].px_start_xy, database, (1, 13), "LevelMenu/Details/TxtRange", "Range"))
+    wave_menu['WaveMenu/Details/TxtRangeValue'] = wave_menu['WaveMenu/Details'].add(
+        MenuText(wave_menu['WaveMenu/Details'].px_start_xy, database, (6, 13), "LevelMenu/Details/TxtRangeValue", "Range",parent_object=selected_turret,variable_name="range"))
+    wave_menu['WaveMenu/Details/TxtRangeValueChange'] = wave_menu['WaveMenu/Details'].add(
+        MenuText(wave_menu['WaveMenu/Details'].px_start_xy, database, (11, 13), "LevelMenu/Details/TxtRangeValueChange", "Range",parent_object=selected_turret,variable_name="range_change"))
 
     wave_menu['WaveMenu/Details/TxtATSP'] = wave_menu['WaveMenu/Details'].add(
         MenuText(wave_menu['WaveMenu/Details'].px_start_xy, database, (1, 15), "LevelMenu/Details/TxtATSP", "ATSP"))
+    wave_menu['WaveMenu/Details/TxtATSPValue'] = wave_menu['WaveMenu/Details'].add(
+        MenuText(wave_menu['WaveMenu/Details'].px_start_xy, database, (6, 15), "LevelMenu/Details/TxtATSPValue", "ATSP",parent_object=selected_turret,variable_name="atsp"))
+    wave_menu['WaveMenu/Details/TxtATSPValueChange'] = wave_menu['WaveMenu/Details'].add(
+        MenuText(wave_menu['WaveMenu/Details'].px_start_xy, database, (11, 15), "LevelMenu/Details/TxtATSPValueChange", "ATSP",parent_object=selected_turret,variable_name="atsp_change"))

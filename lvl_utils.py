@@ -32,8 +32,11 @@ class TurretSprite(pygame.sprite.Sprite):
         self.animation_frames = {}
         #self.dmg=dmg
         self.db={"dmg":dmg,
+                 "dmg_change": "",
                  "atsp": atsp,
+                 "atsp_change":"",
                  "range": turret_range,
+                 "range_change":"",
                  "buy_price":50,
                  "sell_price":50,
                  "target_type":target_type
@@ -72,7 +75,7 @@ class TurretSprite(pygame.sprite.Sprite):
         self.fps_counter += 1
         #self.menu_group.update(database,turret_database,self.text_upgrade)
         self.is_target_available = False
-        self.is_target_available=get_target(self.rect.center,self.turret_range,self.target_type,mobs) is not None
+        self.is_target_available=get_target(self.rect.center,self.db["range"],self.db["target_type"],mobs) is not None
         if self.anim_fps != 0:
 
             self.animation_index = floor(self.fps_counter / (self.fps / self.anim_fps))
@@ -86,7 +89,7 @@ class TurretSprite(pygame.sprite.Sprite):
             pygame.draw.rect(self.image,"white",(0,0,self.rect.width-1,self.rect.height-1),1)
 
 
-        if self.is_target_available and self.last_attack_time+self.attack_speed<pygame.time.get_ticks():
+        if self.is_target_available and self.last_attack_time+self.db["atsp"]<pygame.time.get_ticks():
             self.last_attack_time= pygame.time.get_ticks()
             self.animation_index = 0
             self.fps_counter = 0
@@ -112,9 +115,9 @@ class TurretSprite(pygame.sprite.Sprite):
             "start_xy": (self.rect.center),
             "projectile_speed": 10,
             "target_xy": (0,0),
-            "dmg" : self.dmg,
-            "turret_range": self.turret_range,
-            "target_type": self.target_type
+            "dmg" : self.db["dmg"],
+            "range": self.db["range"],
+            "target_type": self.db["target_type"]
         }
         ev = pygame.event.Event(pygame.USEREVENT,ev_dic)
         pygame.event.post(ev)

@@ -43,7 +43,8 @@ database = {
     "resolution_in_tiles":resolution_in_tiles,
     "resolution_in_tiles_percent_xy":resolution_in_tiles_percent_xy,
     "lives": 10,
-    "gold": 2000,
+    "gold": 300,
+    "gold_change":"",
     "wave_number": 0,
     "font_sizes":fnt_sizes,
     "wave_menu_width_pt": 20,
@@ -254,7 +255,7 @@ while True:
             if events.dict["action"]=="shoot_projectile":
                 if len(mobs) > 0:
                     target = get_target((events.dict["start_xy"][0], events.dict["start_xy"][1]),
-                                        events.dict["turret_range"], events.dict["target_type"], mobs)
+                                        events.dict["range"], events.dict["target_type"], mobs)
                     # projectiles.add(ProjectileSprite(arrow_sprite, fps, events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"],target_xy=target))
                     if target is not None: projectiles.add(
                         ProjectileSprite(arrow_sprite, database["fps"], events.dict["start_xy"][0], events.dict["start_xy"][1],
