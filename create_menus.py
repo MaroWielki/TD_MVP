@@ -193,3 +193,29 @@ def create_wave_menu(database):
         MenuText(LM['WaveMenu/Info'].px_start_xy, database, (1, 3), "WaveMenu/Info/Debug1", "Debug1: "))
 
     return level_menu, LM
+
+def create_wave_turret_details(wave_menu,selected_turret,database):
+    i=0
+    for target_type in [
+        ("furthest",(1,3)),
+        ("closest",(10,3)),
+        ("most_hp",(1,5)),
+        ("least_hp",(10,5))
+    ]:
+        wave_menu['WaveMenu/Details/Checkbox'+str(i)] = wave_menu['WaveMenu/Details'].add(
+    GuiCheckbox(wave_menu['WaveMenu/Details'].px_start_xy, target_type[1], database["tile_size_xy"],
+                "WaveMenu/Details/Checkbox"+str(i), target_type[0], database["tile_size_xy"], selected_turret, True))
+        i+=1
+
+    wave_menu['WaveMenu/Details/ButtonSell'] = wave_menu['WaveMenu/Details'].add(MenuButton(wave_menu['WaveMenu/Details'].px_start_xy, database, (1,7),(database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "WaveMenu/Details/ButtonSell",text="Sell", color=3, action="sell_turret"))
+    wave_menu['WaveMenu/Details/ButtonUpgrade'] = wave_menu['WaveMenu/Details'].add(MenuButton(wave_menu['WaveMenu/Details'].px_start_xy, database, (1,9),(database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "WaveMenu/Details/ButtonUpgrade",text="Upgrade", color=3, action="upgrade_turret"))
+
+
+    wave_menu['WaveMenu/Details/TxtDMG'] = wave_menu['WaveMenu/Details'].add(
+        MenuText(wave_menu['WaveMenu/Details'].px_start_xy, database, (1, 11), "LevelMenu/Details/TxtDMG", "DMG"))
+
+    wave_menu['WaveMenu/Details/TxtRange'] = wave_menu['WaveMenu/Details'].add(
+        MenuText(wave_menu['WaveMenu/Details'].px_start_xy, database, (1, 13), "LevelMenu/Details/TxtRange", "Range"))
+
+    wave_menu['WaveMenu/Details/TxtATSP'] = wave_menu['WaveMenu/Details'].add(
+        MenuText(wave_menu['WaveMenu/Details'].px_start_xy, database, (1, 15), "LevelMenu/Details/TxtATSP", "ATSP"))

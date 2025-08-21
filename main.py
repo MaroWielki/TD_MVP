@@ -186,7 +186,6 @@ while True:
                 handle_RMB_up(colliding_objects,mouse_pos)
 
 
-
         ###### CALL ACTIONS
         if events.type == pygame.USEREVENT:
             if events.dict["action"]=="close_root_menu":
@@ -247,6 +246,11 @@ while True:
                     for turret in turret_group.sprites():
                         building_allowed_map = exclude_from_build_map(building_allowed_map, turret.rect)
 
+            if events.dict["action"] == "sell_turret":
+                pass
+            if events.dict["action"] == "upgrade_turret":
+                pass
+
             if events.dict["action"]=="shoot_projectile":
                 if len(mobs) > 0:
                     target = get_target((events.dict["start_xy"][0], events.dict["start_xy"][1]),
@@ -259,6 +263,13 @@ while True:
             if events.dict["action"]=="select_turret":
                 selected_turret=events.dict["turret"]
                 selected_turret.bordered=True
+                create_wave_turret_details(wave_menu,selected_turret,database)
+
+
+
+
+
+
 
         ##### QUIT
         if events.type == pygame.QUIT:

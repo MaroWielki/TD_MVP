@@ -27,19 +27,26 @@ class AnimationData:
 
 
 class TurretSprite(pygame.sprite.Sprite):
-    def __init__(self,data :AnimationData,x:int,y:int,fps,turret_range,fire_at_frame,px_scale_to_xy:tuple,dmg:int,init_animation="IDLE",init_anim_speed = 0,target_type="least_hp"):
+    def __init__(self,data :AnimationData,x:int,y:int,fps,turret_range,fire_at_frame,px_scale_to_xy:tuple,dmg:int,init_animation="IDLE",init_anim_speed = 0,target_type="least_hp",atsp=2000):
         pygame.sprite.Sprite.__init__(self)
         self.animation_frames = {}
-        self.dmg=dmg
+        #self.dmg=dmg
+        self.db={"dmg":dmg,
+                 "atsp": atsp,
+                 "range": turret_range,
+                 "buy_price":50,
+                 "sell_price":50,
+                 "target_type":target_type
+        }
         self.px_scale_to_xy = px_scale_to_xy
         self.is_target_available=False
         self.text_upgrade=""
-        self.turret_range = turret_range
+        #self.turret_range = turret_range
         self.init_animation = init_animation
         self.animation_index=0
         self.data=data
         self.fps=fps
-        self.target_type=target_type
+        #self.target_type=target_type
         self.bordered = False
         self.fire_at_frame = fire_at_frame
         self.skip_fire=False
@@ -51,7 +58,7 @@ class TurretSprite(pygame.sprite.Sprite):
         self.y=y
         self.fps_counter=0
         self.last_attack_time = 0
-        self.attack_speed=2000
+
         self.animation_name = init_animation
         self.rect = pygame.rect.Rect(self.x, self.y, self.px_scale_to_xy[0],
                                      self.px_scale_to_xy[1])
@@ -360,9 +367,9 @@ def generate_mobs_path(img:pygame.surface.Surface,tile_size:tuple):
 def generate_build_map(menu_x:tuple,width,height,road_map:pygame.surface.Surface,disallowed_distance_from_path:int):
 
     # TO TRWA BARDZO DLUGO TRZEBA PRZYSPIESZYC
-    map={}
-    #map2=[[True for x in range(width+menu_x[1]-menu_x[0])] for y in range(height)]
-    map2=[[True for y in range(768)] for x in range(1366)]
+
+    map2=[[True for y in range(height)] for x in range(width+menu_x[1]-menu_x[0])]
+    #map2=[[True for y in range(768)] for x in range(1366)]
 
     sizex = floor(width/road_map.get_width())
     sizey = floor(height / road_map.get_height())

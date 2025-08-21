@@ -6,35 +6,45 @@ import pygame
 pygame.init()
 
 
-def sort_fun(a:list):
-    return a[1]
-
-img=pygame.image.load("img/Paths/road_mapc_40x28.png")
-list=[]
-print(img)
-for x in range(img.get_width()):
-    for y in range(img.get_height()):
-        if img.get_at((x,y))[0] in range(1,254):
-            list.append(((x,y),img.get_at((x,y))[0]))
 
 
+screen=pygame.display.set_mode((800,600))
 
-print(list)
-list.sort(key=sort_fun)
-print(list)
+folder = "img/GUI/1 Interface/"
 
-dic={}
-st=list.pop(0)
-dic["START"]=[st[0][0],st[0][1]]
-dic["POINTS"]=[]
-for pt in list:
-    dic["POINTS"].append([pt[0][0],pt[0][1]])
-dic["FINISH"]=[list[-1][0][0],list[-1][0][1]]
+im = pygame.image.load(folder + "Tile_93.png").convert()
+print(im)
+im2 = pygame.transform.smoothscale(im, (13, 13))
+#'GENERIC', 'MMX', 'SSE'
 
+im3 = pygame.transform.scale(im, (32, 32))
+pygame.transform.set_smoothscale_backend('GENERIC')
 
-print(dic)
-pygame.quit()
-exit()
+img4=pygame.transform.smoothscale(im, (26, 26))
+
+p1=im.subsurface((0,0,7,6))
+p2=im.subsurface((10,0,6,7))
+p3=im.subsurface((0,10,7,6))
+p4=im.subsurface((10,10,6,7))
+
+while True:
+    screen.fill("green")
+
+    screen.blit(im, (100, 100))
+    screen.blit(im2, (150, 100))
+    screen.blit(im3, (200, 100))
+    screen.blit(img4, (250, 100))
+
+    screen.blit(p1, (250, 100))
+    screen.blit(p2, (300, 100))
+    screen.blit(p3, (350, 100))
+    screen.blit(p4, (400, 100))
+
+    pygame.display.update()
+    for events in pygame.event.get():
+        if events.type == pygame.QUIT:
+            pygame.quit()
+            exit()
 
 
 
