@@ -170,6 +170,8 @@ while True:
             mouse_pos=pygame.mouse.get_pos()
             if selected_turret is not None:
                 selected_turret.bordered=False
+                create_wave_turret_details(wave_menu,selected_turret,database,destroy=True)
+
             colliding_objects=find_colliding_objects(mouse_pos,MMs,turret_group.sprites())
             if events.button == 1:
                 handle_LMB_down(colliding_objects,mouse_pos)
