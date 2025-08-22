@@ -32,13 +32,17 @@ class TurretSprite(pygame.sprite.Sprite):
         self.animation_frames = {}
         #self.dmg=dmg
         self.db={"dmg":dmg,
+                 "dmg_upgrade":2,
                  "dmg_change": "",
                  "atsp": atsp,
+                 "atsp_upgrade":-50,
                  "atsp_change":"",
                  "range": turret_range,
+                 "range_upgrade":10,
                  "range_change":"",
                  "buy_price":50,
                  "sell_price":50,
+                 "upgrade_price":100,
                  "target_type":target_type
         }
         self.px_scale_to_xy = px_scale_to_xy

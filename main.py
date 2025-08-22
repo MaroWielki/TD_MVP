@@ -110,8 +110,11 @@ while True:
 
         wave_menu['WaveMenu/Stats/Lives'].update(txt="Lives: "+str(database["lives"]))
         wave_menu['WaveMenu/Stats/Gold'].update(txt="Gold: " + str(database["gold"]))
+        wave_menu['WaveMenu/Stats/GoldChange'].update(txt=str(database["gold_change"]))
+        database["gold_change"]=""
 
         wave_menu['WaveMenu/Info/Debug1'].update(txt=str(pygame.mouse.get_pos()))
+
         if database['lives']<1:
             pass
             #after_wave(victory=False)
@@ -168,11 +171,14 @@ while True:
         ###### MOUSE DOWN
         if events.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos=pygame.mouse.get_pos()
-            if selected_turret is not None:
+            colliding_objects=find_colliding_objects(mouse_pos,MMs,turret_group.sprites())
+
+            print(colliding_objects)
+            if selected_turret is not None and (colliding_objects == []):
+
                 selected_turret.bordered=False
                 create_wave_turret_details(wave_menu,selected_turret,database,destroy=True)
 
-            colliding_objects=find_colliding_objects(mouse_pos,MMs,turret_group.sprites())
             if events.button == 1:
                 handle_LMB_down(colliding_objects,mouse_pos)
                 bring_root_to_front(colliding_objects, All_menus_groups_ordered)
@@ -250,13 +256,22 @@ while True:
                         building_allowed_map = exclude_from_build_map(building_allowed_map, turret.rect)
 
             if events.dict["action"] == "sell_turret":
-                pass
+
+                database["gold"]+=events.dict["parent_object"].db["sell_price"]
+                events.dict["parent_object"].remove(turret_group)
+
+
             if events.dict["action"] == "upgrade_turret":
-                pass
+                if database["gold"] >= events.dict["parent_object"].db["upgrade_price"]:
+                    events.dict["parent_object"].db["dmg"]+=events.dict["parent_object"].db["dmg_upgrade"]
+                    events.dict["parent_object"].db["atsp"] += events.dict["parent_object"].db["atsp_upgrade"]
+                    events.dict["parent_object"].db["range"] += events.dict["parent_object"].db["range_upgrade"]
+                    database["gold"] -= events.dict["parent_object"].db["upgrade_price"]
 
             if events.dict["action"]=="shoot_projectile":
                 if len(mobs) > 0:
-                    target = get_target((events.dict["start_xy"][0], events.dict["start_xy"][1]),
+                    target = get_target((events.dict["sta"
+                                                     "rt_xy"][0], events.dict["start_xy"][1]),
                                         events.dict["range"], events.dict["target_type"], mobs)
                     # projectiles.add(ProjectileSprite(arrow_sprite, fps, events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"],target_xy=target))
                     if target is not None: projectiles.add(
@@ -268,9 +283,8 @@ while True:
                 selected_turret.bordered=True
                 create_wave_turret_details(wave_menu,selected_turret,database)
 
-
-
-
+            if events.dict["action"]=="set_gold_change":
+                database["gold_change"]=events.dict["gold_change"]
 
 
 

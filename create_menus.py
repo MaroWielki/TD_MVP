@@ -143,7 +143,7 @@ def create_wave_menu(database):
     LM['WaveMenu/Stats/Gold'] = LM['WaveMenu/Stats'].add(
         MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (1, 5), "WaveMenu/Stats/Gold", "Gold: "))
     LM['WaveMenu/Stats/GoldChange'] = LM['WaveMenu/Stats'].add(
-        MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (8, 5), "WaveMenu/Stats/Gold", database["gold_change"]))
+        MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (8, 5), "WaveMenu/Stats/GoldChange", database["gold_change"]))
 
     LM['WaveMenu/Stats/Wave'] = LM['WaveMenu/Stats'].add(
         MenuText(LM['WaveMenu/Stats'].px_start_xy, database, (1, 7), "WaveMenu/Stats/Wave", "Wave: "))
