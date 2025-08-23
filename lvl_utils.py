@@ -618,3 +618,9 @@ def get_target(turret_xy,turret_range: int,target_type: str,group: pygame.sprite
 
 def sort_fun(a:list):
     return a[1]
+
+def deal_splash_dmg(explosion_xy,dmg,radius,mobs_sprite_list:pygame.sprite.Group):
+    for mob in mobs_sprite_list:
+        dist=pygame.Vector2(mob.rect.center).distance_to(pygame.Vector2(explosion_xy))
+        if dist <radius:
+            mob.hp-=floor(dmg*(1-(dist/radius)))

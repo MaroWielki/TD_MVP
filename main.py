@@ -316,6 +316,7 @@ while True:
             if events.dict["action"] == "create_explosion":
                 proj_type=events.dict["projectile_type"]
                 projectiles.add(ExplosionSprite(anim_data[proj_type],database,events.dict["explosion_xy"],database[projectile_init_database[proj_type]["scale"]]))
+                deal_splash_dmg(events.dict["explosion_xy"],events.dict["dmg"],events.dict["radius"],mobs_sprite_list)
 
 
         ##### QUIT
