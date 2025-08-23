@@ -25,6 +25,7 @@ turret_init_database={
                  "sell_price":50,
                  "upgrade_price":100,
                  "target_type":"most_hp",
+                 "projectile_type":"arrow",
                  "sprite_name":"archer_sprite"
         },
     "catapult":
@@ -41,6 +42,7 @@ turret_init_database={
          "sell_price": 75,
          "upgrade_price": 100,
          "target_type": "most_hp",
+         "projectile_type":"bomb",
          "sprite_name": "catapult_sprite"
          },
 
@@ -133,6 +135,7 @@ bomb_sprite = {
 'animation_orientation':"horizontal",
 'border':1,
 'anim_fps':6,
+'init_rotation':90,
 'start_x':0,
 'start_y':0,
 'frames_count':5,

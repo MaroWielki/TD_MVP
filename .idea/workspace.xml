@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="creating turret DB">
+    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="new projectile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lvl_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/lvl_utils.py" afterDir="false" />
@@ -199,7 +199,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755936888096</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="new projectile">
+      <option name="closed" value="true" />
+      <created>1755949696636</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1755949696636</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +239,8 @@
     <MESSAGE value="deselecting turret destroys details" />
     <MESSAGE value="need to fix deselect bug more" />
     <MESSAGE value="creating turret DB" />
-    <option name="LAST_COMMIT_MESSAGE" value="creating turret DB" />
+    <MESSAGE value="new projectile" />
+    <option name="LAST_COMMIT_MESSAGE" value="new projectile" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TD_MVP$tst.coverage" NAME="tst Coverage Results" MODIFIED="1755719961203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

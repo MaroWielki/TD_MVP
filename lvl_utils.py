@@ -21,6 +21,10 @@ class AnimationSingle:
         self.start_y = kw['start_y']
         if "fire_at_frame" in kw.keys():
             self.fire_at_frame=kw['fire_at_frame']
+        if "init_rotation" in kw.keys():
+            self.init_rotation = kw['init_rotation']
+        else:
+            self.init_rotation = 0
         self.frames_count = kw['frames_count']
         self.img_per_row_or_col = kw['img_per_row_or_col']
         self.color_key = kw['color_key']
@@ -108,8 +112,8 @@ class TurretSprite(pygame.sprite.Sprite):
     def fire(self):
         ev_dic={
             "action": "shoot_projectile",
-            "projectile_type": "arrow",
-            "start_xy": (self.rect.center),
+            "projectile_type": self.db["projectile_type"],
+            "start_xy": self.rect.center,
             "projectile_speed": 2,
             "target_xy": (0,0),
             "dmg" : self.db["dmg"],
@@ -148,12 +152,13 @@ class ProjectileSprite(pygame.sprite.Sprite):
         self.target_xy=target_xy
         self.fps = fps
         for anim_name in data.animationdata:
+            anim_ratio=self.data.animationdata[anim_name].frame_window_width/self.data.animationdata[anim_name].frame_window_height
             anim_data = self.data.animationdata[anim_name]
             self.animation_frames[anim_name] = cropp_img(anim_data.path, anim_data.frame_window_width,
                                                           anim_data.frame_window_height, anim_data.border,
                                                           anim_data.start_x, anim_data.start_y, anim_data.frames_count,
                                                           anim_data.img_per_row_or_col, anim_data.animation_orientation,
-                                                          anim_data.color_key,px_scale_to_xy)
+                                                          anim_data.color_key,(floor(px_scale_to_xy[0]*anim_ratio), px_scale_to_xy[1]),anim_data.init_rotation)
 
         self.x = x
         self.y = y
@@ -301,7 +306,7 @@ class MobSprite(pygame.sprite.Sprite):
 
 
 
-def cropp_img(path,frame_window_width,frame_window_height,border,start_x,start_y,frames_count,img_per_row_or_col,animation_orientation,color_key,px_scale_to_xy=None):
+def cropp_img(path,frame_window_width,frame_window_height,border,start_x,start_y,frames_count,img_per_row_or_col,animation_orientation,color_key,px_scale_to_xy=None,init_rotation=0):
     pieces = []
     img = pygame.image.load(path)
     img.set_colorkey(color_key)
@@ -318,7 +323,11 @@ def cropp_img(path,frame_window_width,frame_window_height,border,start_x,start_y
         if px_scale_to_xy is None:
             pieces.append(pygame.Surface.subsurface(img,frame_x,frame_y,frame_window_width-border,frame_window_height-border))
         else:
-            pieces.append(pygame.transform.scale(pygame.Surface.subsurface(img, frame_x, frame_y, frame_window_width - border,frame_window_height - border),px_scale_to_xy))
+            #pieces.append(pygame.transform.scale(pygame.Surface.subsurface(img, frame_x, frame_y, frame_window_width - border,frame_window_height - border), px_scale_to_xy))
+
+            pieces.append(pygame.transform.rotate(pygame.transform.scale(pygame.Surface.subsurface(img, frame_x, frame_y, frame_window_width - border,frame_window_height - border),px_scale_to_xy),init_rotation))
+
+
         frame_index+=1
     return pieces
 

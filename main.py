@@ -87,6 +87,8 @@ turret_sprites["catapult_sprite"]=AnimationData(catapult_sprite)
 turret_sprites["archer_sprite"]=AnimationData(archer_sprite)
 
 projectiles=pygame.sprite.Group()
+
+anim_data={"arrow":AnimationData(arrow_sprite),"bomb":AnimationData(bomb_sprite)}
 arrow_sprite=AnimationData(arrow_sprite)
 bomb_sprite=AnimationData(bomb_sprite)
 
@@ -97,15 +99,7 @@ while True:
     if is_game_on and background is not None:
         screen.blit(background,(0,0))
 
-    ### TURRETS
-    turret_group.update(mobs,database)
-    turret_group.draw(screen)
 
-    ### PROJECTILES
-    projectiles.update()
-    projectiles.draw(screen)
-    for projectile in projectiles.sprites():
-        if projectile.remove_me: projectiles.remove(projectile)
 
     ### MAP / VICTORY / STATS
     if is_game_on:
@@ -126,6 +120,16 @@ while True:
             is_game_on=False
             All_menus_groups_ordered = []
             #after_wave(victory=True)
+
+        ### TURRETS
+    turret_group.update(mobs, database)
+    turret_group.draw(screen)
+
+    ### PROJECTILES
+    projectiles.update()
+    projectiles.draw(screen)
+    for projectile in projectiles.sprites():
+        if projectile.remove_me: projectiles.remove(projectile)
 
     ### MOBS UPDATE N DRAW
     if mobs is not []:
@@ -240,7 +244,7 @@ while True:
                 tmp=create_wave_menu(database)
                 All_menus_groups_ordered.append(tmp)
                 wave_menu=tmp[1]
-                mobs_wave_units = [7, 15, 10, 15, 20]
+                mobs_wave_units = [7, 15, 30, 45, 100]
                 wave_mob = generate_wave(mobs_wave_units.pop(0), AnimationData(goblin_sprite), pygame.time.get_ticks(),
                                          pygame.time.get_ticks() + (10 * 1000))
                 wave_menu['WaveMenu/Stats/Gold'].update(txt="Gold: " + str(database["gold"]))
@@ -283,7 +287,7 @@ while True:
                                         events.dict["range"], events.dict["target_type"], mobs)
 
                     if target is not None: projectiles.add(
-                        ProjectileSprite(bomb_sprite, database["fps"], events.dict["start_xy"][0], events.dict["start_xy"][1],
+                        ProjectileSprite(anim_data[events.dict["projectile_type"]], database["fps"], events.dict["start_xy"][0], events.dict["start_xy"][1],
                                          events.dict["projectile_speed"], events.dict["dmg"], target_sprite=target,px_scale_to_xy=database["tile_size_xy"]))
 
             if events.dict["action"]=="select_turret":
