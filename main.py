@@ -127,11 +127,8 @@ while True:
     turret_group.update(mobs, database)
     turret_group.draw(screen)
 
-    ### PROJECTILES
-    projectiles.update()
-    projectiles.draw(screen)
-    for projectile in projectiles.sprites():
-        if projectile.remove_me: projectiles.remove(projectile)
+
+
 
     ### MOBS UPDATE N DRAW
     if mobs is not []:
@@ -140,6 +137,7 @@ while True:
         mobs_sprite_list.sort(key=sort_sprites)
         for mob in mobs_sprite_list:
             screen.blit(mob.image, mob.rect)
+
 
     ## SPAWN MOBS
     if is_game_on:
@@ -153,6 +151,12 @@ while True:
         if mob.hp<=0:
             mobs.remove(mob)
             database['gold']+=10
+
+    ### PROJECTILES
+    for projectile in projectiles.sprites():
+        if projectile.remove_me: projectiles.remove(projectile)
+    projectiles.update()
+    projectiles.draw(screen)
 
     ### TURRET RANGE
     if selected_turret is not None:
@@ -296,9 +300,9 @@ while True:
 
                     if target is not None:
                         if projectile_init_database[events.dict["projectile_type"]]["target_type"]=="mob":
-                            projectiles.add(ProjectileSprite(anim_data[events.dict["projectile_type"]], database["fps"],events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"], events.dict["dmg"], target_sprite=target,px_scale_to_xy=database["tile_size_xy"]))
+                            projectiles.add(ProjectileSprite(anim_data[events.dict["projectile_type"]], database["fps"],events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"], events.dict["dmg"], events.dict["projectile_type"],target_sprite=target,px_scale_to_xy=database["tile_size_xy"]))
                         else:
-                            projectiles.add(ProjectileSprite(anim_data[events.dict["projectile_type"]], database["fps"],events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"], events.dict["dmg"], target_xy=target.rect.center,px_scale_to_xy=database["tile_size_xy"]))
+                            projectiles.add(ProjectileSprite(anim_data[events.dict["projectile_type"]], database["fps"],events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"], events.dict["dmg"],events.dict["projectile_type"], target_xy=target.rect.center,px_scale_to_xy=database["tile_size_xy"]))
 
             if events.dict["action"]=="select_turret":
                 selected_turret=events.dict["turret"]
@@ -308,6 +312,10 @@ while True:
             if events.dict["action"]=="set_gold_change":
                 database["gold_change"]=events.dict["gold_change"]
 
+
+            if events.dict["action"] == "create_explosion":
+                proj_type=events.dict["projectile_type"]
+                projectiles.add(ExplosionSprite(anim_data[proj_type],database,events.dict["explosion_xy"],database[projectile_init_database[proj_type]["scale"]]))
 
 
         ##### QUIT

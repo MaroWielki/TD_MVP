@@ -36,6 +36,44 @@ class AnimationData:
         for key in kw:
             self.animationdata[key]=AnimationSingle(key,kw[key])
 
+class ExplosionSprite(pygame.sprite.Sprite):
+    def __init__(self,anim_data,database,explosion_xy,px_scale_to_xy:tuple,init_anim_speed=0):
+        pygame.sprite.Sprite.__init__(self)
+        self.init_animation = "HIT"
+        self.explosion_xy=explosion_xy
+        self.fps_counter=0
+        self.animation_frames = {}
+        self.fps=database["fps"]
+        self.animation_name="HIT"
+        self.remove_me=False
+        self.px_scale_to_xy=px_scale_to_xy
+        self.data=anim_data
+        anim_data = self.data.animationdata["HIT"]
+        self.animation_frames["HIT"]=cropp_img(anim_data.path,anim_data.frame_window_width,anim_data.frame_window_height,anim_data.border,anim_data.start_x,anim_data.start_y,anim_data.frames_count,anim_data.img_per_row_or_col,anim_data.animation_orientation,anim_data.color_key,self.px_scale_to_xy)
+        self.image = None
+        self.rect = pygame.rect.Rect(self.explosion_xy[0],self.explosion_xy[1], self.px_scale_to_xy[0],
+                                     self.px_scale_to_xy[1])
+        self.rect.center = self.explosion_xy
+
+        if init_anim_speed == 0:
+            self.anim_fps = self.data.animationdata[self.animation_name].anim_fps
+        else:
+            self.anim_fps = init_anim_speed
+
+    def update(self):
+        self.fps_counter += 1
+
+        if self.anim_fps != 0:
+
+            self.animation_index = floor(self.fps_counter / (self.fps / self.anim_fps))
+            if self.animation_index >= len(self.animation_frames[self.animation_name]):
+                self.remove_me = True
+                self.animation_index = 0
+                self.fps_counter = 0
+        self.image = self.animation_frames[self.animation_name][self.animation_index].copy()
+
+
+
 
 class TurretSprite(pygame.sprite.Sprite):
     def __init__(self,data :AnimationData,x:int,y:int,fps,fire_at_frame,px_scale_to_xy:tuple,turret_name:str,init_animation="IDLE",init_anim_speed = 0):
@@ -138,11 +176,12 @@ class TurretSprite(pygame.sprite.Sprite):
 
 
 class ProjectileSprite(pygame.sprite.Sprite):
-    def __init__(self,data :AnimationData,fps:int,x:int,y:int,move_speed:int,dmg:int,target_sprite:pygame.sprite.Sprite=None,target_xy=None,init_animation="IDLE",init_anim_speed = 0,rotation=0,px_scale_to_xy:tuple=None):
+    def __init__(self,data :AnimationData,fps:int,x:int,y:int,move_speed:int,dmg:int,projectile_type:str,target_sprite:pygame.sprite.Sprite=None,target_xy=None,init_animation="IDLE",init_anim_speed = 0,rotation=0,px_scale_to_xy:tuple=None):
         pygame.sprite.Sprite.__init__(self)
         self.target_sprite = target_sprite
         self.remove_me = False
         self.dmg=dmg
+        self.projectile_type=projectile_type
         self.animation_frames = {}
         self.init_animation = init_animation
         self.animation_index = 0
@@ -189,9 +228,20 @@ class ProjectileSprite(pygame.sprite.Sprite):
         else:
             trgt=self.target_xy
         if pygame.math.Vector2(self.rect.center).distance_to(pygame.math.Vector2(trgt)) < self.move_speed:
-            if self.target_sprite is not None: self.target_sprite.hp-=self.dmg
-            self.remove_me = True
-
+            if self.target_sprite is not None:
+                self.target_sprite.hp-=self.dmg
+                self.remove_me = True
+            else:
+                ev_dic = {
+                    "action": "create_explosion",
+                    "dmg": self.dmg,
+                    "radius":50,
+                    "projectile_type": self.projectile_type,
+                    "explosion_xy":trgt
+                }
+                ev = pygame.event.Event(pygame.USEREVENT, ev_dic)
+                pygame.event.post(ev)
+                self.remove_me = True
 
         self.move(**kwargs)
 

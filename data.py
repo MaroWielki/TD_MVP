@@ -10,7 +10,8 @@ projectile_init_database={
         "dmg_type": "splash",
         "target_type":"ground",
         "sprite":"bomb_sprite",
-"projectile_speed":5
+        "scale":"quadrupal_tile_size_xy",
+        "projectile_speed":5
     }
 
 }

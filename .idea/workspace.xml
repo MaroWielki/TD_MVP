@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="available turrets logic">
+    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="target ground">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/create_menus.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_menus.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lvl_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/lvl_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tst2.py" beforeDir="false" afterPath="$PROJECT_DIR$/tst2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +225,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755967716912</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="target ground">
+      <option name="closed" value="true" />
+      <created>1755969517985</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1755969517985</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,7 +268,8 @@
     <MESSAGE value="new projectile" />
     <MESSAGE value="projectile logic and database" />
     <MESSAGE value="available turrets logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="available turrets logic" />
+    <MESSAGE value="target ground" />
+    <option name="LAST_COMMIT_MESSAGE" value="target ground" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TD_MVP$tst.coverage" NAME="tst Coverage Results" MODIFIED="1755719961203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

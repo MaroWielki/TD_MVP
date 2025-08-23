@@ -248,5 +248,12 @@ def create_wave_turret_details(wave_menu,selected_turret,database,destroy=False)
 
     else:
         for x in wave_menu['WaveMenu/Details'].members_group.sprites():
-            wave_menu['WaveMenu/Details'].remove(x)
+            x.remove(wave_menu['WaveMenu/Details'].members_group)
+            #wave_menu['WaveMenu/Details'].members_group.remove(x)
+        to_remove=[]
+        for x in wave_menu:
+            if x[:17]=="WaveMenu/Details/": to_remove.append(x)
+        for xx in to_remove:
+            wave_menu.pop(xx)
+
 
