@@ -2,14 +2,17 @@
 projectile_init_database={
     "arrow":{
         "dmg_type":"single",
+        "target_type":"mob",
         "sprite":"arrow_sprite",
         "projectile_speed":10
     },
     "bomb": {
         "dmg_type": "splash",
+        "target_type":"ground",
         "sprite":"bomb_sprite",
 "projectile_speed":5
     }
+
 }
 
 turret_init_database={

@@ -88,7 +88,7 @@ def create_world_menu(database):
 
     for item in database["available_turrets"]:
         LM['LevelMenu/Title0/Title1/gridInActive/item'+str(inactive_item_index)] = LM['LevelMenu/Title0/Title1/gridInActive'].add(
-        ItemMenu(LM['LevelMenu/Title0/Title1/gridInActive'].px_start_xy, database, (2, 0),  "LevelMenu/Title0/Title1/gridInActive/item"+str(inactive_item_index),tile_size_xy=database["double_tile_size_xy"],item_name=item,parent_grid=LM['LevelMenu/Title0/Title1/gridInActive']))
+        ItemMenu(LM['LevelMenu/Title0/Title1/gridInActive'].px_start_xy, database, (inactive_item_index, 0),  "LevelMenu/Title0/Title1/gridInActive/item"+str(inactive_item_index),tile_size_xy=database["double_tile_size_xy"],item_name=item,parent_grid=LM['LevelMenu/Title0/Title1/gridInActive']))
         inactive_item_index+=1
 
     ### WORLDS
@@ -174,7 +174,7 @@ def create_wave_menu(database):
     shop_item_index=0
     for item in database["wave_shop_items"]:
         LM['WaveMenu/Shop/grid0/item' + str(shop_item_index)] = LM['WaveMenu/Shop/grid0'].add(
-            ItemMenu(LM['WaveMenu/Shop/grid0'].px_start_xy, database, (0, 0),
+            ItemMenu(LM['WaveMenu/Shop/grid0'].px_start_xy, database, (shop_item_index, 0),
                      "WaveMenu/Shop/grid0/item" + str(shop_item_index),
                      tile_size_xy=database["quadrupal_tile_size_xy"], item_name=item,
                      parent_grid=LM['WaveMenu/Shop/grid0']))

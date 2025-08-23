@@ -184,10 +184,15 @@ class ProjectileSprite(pygame.sprite.Sprite):
                 self.animation_index = 0
                 self.fps_counter = 0
 
-        if pygame.math.Vector2(self.rect.center).distance_to(pygame.math.Vector2(self.target_sprite.rect.center)) < self.move_speed:
-
-            self.target_sprite.hp-=self.dmg
+        if self.target_sprite is not None:
+            trgt=self.target_sprite.rect.center
+        else:
+            trgt=self.target_xy
+        if pygame.math.Vector2(self.rect.center).distance_to(pygame.math.Vector2(trgt)) < self.move_speed:
+            if self.target_sprite is not None: self.target_sprite.hp-=self.dmg
             self.remove_me = True
+
+
         self.move(**kwargs)
 
     def move(self, **kwargs):

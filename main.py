@@ -47,7 +47,7 @@ database = {
     "lives": 10,
     "gold": 300,
     "wave_shop_items":[],
-    "available_turrets":["archer"],
+    "available_turrets":["archer","catapult"],
     "gold_change":"",
     "wave_number": 0,
     "font_sizes":fnt_sizes,
@@ -294,9 +294,11 @@ while True:
                                                      "rt_xy"][0], events.dict["start_xy"][1]),
                                         events.dict["range"], events.dict["target_type"], mobs)
 
-                    if target is not None: projectiles.add(
-                        ProjectileSprite(anim_data[events.dict["projectile_type"]], database["fps"], events.dict["start_xy"][0], events.dict["start_xy"][1],
-                                         events.dict["projectile_speed"], events.dict["dmg"], target_sprite=target,px_scale_to_xy=database["tile_size_xy"]))
+                    if target is not None:
+                        if projectile_init_database[events.dict["projectile_type"]]["target_type"]=="mob":
+                            projectiles.add(ProjectileSprite(anim_data[events.dict["projectile_type"]], database["fps"],events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"], events.dict["dmg"], target_sprite=target,px_scale_to_xy=database["tile_size_xy"]))
+                        else:
+                            projectiles.add(ProjectileSprite(anim_data[events.dict["projectile_type"]], database["fps"],events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"], events.dict["dmg"], target_xy=target.rect.center,px_scale_to_xy=database["tile_size_xy"]))
 
             if events.dict["action"]=="select_turret":
                 selected_turret=events.dict["turret"]
