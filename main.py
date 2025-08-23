@@ -3,6 +3,8 @@ from random import randint
 import pygame
 from pygame import K_LEFT, K_RIGHT, K_DOWN, K_UP, K_ESCAPE
 from sys import exit
+
+import menus_utils
 #from menus_utils import *
 from create_menus import *
 import time
@@ -73,7 +75,7 @@ wave_mob=[]
 
 ### TURRETS
 turret_group= pygame.sprite.Group()
-turret_database=None
+
 #archer_sprite=AnimationData(archer_sprite)
 #catapult_sprite=AnimationData(catapult_sprite)
 
@@ -95,7 +97,7 @@ while True:
         screen.blit(background,(0,0))
 
     ### TURRETS
-    turret_group.update(mobs,database,turret_database)
+    turret_group.update(mobs,database)
     turret_group.draw(screen)
 
     ### PROJECTILES
@@ -145,6 +147,10 @@ while True:
             mobs.remove(mob)
             database['gold']+=10
 
+    ### TURRET RANGE
+    if selected_turret is not None:
+        pygame.draw.circle(screen, "white", selected_turret.rect.center, selected_turret.db["range"],1)
+
 
     ### MENUS
     if All_menus_groups_ordered != []:
@@ -173,11 +179,12 @@ while True:
             mouse_pos=pygame.mouse.get_pos()
             colliding_objects=find_colliding_objects(mouse_pos,MMs,turret_group.sprites())
 
-            print(colliding_objects)
-            if selected_turret is not None and (colliding_objects == []):
+
+            if selected_turret is not None and (colliding_objects == [] or menus_utils.MenuTitle not in [type(a) for a in colliding_objects]):
 
                 selected_turret.bordered=False
                 create_wave_turret_details(wave_menu,selected_turret,database,destroy=True)
+                selected_turret=None
 
             if events.button == 1:
                 handle_LMB_down(colliding_objects,mouse_pos)
@@ -251,7 +258,7 @@ while True:
                 if database["gold"]>=events.dict["turret"].item.data["cost"]:
                     database["gold"]-=events.dict["turret"].item.data["cost"]
                     wave_menu['WaveMenu/Stats/Gold'].update(txt="Gold: " + str(database["gold"]))
-                    turret_group.add(TurretSprite(turret_sprites[events.dict["turret"].item.data["sprite"]], pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], database["fps"], 500,10, database["quadrupal_tile_size_xy"], 15))
+                    turret_group.add(TurretSprite(turret_sprites[events.dict["turret"].item.data["sprite"]], pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], database["fps"], 500,10, database["quadrupal_tile_size_xy"], "archer",15))
                     for turret in turret_group.sprites():
                         building_allowed_map = exclude_from_build_map(building_allowed_map, turret.rect)
 

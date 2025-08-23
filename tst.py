@@ -3,48 +3,50 @@
 
 
 import pygame
+from random import randint
 pygame.init()
-
-
-
 
 screen=pygame.display.set_mode((800,600))
 
-folder = "img/GUI/1 Interface/"
-
-im = pygame.image.load(folder + "Tile_93.png").convert()
-print(im)
-im2 = pygame.transform.smoothscale(im, (13, 13))
-#'GENERIC', 'MMX', 'SSE'
-
-im3 = pygame.transform.scale(im, (32, 32))
-pygame.transform.set_smoothscale_backend('GENERIC')
-
-img4=pygame.transform.smoothscale(im, (26, 26))
-
-p1=im.subsurface((0,0,7,6))
-p2=im.subsurface((10,0,6,7))
-p3=im.subsurface((0,10,7,6))
-p4=im.subsurface((10,10,6,7))
+#im = pygame.image.load(folder + "Tile_93.png").convert()
+kostka_wartosc="1"
+font = pygame.font.SysFont("comicsansms", 30)
+kto_sie_rusza="Kazio"
+Kazio_pozycja=0
 
 while True:
     screen.fill("green")
 
-    screen.blit(im, (100, 100))
-    screen.blit(im2, (150, 100))
-    screen.blit(im3, (200, 100))
-    screen.blit(img4, (250, 100))
+    #pygame.draw.rect(screen,"red",(30,20,30,30),1)
+    #pygame.draw.rect(screen,"red",(60,20,30,30),1)
 
-    screen.blit(p1, (250, 100))
-    screen.blit(p2, (300, 100))
-    screen.blit(p3, (350, 100))
-    screen.blit(p4, (400, 100))
+    szerokosc=50
+
+    pygame.draw.rect(screen,"pink",(15,25,15,15))
+    pygame.draw.rect(screen, "red", (15+(Kazio_pozycja*szerokosc), 45, 15, 15))
+
+    for i in range(15):
+        pygame.draw.rect(screen, "red", (i*szerokosc, 20, szerokosc, szerokosc), 1)
+
+    for i in range(15):
+        pygame.draw.rect(screen, "red", (i*szerokosc, 420, szerokosc, szerokosc), 1)
+
+    for i in range(8):
+        pygame.draw.rect(screen, "red", (14*szerokosc, 20+(i*szerokosc), szerokosc, szerokosc), 1)
+
+    pygame.draw.rect(screen,"yellow",(500,500,100,100),10)
+
+    kostka = font.render(kostka_wartosc, True, 'BLUE')
+    screen.blit(kostka,(540,525))
 
     pygame.display.update()
     for events in pygame.event.get():
         if events.type == pygame.QUIT:
             pygame.quit()
             exit()
+        if events.type == pygame.MOUSEBUTTONDOWN:
+            kostka_wartosc=str(randint(1,6))
+            Kazio_pozycja+=int(kostka_wartosc)
 
 
 

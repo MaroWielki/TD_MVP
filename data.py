@@ -1,4 +1,40 @@
 
+turret_init_database={
+    "archer":
+                  {"dmg":15,
+                 "dmg_upgrade":2,
+                 "dmg_change": "",
+                 "atsp": 2000,
+                 "atsp_upgrade":-50,
+                 "atsp_change":"",
+                 "range": 300,
+                 "range_upgrade":10,
+                 "range_change":"",
+                 "buy_price":50,
+                 "sell_price":50,
+                 "upgrade_price":100,
+                 "target_type":"most_hp",
+                 "sprite_name":"archer_sprite"
+        },
+    "catapult":
+        {"dmg": 50,
+         "dmg_upgrade": 10,
+         "dmg_change": "",
+         "atsp": 4000,
+         "atsp_upgrade": -200,
+         "atsp_change": "",
+         "range": 150,
+         "range_upgrade": 10,
+         "range_change": "",
+         "buy_price": 150,
+         "sell_price": 75,
+         "upgrade_price": 100,
+         "target_type": "most_hp",
+         "sprite_name": "catapult_sprite"
+         },
+
+                 }
+
 
 levels_dict={
  "umap":{

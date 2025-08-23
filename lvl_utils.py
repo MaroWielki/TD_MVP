@@ -2,6 +2,12 @@ import pygame
 from math import floor,sin, cos, atan2, radians, degrees
 from random import uniform, randint
 
+from data import turret_init_database
+
+
+class TurretType:
+    def __init__(self,name):
+        pass
 
 class AnimationSingle:
     def __init__(self,name,kw):
@@ -27,24 +33,11 @@ class AnimationData:
 
 
 class TurretSprite(pygame.sprite.Sprite):
-    def __init__(self,data :AnimationData,x:int,y:int,fps,turret_range,fire_at_frame,px_scale_to_xy:tuple,dmg:int,init_animation="IDLE",init_anim_speed = 0,target_type="least_hp",atsp=2000):
+    def __init__(self,data :AnimationData,x:int,y:int,fps,turret_range,fire_at_frame,px_scale_to_xy:tuple,turret_name:str,dmg:int,init_animation="IDLE",init_anim_speed = 0,target_type="least_hp",atsp=2000):
         pygame.sprite.Sprite.__init__(self)
         self.animation_frames = {}
         #self.dmg=dmg
-        self.db={"dmg":dmg,
-                 "dmg_upgrade":2,
-                 "dmg_change": "",
-                 "atsp": atsp,
-                 "atsp_upgrade":-50,
-                 "atsp_change":"",
-                 "range": turret_range,
-                 "range_upgrade":10,
-                 "range_change":"",
-                 "buy_price":50,
-                 "sell_price":50,
-                 "upgrade_price":100,
-                 "target_type":target_type
-        }
+        self.db=turret_init_database[turret_name]
         self.px_scale_to_xy = px_scale_to_xy
         self.is_target_available=False
         self.text_upgrade=""
@@ -75,9 +68,8 @@ class TurretSprite(pygame.sprite.Sprite):
         else:
             self.anim_fps=init_anim_speed
 
-    def update(self,mobs:pygame.sprite.Group,database,turret_database):
+    def update(self,mobs:pygame.sprite.Group,database):
         self.fps_counter += 1
-        #self.menu_group.update(database,turret_database,self.text_upgrade)
         self.is_target_available = False
         self.is_target_available=get_target(self.rect.center,self.db["range"],self.db["target_type"],mobs) is not None
         if self.anim_fps != 0:
