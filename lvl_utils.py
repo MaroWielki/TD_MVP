@@ -114,7 +114,7 @@ class TurretSprite(pygame.sprite.Sprite):
             "action": "shoot_projectile",
             "projectile_type": self.db["projectile_type"],
             "start_xy": self.rect.center,
-            "projectile_speed": 2,
+            "projectile_speed": self.db["projectile_speed"],
             "target_xy": (0,0),
             "dmg" : self.db["dmg"],
             "range": self.db["range"],

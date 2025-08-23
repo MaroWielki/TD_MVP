@@ -74,7 +74,7 @@ def create_world_menu(database):
                   (5,3), "LevelMenu/Title0/Title0", "Active",
                   tile_size_xy=database["double_tile_size_xy"], draggable=False))
 
-    LM['LevelMenu/Title0/Title0/grid0'] = LM['LevelMenu/Title0/Title0'].add(GuiGrid(LM['LevelMenu/Title0/Title0'].px_start_xy, database, (0.5, 1.25),(4,1), "LevelMenu/Title0/Title0/grid0",tile_size_xy=database["double_tile_size_xy"]))
+    LM['LevelMenu/Title0/Title0/gridActive'] = LM['LevelMenu/Title0/Title0'].add(GuiGrid(LM['LevelMenu/Title0/Title0'].px_start_xy, database, (0.5, 1.25),(4,1), "LevelMenu/Title0/Title0/gridActive",tile_size_xy=database["double_tile_size_xy"]))
 
     ### INACTIVE
     LM['LevelMenu/Title0/Title1'] = LM['LevelMenu/Title0'].add(
@@ -82,13 +82,14 @@ def create_world_menu(database):
                   (11, 1),
                   (5, 6), "LevelMenu/Title0/Title1", "InActive",
                   tile_size_xy=database["double_tile_size_xy"], draggable=False))
-    LM['LevelMenu/Title0/Title1/grid0'] = LM['LevelMenu/Title0/Title1'].add(GuiGrid(LM['LevelMenu/Title0/Title0'].px_start_xy, database, (0.5, 1.25),(4,4), "LevelMenu/Title0/Title1/grid0",tile_size_xy=database["double_tile_size_xy"]))
+    LM['LevelMenu/Title0/Title1/gridInActive'] = LM['LevelMenu/Title0/Title1'].add(GuiGrid(LM['LevelMenu/Title0/Title0'].px_start_xy, database, (0.5, 1.25),(4,4), "LevelMenu/Title0/Title1/gridInActive",tile_size_xy=database["double_tile_size_xy"]))
 
     inactive_item_index=0
 
-    LM['LevelMenu/Title0/Title1/grid0/item'+str(inactive_item_index)] = LM['LevelMenu/Title0/Title1/grid0'].add(
-        ItemMenu(LM['LevelMenu/Title0/Title1/grid0'].px_start_xy, database, (2, 0),  "LevelMenu/Title0/Title1/grid0/item"+str(inactive_item_index),tile_size_xy=database["double_tile_size_xy"],item_name="catapult",parent_grid=LM['LevelMenu/Title0/Title1/grid0']))
-
+    for item in database["available_turrets"]:
+        LM['LevelMenu/Title0/Title1/gridInActive/item'+str(inactive_item_index)] = LM['LevelMenu/Title0/Title1/gridInActive'].add(
+        ItemMenu(LM['LevelMenu/Title0/Title1/gridInActive'].px_start_xy, database, (2, 0),  "LevelMenu/Title0/Title1/gridInActive/item"+str(inactive_item_index),tile_size_xy=database["double_tile_size_xy"],item_name=item,parent_grid=LM['LevelMenu/Title0/Title1/gridInActive']))
+        inactive_item_index+=1
 
     ### WORLDS
     #lvl_menu_grid=([10,40,70],[10,75])
@@ -171,17 +172,25 @@ def create_wave_menu(database):
                 "WaveMenu/Shop/grid0", tile_size_xy=database["quadrupal_tile_size_xy"]))
 
     shop_item_index=0
-    LM['WaveMenu/Shop/grid0/item' + str(shop_item_index)] = LM['WaveMenu/Shop/grid0'].add(
-        ItemMenu(LM['WaveMenu/Shop/grid0'].px_start_xy, database, (0, 0),
-                 "WaveMenu/Shop/grid0/item" + str(shop_item_index),
-                 tile_size_xy=database["quadrupal_tile_size_xy"], item_name="catapult",
-                 parent_grid=LM['WaveMenu/Shop/grid0']))
-    shop_item_index = 1
-    LM['WaveMenu/Shop/grid0/item' + str(shop_item_index)] = LM['WaveMenu/Shop/grid0'].add(
-        ItemMenu(LM['WaveMenu/Shop/grid0'].px_start_xy, database, (1, 0),
-                 "WaveMenu/Shop/grid0/item" + str(shop_item_index),
-                 tile_size_xy=database["quadrupal_tile_size_xy"], item_name="archer",
-                 parent_grid=LM['WaveMenu/Shop/grid0']))
+    for item in database["wave_shop_items"]:
+        LM['WaveMenu/Shop/grid0/item' + str(shop_item_index)] = LM['WaveMenu/Shop/grid0'].add(
+            ItemMenu(LM['WaveMenu/Shop/grid0'].px_start_xy, database, (0, 0),
+                     "WaveMenu/Shop/grid0/item" + str(shop_item_index),
+                     tile_size_xy=database["quadrupal_tile_size_xy"], item_name=item,
+                     parent_grid=LM['WaveMenu/Shop/grid0']))
+        shop_item_index+=1
+    #
+    # LM['WaveMenu/Shop/grid0/item' + str(shop_item_index)] = LM['WaveMenu/Shop/grid0'].add(
+    #     ItemMenu(LM['WaveMenu/Shop/grid0'].px_start_xy, database, (0, 0),
+    #              "WaveMenu/Shop/grid0/item" + str(shop_item_index),
+    #              tile_size_xy=database["quadrupal_tile_size_xy"], item_name="catapult",
+    #              parent_grid=LM['WaveMenu/Shop/grid0']))
+    # shop_item_index = 1
+    # LM['WaveMenu/Shop/grid0/item' + str(shop_item_index)] = LM['WaveMenu/Shop/grid0'].add(
+    #     ItemMenu(LM['WaveMenu/Shop/grid0'].px_start_xy, database, (1, 0),
+    #              "WaveMenu/Shop/grid0/item" + str(shop_item_index),
+    #              tile_size_xy=database["quadrupal_tile_size_xy"], item_name="archer",
+    #              parent_grid=LM['WaveMenu/Shop/grid0']))
 
     ###INFO
     LM['WaveMenu/Info']=LM['WaveMenu'].add(MenuTitle(LM['WaveMenu'].px_start_xy, database,

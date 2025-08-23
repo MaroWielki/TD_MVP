@@ -2,11 +2,13 @@
 projectile_init_database={
     "arrow":{
         "dmg_type":"single",
-        "sprite":"arrow_sprite"
+        "sprite":"arrow_sprite",
+        "projectile_speed":10
     },
     "bomb": {
         "dmg_type": "splash",
-        "sprite":"bomb_sprite"
+        "sprite":"bomb_sprite",
+"projectile_speed":5
     }
 }
 
@@ -26,6 +28,7 @@ turret_init_database={
                  "upgrade_price":100,
                  "target_type":"most_hp",
                  "projectile_type":"arrow",
+"projectile_speed":10,
                  "sprite_name":"archer_sprite"
         },
     "catapult":
@@ -43,6 +46,7 @@ turret_init_database={
          "upgrade_price": 100,
          "target_type": "most_hp",
          "projectile_type":"bomb",
+    "projectile_speed":5,
          "sprite_name": "catapult_sprite"
          },
 
@@ -305,8 +309,8 @@ catapult_sprite={
 'frame_window_height':32,
 'animation_orientation':"horizontal",
 'border':0,
-'fire_at_frame':3,
-'anim_fps':5,
+'fire_at_frame':4,
+'anim_fps':10,
 'start_x':0,
 'start_y':0,
 'frames_count':7,

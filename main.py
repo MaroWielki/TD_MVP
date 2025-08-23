@@ -46,6 +46,8 @@ database = {
     "resolution_in_tiles_percent_xy":resolution_in_tiles_percent_xy,
     "lives": 10,
     "gold": 300,
+    "wave_shop_items":[],
+    "available_turrets":["archer"],
     "gold_change":"",
     "wave_number": 0,
     "font_sizes":fnt_sizes,
@@ -193,7 +195,9 @@ while True:
 
             if events.button == 1:
                 handle_LMB_down(colliding_objects,mouse_pos)
+
                 bring_root_to_front(colliding_objects, All_menus_groups_ordered)
+
             if events.button == 3:
                 handle_RMB_down(colliding_objects,mouse_pos)
                 bring_root_to_front(colliding_objects, All_menus_groups_ordered)
@@ -232,6 +236,10 @@ while True:
                 All_menus_groups_ordered.append(create_world_menu(database))
 
             if events.dict["action"]=="start_battle":
+                database["wave_shop_items"]=[]
+                for item in All_menus_groups_ordered[0][1]['LevelMenu/Title0/Title0/gridActive'].members_group.sprites():
+                    database["wave_shop_items"].append(item.item_name)
+
                 All_menus_groups_ordered = []
                 is_game_on=True
                 if "Title1" in events.dict["button_name"]:
