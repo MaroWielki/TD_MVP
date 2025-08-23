@@ -88,6 +88,7 @@ turret_sprites["archer_sprite"]=AnimationData(archer_sprite)
 
 projectiles=pygame.sprite.Group()
 arrow_sprite=AnimationData(arrow_sprite)
+bomb_sprite=AnimationData(bomb_sprite)
 
 is_game_on=False
 while True:
@@ -258,7 +259,7 @@ while True:
                 if database["gold"]>=events.dict["turret"].item.data["cost"]:
                     database["gold"]-=events.dict["turret"].item.data["cost"]
                     wave_menu['WaveMenu/Stats/Gold'].update(txt="Gold: " + str(database["gold"]))
-                    turret_group.add(TurretSprite(turret_sprites[events.dict["turret"].item.data["sprite"]], pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], database["fps"], 500,10, database["quadrupal_tile_size_xy"], "archer",15))
+                    turret_group.add(TurretSprite(turret_sprites[events.dict["turret"].item.data["sprite"]], pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], database["fps"],10, database["quadrupal_tile_size_xy"],events.dict["turret"].item.data["name"]))
                     for turret in turret_group.sprites():
                         building_allowed_map = exclude_from_build_map(building_allowed_map, turret.rect)
 
@@ -280,9 +281,9 @@ while True:
                     target = get_target((events.dict["sta"
                                                      "rt_xy"][0], events.dict["start_xy"][1]),
                                         events.dict["range"], events.dict["target_type"], mobs)
-                    # projectiles.add(ProjectileSprite(arrow_sprite, fps, events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"],target_xy=target))
+
                     if target is not None: projectiles.add(
-                        ProjectileSprite(arrow_sprite, database["fps"], events.dict["start_xy"][0], events.dict["start_xy"][1],
+                        ProjectileSprite(bomb_sprite, database["fps"], events.dict["start_xy"][0], events.dict["start_xy"][1],
                                          events.dict["projectile_speed"], events.dict["dmg"], target_sprite=target,px_scale_to_xy=database["tile_size_xy"]))
 
             if events.dict["action"]=="select_turret":

@@ -1,4 +1,15 @@
 
+projectile_init_database={
+    "arrow":{
+        "dmg_type":"single",
+        "sprite":"arrow_sprite"
+    },
+    "bomb": {
+        "dmg_type": "splash",
+        "sprite":"bomb_sprite"
+    }
+}
+
 turret_init_database={
     "archer":
                   {"dmg":15,
@@ -114,7 +125,34 @@ mob_path2_data={
  'FINISH': [500, 20]
 }
 
-
+bomb_sprite = {
+'IDLE': {
+'path': "img/bomg.png",
+'frame_window_width':32,
+'frame_window_height':16,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':6,
+'start_x':0,
+'start_y':0,
+'frames_count':5,
+'img_per_row_or_col':5,
+'color_key':(0,0,0)
+},
+'HIT': {
+'path': "img/bomb_explode.png",
+'frame_window_width':16,
+'frame_window_height':16,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':6,
+'img_per_row_or_col':6,
+'color_key':(0,0,0)
+}
+}
 arrow_sprite = {
 'IDLE': {
 'path': "img/arrow3.png",
@@ -264,6 +302,7 @@ catapult_sprite={
 'frame_window_height':32,
 'animation_orientation':"horizontal",
 'border':0,
+'fire_at_frame':3,
 'anim_fps':5,
 'start_x':0,
 'start_y':0,
@@ -307,6 +346,7 @@ archer_sprite={
 'frame_window_height':73,
 'animation_orientation':"horizontal",
 'border':1,
+'fire_at_frame':10,
 'anim_fps':20,
 'start_x':129,
 'start_y':406,

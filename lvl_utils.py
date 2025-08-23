@@ -1,7 +1,6 @@
 import pygame
 from math import floor,sin, cos, atan2, radians, degrees
 from random import uniform, randint
-
 from data import turret_init_database
 
 
@@ -20,6 +19,8 @@ class AnimationSingle:
         self.anim_fps = kw['anim_fps']
         self.start_x = kw['start_x']
         self.start_y = kw['start_y']
+        if "fire_at_frame" in kw.keys():
+            self.fire_at_frame=kw['fire_at_frame']
         self.frames_count = kw['frames_count']
         self.img_per_row_or_col = kw['img_per_row_or_col']
         self.color_key = kw['color_key']
@@ -33,11 +34,11 @@ class AnimationData:
 
 
 class TurretSprite(pygame.sprite.Sprite):
-    def __init__(self,data :AnimationData,x:int,y:int,fps,turret_range,fire_at_frame,px_scale_to_xy:tuple,turret_name:str,dmg:int,init_animation="IDLE",init_anim_speed = 0,target_type="least_hp",atsp=2000):
+    def __init__(self,data :AnimationData,x:int,y:int,fps,fire_at_frame,px_scale_to_xy:tuple,turret_name:str,init_animation="IDLE",init_anim_speed = 0):
         pygame.sprite.Sprite.__init__(self)
         self.animation_frames = {}
         #self.dmg=dmg
-        self.db=turret_init_database[turret_name]
+        self.db=turret_init_database[turret_name].copy()
         self.px_scale_to_xy = px_scale_to_xy
         self.is_target_available=False
         self.text_upgrade=""
@@ -48,7 +49,7 @@ class TurretSprite(pygame.sprite.Sprite):
         self.fps=fps
         #self.target_type=target_type
         self.bordered = False
-        self.fire_at_frame = fire_at_frame
+        self.fire_at_frame = self.data.animationdata["FIRE"].fire_at_frame
         self.skip_fire=False
         for anim_name in data.animationdata:
             anim_data=self.data.animationdata[anim_name]
@@ -109,7 +110,7 @@ class TurretSprite(pygame.sprite.Sprite):
             "action": "shoot_projectile",
             "projectile_type": "arrow",
             "start_xy": (self.rect.center),
-            "projectile_speed": 10,
+            "projectile_speed": 2,
             "target_xy": (0,0),
             "dmg" : self.db["dmg"],
             "range": self.db["range"],
