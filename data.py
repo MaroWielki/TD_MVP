@@ -53,6 +53,24 @@ turret_init_database={
     "projectile_speed":5,
          "sprite_name": "catapult_sprite"
          },
+    "cyclop":
+        {"dmg": 25,
+         "dmg_upgrade": 10,
+         "dmg_change": "",
+         "atsp": 1500,
+         "atsp_upgrade": -200,
+         "atsp_change": "",
+         "range": 200,
+         "range_upgrade": 10,
+         "range_change": "",
+         "buy_price": 150,
+         "sell_price": 75,
+         "upgrade_price": 100,
+         "target_type": "most_hp",
+         "projectile_type": "arrow",
+         "projectile_speed": 5,
+         "sprite_name": "cyclop_sprite"
+         },
 
                  }
 
@@ -336,6 +354,35 @@ catapult_sprite={
 }
 }
 
+cyclop_sprite={
+ 'FIRE':{
+'path': "img/Turrets/cyclop/cyclop.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':0,
+'fire_at_frame':6,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':7,
+'img_per_row_or_col':7,
+'color_key':(0,0,0)
+},
+'IDLE': {
+'path': "img/Turrets/cyclop/cyclop.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':0,
+'anim_fps':5,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':1,
+'color_key':(0,0,0)
+}
+}
 ### ARCHER
 archer_sprite={
 'WALK_RIGHT': {

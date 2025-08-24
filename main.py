@@ -1,13 +1,11 @@
-from math import floor
-from random import randint
-import pygame
-from pygame import K_LEFT, K_RIGHT, K_DOWN, K_UP, K_ESCAPE
-from sys import exit
 
+
+from sys import exit
+from pygame import K_ESCAPE
 import menus_utils
 #from menus_utils import *
 from create_menus import *
-import time
+
 from lvl_utils import *
 from data import *
 
@@ -47,7 +45,7 @@ database = {
     "lives": 10,
     "gold": 300,
     "wave_shop_items":[],
-    "available_turrets":["archer","catapult"],
+    "available_turrets":["archer","catapult","cyclop"],
     "gold_change":"",
     "wave_number": 0,
     "font_sizes":fnt_sizes,
@@ -84,9 +82,7 @@ turret_group= pygame.sprite.Group()
 selected_turret=None
 background=None
 
-turret_sprites={}
-turret_sprites["catapult_sprite"]=AnimationData(catapult_sprite)
-turret_sprites["archer_sprite"]=AnimationData(archer_sprite)
+turret_sprites= {"cyclop_sprite": AnimationData(cyclop_sprite),"catapult_sprite": AnimationData(catapult_sprite), "archer_sprite": AnimationData(archer_sprite)}
 
 projectiles=pygame.sprite.Group()
 
