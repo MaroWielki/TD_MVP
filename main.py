@@ -249,6 +249,7 @@ while True:
                 All_menus_groups_ordered = []
                 is_game_on=True
 
+
                 database["current_level"]=int(events.dict["button_name"][-1])
 
                 map, road, building_allowed_map, mob_path, background = load_level(levels_dict[levels_list[database["current_level"]].road_map]["filename"],road_tiles, database)
@@ -266,7 +267,7 @@ while True:
                 wave_menu=tmp[1]
                 mobs_wave_units = [7, 15, 30, 45, 100]
 
-                database["wave_number"]=0
+                database["wave_number"]=1
                 wave_mob = generate_wave2(database,levels_list)
                 #wave_mob = generate_wave(levels_list[database["current_level"]].waves(database["wave_number"]).number, AnimationData(levels_list[database["current_level"]].waves(database["wave_number"]).mob), pygame.time.get_ticks(),pygame.time.get_ticks() + (10 * 1000))
 
@@ -274,13 +275,12 @@ while True:
                 wave_menu['WaveMenu/Stats/Wave'].update(txt="Wave: " + str(database["wave_number"]))
 
             if events.dict["action"]=="next_wave":
-                database["wave_number"] += 1
-                wave_menu['WaveMenu/Stats/Wave'].update(txt="Wave: " + str(database["wave_number"]))
+                if database["wave_number"] < len(levels_list[database["current_level"]].waves):
+                    database["wave_number"] += 1
+                    wave_menu['WaveMenu/Stats/Wave'].update(txt="Wave: " + str(database["wave_number"]))
 
-                if database["wave_number"] <= len(levels_list[database["current_level"]].waves):
-
-                    wave_mob+= generate_wave(
-                    levels_list[database["current_level"]].waves(database["wave_number"]).number, AnimationData(levels_list[database["current_level"]].waves(database["wave_number"]).mob), pygame.time.get_ticks(),pygame.time.get_ticks() + (10 * 1000))
+                    wave_mob+= generate_wave2(database,levels_list)
+                        #wave_mob+= generate_wave(levels_list[database["current_level"]].waves(database["wave_number"]).number, AnimationData(levels_list[database["current_level"]].waves(database["wave_number"]).mob), pygame.time.get_ticks(),pygame.time.get_ticks() + (10 * 1000))
 
 
 

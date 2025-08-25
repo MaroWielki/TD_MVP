@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="refactor animationdata START">
+    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="chyba zrobiony refactor animation_sprites">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lvl_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/lvl_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tst2.py" beforeDir="false" afterPath="$PROJECT_DIR$/tst2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +45,7 @@
     "Python.create_menus.executor": "Run",
     "Python.data.executor": "Run",
     "Python.lvl_utils.executor": "Run",
-    "Python.main.executor": "Run",
+    "Python.main.executor": "Debug",
     "Python.menus_utils.executor": "Run",
     "Python.tst.executor": "Run",
     "Python.tst2.executor": "Run",
@@ -268,7 +266,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756145320151</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="chyba zrobiony refactor animation_sprites">
+      <option name="closed" value="true" />
+      <created>1756147053227</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1756147053227</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,15 +314,16 @@
     <MESSAGE value="added cyclop" />
     <MESSAGE value="adding wave logic and database" />
     <MESSAGE value="refactor animationdata START" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor animationdata START" />
+    <MESSAGE value="chyba zrobiony refactor animation_sprites" />
+    <option name="LAST_COMMIT_MESSAGE" value="chyba zrobiony refactor animation_sprites" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>319</line>
-          <option name="timeStamp" value="3" />
+          <line>252</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

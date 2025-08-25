@@ -575,11 +575,12 @@ def generate_wave2(database:dict,levels_list:list):
     wave: MobWave
     bunch: BunchOfMobs
     pygame.time.get_ticks()
-    timestart=lvl_number=database["current_level"]
+    lvl_number=database["current_level"]
+    timestart =pygame.time.get_ticks()
     timeend=timestart+10*1000
     wave_number=database["wave_number"]
     level = levels_list[lvl_number]
-    wave=level.waves[wave_number]
+    wave=level.waves[wave_number-1]
 
     for bunch in wave.bunches:
         for i in range(bunch.number):
