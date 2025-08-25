@@ -1,7 +1,8 @@
 import pygame
 from math import floor,sin, cos, atan2, radians, degrees
 from random import uniform, randint
-from data import turret_init_database
+from data import turret_init_database, animation_sprites
+
 
 class Level:
     def __init__(self,road_map):
@@ -582,7 +583,7 @@ def generate_wave2(database:dict,levels_list:list):
 
     for bunch in wave.bunches:
         for i in range(bunch.number):
-            ret_wave.append((floor(uniform(timestart,timeend)),AnimationData(bunch.mob)))
+            ret_wave.append((floor(uniform(timestart,timeend)),AnimationData(animation_sprites[bunch.mob])))
 
 
     return ret_wave

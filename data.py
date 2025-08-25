@@ -162,9 +162,8 @@ mob_path2_data={
  'POINTS': [[20, 320], [400, 320], [400, 120],[300,120],[300,220],[500,220],[500,20]],
  'FINISH': [500, 20]
 }
-
-
-bomb_sprite = {
+animation_sprites={}
+animation_sprites["bomb_sprite"] = {
 'IDLE': {
 'path': "img/bomg.png",
 'frame_window_width':32,
@@ -193,7 +192,7 @@ bomb_sprite = {
 'color_key':(0,0,0)
 }
 }
-arrow_sprite = {
+animation_sprites["arrow_sprite"] = {
 'IDLE': {
 'path': "img/arrow3.png",
 'frame_window_width':32,
@@ -209,7 +208,7 @@ arrow_sprite = {
 }
 }
 ### GOBLIN
-goblin_sprite = {
+animation_sprites["goblin_sprite"] = {
 'WALK_DOWN': {
 'path': "img/zombie_n_skeleton2.png",
 'frame_window_width':32,
@@ -278,7 +277,7 @@ goblin_sprite = {
 }
 ### /GOBLIN
 ### SKELETON
-skeleton_sprite = {
+animation_sprites["skeleton_sprite"] = {
 'WALK_DOWN': {
 'path': "img/zombie_n_skeleton2.png",
 'frame_window_width':32,
@@ -335,7 +334,7 @@ skeleton_sprite = {
 
 ### /SKELETON
 
-catapult_sprite={
+animation_sprites["catapult_sprite"]={
  'FIRE':{
 'path': "img/Turrets/catapult/catapult.png",
 'frame_window_width':32,
@@ -365,7 +364,7 @@ catapult_sprite={
 }
 }
 
-cyclop_sprite={
+animation_sprites["cyclop_sprite"]={
  'FIRE':{
 'path': "img/Turrets/cyclop/cyclop.png",
 'frame_window_width':32,
@@ -395,7 +394,7 @@ cyclop_sprite={
 }
 }
 ### ARCHER
-archer_sprite={
+animation_sprites["archer_sprite"]={
 'WALK_RIGHT': {
 'path': "img/anim.png",
 'frame_window_width':73,

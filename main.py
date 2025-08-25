@@ -83,20 +83,18 @@ turret_group= pygame.sprite.Group()
 #archer_sprite=AnimationData(archer_sprite)
 #catapult_sprite=AnimationData(catapult_sprite)
 
-AnimationData_dict={
-    "goblin_sprite":goblin_sprite,
-}
+
 
 selected_turret=None
 background=None
 
-turret_sprites= {"cyclop_sprite": AnimationData(cyclop_sprite),"catapult_sprite": AnimationData(catapult_sprite), "archer_sprite": AnimationData(archer_sprite)}
+#turret_sprites= {"cyclop_sprite": AnimationData(cyclop_sprite),"catapult_sprite": AnimationData(catapult_sprite), "archer_sprite": AnimationData(archer_sprite)}
 
 projectiles=pygame.sprite.Group()
 
-anim_data={"arrow":AnimationData(arrow_sprite),"bomb":AnimationData(bomb_sprite),"rock":AnimationData(bomb_sprite)}
-arrow_sprite=AnimationData(arrow_sprite)
-bomb_sprite=AnimationData(bomb_sprite)
+#anim_data={"arrow":AnimationData(arrow_sprite),"bomb":AnimationData(bomb_sprite),"rock":AnimationData(bomb_sprite)}
+#arrow_sprite=AnimationData(arrow_sprite)
+#bomb_sprite=AnimationData(bomb_sprite)
 
 is_game_on=False
 while True:
@@ -291,7 +289,7 @@ while True:
                 if database["gold"]>=events.dict["turret"].item.data["cost"]:
                     database["gold"]-=events.dict["turret"].item.data["cost"]
                     wave_menu['WaveMenu/Stats/Gold'].update(txt="Gold: " + str(database["gold"]))
-                    turret_group.add(TurretSprite(turret_sprites[events.dict["turret"].item.data["sprite"]], pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], database["fps"],10, database["quadrupal_tile_size_xy"],events.dict["turret"].item.data["name"]))
+                    turret_group.add(TurretSprite(AnimationData(animation_sprites[events.dict["turret"].item.data["sprite"]]), pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], database["fps"],10, database["quadrupal_tile_size_xy"],events.dict["turret"].item.data["name"]))
                     for turret in turret_group.sprites():
                         building_allowed_map = exclude_from_build_map(building_allowed_map, turret.rect)
 
@@ -318,9 +316,11 @@ while True:
 
                     if target is not None:
                         if projectile_init_database[events.dict["projectile_type"]]["target_type"]=="mob":
-                            projectiles.add(ProjectileSprite(anim_data[events.dict["projectile_type"]], database["fps"],events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"], events.dict["dmg"], events.dict["projectile_type"],target_sprite=target,px_scale_to_xy=database["tile_size_xy"]))
+                            projectile_sprite_name=projectile_init_database[events.dict["projectile_type"]]["sprite"]
+                            projectiles.add(ProjectileSprite(AnimationData(animation_sprites[projectile_sprite_name]), database["fps"],events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"], events.dict["dmg"], projectile_sprite_name,target_sprite=target,px_scale_to_xy=database["tile_size_xy"]))
                         else:
-                            projectiles.add(ProjectileSprite(anim_data[events.dict["projectile_type"]], database["fps"],events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"], events.dict["dmg"],events.dict["projectile_type"], target_xy=target.rect.center,px_scale_to_xy=database["tile_size_xy"]))
+                            projectile_sprite_name = projectile_init_database[events.dict["projectile_type"]]["sprite"]
+                            projectiles.add(ProjectileSprite(AnimationData(animation_sprites[projectile_sprite_name]), database["fps"],events.dict["start_xy"][0], events.dict["start_xy"][1],events.dict["projectile_speed"], events.dict["dmg"],events.dict["projectile_type"], target_xy=target.rect.center,px_scale_to_xy=database["tile_size_xy"]))
 
             if events.dict["action"]=="select_turret":
                 selected_turret=events.dict["turret"]
@@ -332,8 +332,9 @@ while True:
 
 
             if events.dict["action"] == "create_explosion":
-                proj_type=events.dict["projectile_type"]
-                projectiles.add(ExplosionSprite(anim_data[proj_type],database,events.dict["explosion_xy"],database[projectile_init_database[proj_type]["scale"]]))
+                #proj_type=events.dict["projectile_type"]
+                proj_type = projectile_init_database[events.dict["projectile_type"]]["sprite"]
+                projectiles.add(ExplosionSprite(AnimationData(animation_sprites[proj_type]),database,events.dict["explosion_xy"],database[projectile_init_database[events.dict["projectile_type"]]["scale"]]))
                 deal_splash_dmg(events.dict["explosion_xy"],events.dict["dmg"],events.dict["radius"],mobs_sprite_list)
 
 
