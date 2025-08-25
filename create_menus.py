@@ -97,6 +97,13 @@ def create_world_menu(database):
 
     lvl_menu_size_xy=(12,15)
 
+    bg={1:"img/graveyard.png",
+        2: "img/volcano.png",
+        3: "img/forest_fire.png",
+        4: "img/island.png",
+        5: "img/desert.png",
+        6: "img/graveyard.png"
+        }
     index=1
     for coords_x in range(3):
         for coords_y in range(2):
@@ -105,12 +112,12 @@ def create_world_menu(database):
                              database["resolution_in_tiles_percent_xy"][lvl_menu_grid[1][coords_y]][1]),
                             (database["resolution_in_tiles_percent_xy"][lvl_menu_size_xy[0]][0],
                              database["resolution_in_tiles_percent_xy"][lvl_menu_size_xy[1]][1]), "Title"+str(index), "Title"+str(index),
-                            tile_size_xy=database["double_tile_size_xy"], draggable=False))
+                            tile_size_xy=database["double_tile_size_xy"], draggable=False,background=bg[index]))
 
-            LM['LevelMenu/Title'+str(index)+'/button0'] = LM['LevelMenu/Title'+str(index)].add(
+            LM['LevelMenu/Title'+str(index)+'/buttonStartLvl'+str(index)] = LM['LevelMenu/Title'+str(index)].add(
                 MenuButton(LM['LevelMenu/Title'+str(index)].px_start_xy, database,
                            (database["resolution_in_tiles_percent_xy"][7][0], database["resolution_in_tiles_percent_xy"][(lvl_menu_size_xy[1]*2)-6][1]),
-                           (database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), 'LevelMenu/Title'+str(index)+'/button0',
+                           (database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), 'LevelMenu/Title'+str(index)+'/buttonStartLvl'+str(index),
                            text="To battle!", color=3, action="start_battle"))
             index+=1
 

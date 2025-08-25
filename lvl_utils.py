@@ -3,6 +3,23 @@ from math import floor,sin, cos, atan2, radians, degrees
 from random import uniform, randint
 from data import turret_init_database
 
+class Level:
+    def __init__(self,road_map):
+        self.waves=[]
+        self.road_map=road_map
+    def add_wave(self,wave):
+        self.waves.append(wave)
+
+class MobWave:
+    def __init__(self):
+        self.bunches=[]
+    def add(self,bunch):
+        self.bunches.append(bunch)
+
+class BunchOfMobs:
+    def __init__(self,number:int,mob:str):
+        self.number=number
+        self.mob=mob
 
 class TurretType:
     def __init__(self,name):
@@ -456,10 +473,10 @@ def generate_build_map(menu_x:tuple,width,height,road_map:pygame.surface.Surface
 
     return map2
 
-def exclude_from_build_map(map,rect:pygame.rect.Rect):
+def exclude_from_build_map(map,rect:pygame.rect.Rect,include=False):
     for x in range(rect.x,rect.x+rect.width):
         for y in range(rect.y,rect.y+rect.height):
-            map[x][y]=False
+            map[x][y]=include
     return map
 
 def print_road(screen,map2,road,tile_size_xy):

@@ -8,6 +8,7 @@ from create_menus import *
 
 from lvl_utils import *
 from data import *
+from mob_waves import *
 
 pygame.init()
 pygame.display.set_caption("Marek")
@@ -22,6 +23,9 @@ fnt_sizes=tab=get_fonts_sizes(fnt_list,list(range(6,30)))
 resolution_xy = (1366,768)
 #resolution_xy = (800, 600)
 #resolution_xy = (1066, 600)
+#resolution_xy = (426 , 240)
+#640 x 360 pixels
+#1280 x 720 pixels
 #tile_size_xy = (16, 16)
 resolution_in_tiles=(100,56)
 
@@ -86,7 +90,7 @@ turret_sprites= {"cyclop_sprite": AnimationData(cyclop_sprite),"catapult_sprite"
 
 projectiles=pygame.sprite.Group()
 
-anim_data={"arrow":AnimationData(arrow_sprite),"bomb":AnimationData(bomb_sprite)}
+anim_data={"arrow":AnimationData(arrow_sprite),"bomb":AnimationData(bomb_sprite),"rock":AnimationData(bomb_sprite)}
 arrow_sprite=AnimationData(arrow_sprite)
 bomb_sprite=AnimationData(bomb_sprite)
 
@@ -242,6 +246,7 @@ while True:
 
                 All_menus_groups_ordered = []
                 is_game_on=True
+
                 if "Title1" in events.dict["button_name"]:
                     map, road, building_allowed_map,mob_path,background= load_level(levels_dict["zigzagc"]["filename"], road_tiles, database)
                 else:
@@ -277,9 +282,11 @@ while True:
 
             if events.dict["action"] == "sell_turret":
 
+
                 database["gold"]+=events.dict["parent_object"].db["sell_price"]
                 events.dict["parent_object"].remove(turret_group)
-
+                building_allowed_map=exclude_from_build_map(building_allowed_map, turret.rect,include=True)
+                selected_turret=None
 
             if events.dict["action"] == "upgrade_turret":
                 if database["gold"] >= events.dict["parent_object"].db["upgrade_price"]:

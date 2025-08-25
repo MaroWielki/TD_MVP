@@ -1,4 +1,44 @@
 
+mobs_levels_waves_data={
+1:
+    [
+        [("goblin",6)],
+        [("goblin",12)]
+    ],
+2:
+    [
+        [("goblin",6)],
+        [("goblin",12)],
+        [("goblin",24)],
+        [("goblin",48)]
+    ],
+3:
+    [
+        [("goblin",6)],
+        [("goblin",12)],
+        [("goblin",24)],
+        [("goblin",48)]
+    ],
+4:
+    [
+        [("goblin",6)],
+        [("goblin",12)]
+    ],
+5:
+    [
+        [("goblin",6)],
+        [("goblin",12)]
+    ],
+6:
+    [
+        [("goblin",6)],
+        [("goblin",12)]
+    ]
+
+}
+
+
+
 projectile_init_database={
     "arrow":{
         "dmg_type":"single",
@@ -12,7 +52,15 @@ projectile_init_database={
         "sprite":"bomb_sprite",
         "scale":"quadrupal_tile_size_xy",
         "projectile_speed":5
+    },
+"rock": {
+        "dmg_type": "single",
+        "target_type":"mob",
+        "sprite":"bomb_sprite",
+        "scale":"quadrupal_tile_size_xy",
+        "projectile_speed":5
     }
+
 
 }
 
@@ -67,7 +115,7 @@ turret_init_database={
          "sell_price": 75,
          "upgrade_price": 100,
          "target_type": "most_hp",
-         "projectile_type": "arrow",
+         "projectile_type": "rock",
          "projectile_speed": 5,
          "sprite_name": "cyclop_sprite"
          },
