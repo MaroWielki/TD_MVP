@@ -83,6 +83,10 @@ turret_group= pygame.sprite.Group()
 #archer_sprite=AnimationData(archer_sprite)
 #catapult_sprite=AnimationData(catapult_sprite)
 
+AnimationData_dict={
+    "goblin_sprite":goblin_sprite,
+}
+
 selected_turret=None
 background=None
 
@@ -247,10 +251,15 @@ while True:
                 All_menus_groups_ordered = []
                 is_game_on=True
 
-                if "Title1" in events.dict["button_name"]:
-                    map, road, building_allowed_map,mob_path,background= load_level(levels_dict["zigzagc"]["filename"], road_tiles, database)
-                else:
-                    map, road,building_allowed_map,mob_path,background = load_level(levels_dict["umapc"]["filename"], road_tiles, database)
+                database["current_level"]=int(events.dict["button_name"][-1])
+
+                map, road, building_allowed_map, mob_path, background = load_level(levels_dict[levels_list[database["current_level"]].road_map]["filename"],road_tiles, database)
+
+
+                # if "Title1" in events.dict["button_name"]:
+                #     map, road, building_allowed_map,mob_path,background= load_level(levels_dict["zigzagc"]["filename"], road_tiles, database)
+                # else:
+                #     map, road,building_allowed_map,mob_path,background = load_level(levels_dict["umapc"]["filename"], road_tiles, database)
 
 
                 database["building_allowed_map"]=building_allowed_map
@@ -258,18 +267,24 @@ while True:
                 All_menus_groups_ordered.append(tmp)
                 wave_menu=tmp[1]
                 mobs_wave_units = [7, 15, 30, 45, 100]
-                wave_mob = generate_wave(mobs_wave_units.pop(0), AnimationData(goblin_sprite), pygame.time.get_ticks(),
-                                         pygame.time.get_ticks() + (10 * 1000))
+
+                database["wave_number"]=0
+                wave_mob = generate_wave2(database,levels_list)
+                #wave_mob = generate_wave(levels_list[database["current_level"]].waves(database["wave_number"]).number, AnimationData(levels_list[database["current_level"]].waves(database["wave_number"]).mob), pygame.time.get_ticks(),pygame.time.get_ticks() + (10 * 1000))
+
                 wave_menu['WaveMenu/Stats/Gold'].update(txt="Gold: " + str(database["gold"]))
                 wave_menu['WaveMenu/Stats/Wave'].update(txt="Wave: " + str(database["wave_number"]))
 
             if events.dict["action"]=="next_wave":
-                if len(mobs_wave_units) > 0:
-                    wave_mob+=generate_wave(mobs_wave_units.pop(0), AnimationData(goblin_sprite),
-                                         pygame.time.get_ticks(),
-                                         pygame.time.get_ticks() + (10 * 1000))
-                    database["wave_number"]+=1
-                    wave_menu['WaveMenu/Stats/Wave'].update(txt="Wave: " + str(database["wave_number"]))
+                database["wave_number"] += 1
+                wave_menu['WaveMenu/Stats/Wave'].update(txt="Wave: " + str(database["wave_number"]))
+
+                if database["wave_number"] <= len(levels_list[database["current_level"]].waves):
+
+                    wave_mob+= generate_wave(
+                    levels_list[database["current_level"]].waves(database["wave_number"]).number, AnimationData(levels_list[database["current_level"]].waves(database["wave_number"]).mob), pygame.time.get_ticks(),pygame.time.get_ticks() + (10 * 1000))
+
+
 
 
             if events.dict["action"]=="build_turret":

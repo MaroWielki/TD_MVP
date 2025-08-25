@@ -568,6 +568,24 @@ def read_road_map_mapping(path):
             road_map_mapping[lines2[4*i].split(",")[0]]=[lines2[4*i+1].split(",")[1:4],lines2[4*i+2].split(",")[1:4],lines2[4*i+3].split(",")[1:4]]
     return road_map_mapping
 
+def generate_wave2(database:dict,levels_list:list):
+    ret_wave=[]
+    level: Level
+    wave: MobWave
+    bunch: BunchOfMobs
+    pygame.time.get_ticks()
+    timestart=lvl_number=database["current_level"]
+    timeend=timestart+10*1000
+    wave_number=database["wave_number"]
+    level = levels_list[lvl_number]
+    wave=level.waves[wave_number]
+
+    for bunch in wave.bunches:
+        for i in range(bunch.number):
+            ret_wave.append((floor(uniform(timestart,timeend)),AnimationData(bunch.mob)))
+
+
+    return ret_wave
 
 def generate_wave(number_of_mobs:int,mob_type,timestart:int,timeend:int,alghoritm="uniform"):
     wave=[]

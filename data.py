@@ -1,42 +1,4 @@
 
-mobs_levels_waves_data={
-1:
-    [
-        [("goblin",6)],
-        [("goblin",12)]
-    ],
-2:
-    [
-        [("goblin",6)],
-        [("goblin",12)],
-        [("goblin",24)],
-        [("goblin",48)]
-    ],
-3:
-    [
-        [("goblin",6)],
-        [("goblin",12)],
-        [("goblin",24)],
-        [("goblin",48)]
-    ],
-4:
-    [
-        [("goblin",6)],
-        [("goblin",12)]
-    ],
-5:
-    [
-        [("goblin",6)],
-        [("goblin",12)]
-    ],
-6:
-    [
-        [("goblin",6)],
-        [("goblin",12)]
-    ]
-
-}
-
 
 
 projectile_init_database={
@@ -200,6 +162,7 @@ mob_path2_data={
  'POINTS': [[20, 320], [400, 320], [400, 120],[300,120],[300,220],[500,220],[500,20]],
  'FINISH': [500, 20]
 }
+
 
 bomb_sprite = {
 'IDLE': {
