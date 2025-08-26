@@ -9,8 +9,6 @@ def create_main_menu(database):
 
 
 
-
-
     main_menu.add(MenuTitle( get_xy((0,0),database["tile_size_xy"],0,0), database, (database["resolution_in_tiles_percent_xy"][25][0],database["resolution_in_tiles_percent_xy"][40][1]),(database["resolution_in_tiles_percent_xy"][50][0],database["resolution_in_tiles_percent_xy"][20][1]), "MainMenu","",tile_size_xy=database["tile_size_xy"],draggable=False))
     MM['MainMenu'] =get_member_by_name(main_menu.sprites(), "MainMenu")
 
@@ -59,38 +57,60 @@ def create_world_menu(database):
 
 
     LM['LevelMenu/Title0/button0'] = LM['LevelMenu/Title0'].add(
-        MenuButton(LM['LevelMenu/Title0'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][45][0], 3),
+        MenuButton(LM['LevelMenu/Title0'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][50][0], 3),
                    (database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "LevelMenu/Title0/button0",
                    text="Shop", color=3, action="open_shop"))
 
     LM['LevelMenu/Title0/button1'] = LM['LevelMenu/Title0'].add(
-        MenuButton(LM['LevelMenu/Title0'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][45][0], 6),
+        MenuButton(LM['LevelMenu/Title0'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][50][0], 6),
                    (database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "LevelMenu/Title0/button1",
                    text="Armory", color=3, action="open_armory"))
+
+
+
 
     ### ACTIVE
     LM['LevelMenu/Title0/Title0'] = LM['LevelMenu/Title0'].add(
         MenuTitle(LM['LevelMenu/Title0'].px_start_xy, database,
-                  (5,1),
-                  (5,3), "LevelMenu/Title0/Title0", "Active",
+                  (1,1),
+                  (5,6), "LevelMenu/Title0/Title0", "Active",
                   tile_size_xy=database["double_tile_size_xy"], draggable=False))
 
-    LM['LevelMenu/Title0/Title0/gridActive'] = LM['LevelMenu/Title0/Title0'].add(GuiGrid(LM['LevelMenu/Title0/Title0'].px_start_xy, database, (0.5, 1.25),(4,1), "LevelMenu/Title0/Title0/gridActive",tile_size_xy=database["double_tile_size_xy"]))
+    LM['LevelMenu/Title0/Title0/gridActive'] = LM['LevelMenu/Title0/Title0'].add(GuiGrid(LM['LevelMenu/Title0/Title0'].px_start_xy, database, (0.25, 0.70),(2,2), "LevelMenu/Title0/Title0/gridActive",tile_size_xy=database["quadrupal_tile_size_xy"]))
 
     ### INACTIVE
     LM['LevelMenu/Title0/Title1'] = LM['LevelMenu/Title0'].add(
         MenuTitle(LM['LevelMenu/Title0'].px_start_xy, database,
-                  (11, 1),
-                  (5, 6), "LevelMenu/Title0/Title1", "InActive",
+                  (8, 1),
+                  (9, 6), "LevelMenu/Title0/Title1", "InActive",
                   tile_size_xy=database["double_tile_size_xy"], draggable=False))
-    LM['LevelMenu/Title0/Title1/gridInActive'] = LM['LevelMenu/Title0/Title1'].add(GuiGrid(LM['LevelMenu/Title0/Title0'].px_start_xy, database, (0.5, 1.25),(4,4), "LevelMenu/Title0/Title1/gridInActive",tile_size_xy=database["double_tile_size_xy"]))
+    LM['LevelMenu/Title0/Title1/gridInActive'] = LM['LevelMenu/Title0/Title1'].add(GuiGrid(LM['LevelMenu/Title0/Title0'].px_start_xy, database, (0.25, 0.7),(4,2), "LevelMenu/Title0/Title1/gridInActive",tile_size_xy=database["quadrupal_tile_size_xy"]))
 
     inactive_item_index=0
 
     for item in database["available_turrets"]:
         LM['LevelMenu/Title0/Title1/gridInActive/item'+str(inactive_item_index)] = LM['LevelMenu/Title0/Title1/gridInActive'].add(
-        ItemMenu(LM['LevelMenu/Title0/Title1/gridInActive'].px_start_xy, database, (inactive_item_index, 0),  "LevelMenu/Title0/Title1/gridInActive/item"+str(inactive_item_index),tile_size_xy=database["double_tile_size_xy"],item_name=item,parent_grid=LM['LevelMenu/Title0/Title1/gridInActive']))
+        ItemMenu(LM['LevelMenu/Title0/Title1/gridInActive'].px_start_xy, database, (inactive_item_index, 0),  "LevelMenu/Title0/Title1/gridInActive/item"+str(inactive_item_index),tile_size_xy=database["quadrupal_tile_size_xy"],item_name=item,parent_grid=LM['LevelMenu/Title0/Title1/gridInActive']))
         inactive_item_index+=1
+
+    ###  Resorces
+    LM['LevelMenu/Title0/Title2'] = LM['LevelMenu/Title0'].add(
+        MenuTitle(LM['LevelMenu/Title0'].px_start_xy, database,
+                  (18, 1),
+                  (6, 6), "LevelMenu/Title0/Title2", "Resources",
+                  tile_size_xy=database["double_tile_size_xy"], draggable=False))
+
+    LM['LevelMenu/Title0/Title2/TextFood'] = LM['LevelMenu/Title0/Title2'].add(
+        MenuText(LM['LevelMenu/Title0/Title2'].px_start_xy, database, (1, 3), "LevelMenu/Title0/Title2/TextFood","Food: "))
+    LM['LevelMenu/Title0/Title2/TextFood_change'] = LM['LevelMenu/Title0/Title2'].add(
+        MenuText(LM['LevelMenu/Title0/Title2'].px_start_xy, database, (7, 3), "LevelMenu/Title0/Title2/TextFood_change", "",variable_name="food_change"))
+
+    LM['LevelMenu/Title0/Title2/TextGems'] = LM['LevelMenu/Title0/Title2'].add(
+        MenuText(LM['LevelMenu/Title0/Title2'].px_start_xy, database, (1, 5), "LevelMenu/Title0/Title2/TextGems","Gems: "))
+
+    LM['LevelMenu/Title0/Title2/TextGems_change'] = LM['LevelMenu/Title0/Title2'].add(
+        MenuText(LM['LevelMenu/Title0/Title2'].px_start_xy, database, (7, 5), "LevelMenu/Title0/Title2/TextGems_change", "",variable_name="gems_change"))
+
 
     ### WORLDS
     #lvl_menu_grid=([10,40,70],[10,75])

@@ -661,3 +661,22 @@ def deal_splash_dmg(explosion_xy,dmg,radius,mobs_sprite_list:pygame.sprite.Group
         dist=pygame.Vector2(mob.rect.center).distance_to(pygame.Vector2(explosion_xy))
         if dist <radius:
             mob.hp-=floor(dmg*(1-(dist/radius)))
+
+def update_shop_details(menu,database):
+
+    database["food_change"]=0
+    database["gems_change"] = 0
+
+    for active in menu["LevelMenu/Title0/Title0/gridActive"].members_group:
+        database["food_change"]-=active.data["food_cost"]
+        database["gems_change"] -= active.data["gems_cost"]
+    menu["LevelMenu/Title0/Title2/TextFood"].update(txt="Food: " + str(database["food"]))
+    menu["LevelMenu/Title0/Title2/TextGems"].update(txt="Gems: " + str(database["gems"]))
+    if database["food_change"] !=0:
+        menu["LevelMenu/Title0/Title2/TextFood_change"].update(txt=str(database["food_change"]))
+    else:
+        menu["LevelMenu/Title0/Title2/TextFood_change"].update(txt="")
+    if database["gems_change"] !=0:
+        menu["LevelMenu/Title0/Title2/TextGems_change"].update(txt=str(database["gems_change"]))
+    else:
+        menu["LevelMenu/Title0/Title2/TextGems_change"].update(txt="")

@@ -48,10 +48,15 @@ database = {
     "resolution_in_tiles_percent_xy":resolution_in_tiles_percent_xy,
     "lives": 10,
     "gold": 300,
+    "food": 20,
+    "food_change":-5,
+    "gems_change":-20,
+    "gems": 1,
     "wave_shop_items":[],
     "available_turrets":["archer","catapult","cyclop"],
     "gold_change":"",
     "wave_number": 0,
+
     "font_sizes":fnt_sizes,
     "wave_menu_width_pt": 20,
     "building_allowed_map":{}
@@ -170,8 +175,14 @@ while True:
 
     ### MENUS
     if All_menus_groups_ordered != []:
+
         for group in All_menus_groups_ordered:
-            group[0].update(allowed_map=database["building_allowed_map"])
+            group[0].update(allowed_map=database["building_allowed_map"],database=database)
+            if "LevelMenu/Title0/Title2/TextFood" in group[1].keys():
+                update_shop_details(menu=group[1],database=database)
+
+
+
 
         groups, MMs = zip(*All_menus_groups_ordered)
         MMs=list(MMs)
