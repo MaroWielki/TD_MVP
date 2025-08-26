@@ -38,7 +38,7 @@ def create_world_menu(database):
                             tile_size_xy=database["tile_size_xy"], draggable=False))
     LM['LevelMenu'] = get_member_by_name(level_menu.sprites(), "LevelMenu")
 
-    lvl_menu_grid=([10],[20])
+    lvl_menu_grid=([5],[20])
     coords_x=0
     coords_y=0
 
@@ -47,7 +47,7 @@ def create_world_menu(database):
     LM['LevelMenu/Title0'] = LM['LevelMenu'].add(MenuTitle(LM['LevelMenu'].px_start_xy, database, (
         database["resolution_in_tiles_percent_xy"][lvl_menu_grid[0][coords_x]][0],
         database["resolution_in_tiles_percent_xy"][lvl_menu_grid[1][coords_y]][1]),
-                                                           (database["resolution_in_tiles_percent_xy"][30][0],
+                                                           (database["resolution_in_tiles_percent_xy"][40][0],
                                                             database["resolution_in_tiles_percent_xy"][15][1]),
                                                            "LevelMenu/Title0", "Title0",
                                                            tile_size_xy=database["double_tile_size_xy"],
@@ -57,16 +57,14 @@ def create_world_menu(database):
 
 
     LM['LevelMenu/Title0/button0'] = LM['LevelMenu/Title0'].add(
-        MenuButton(LM['LevelMenu/Title0'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][50][0], 3),
+        MenuButton(LM['LevelMenu/Title0'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][67][0], 3),
                    (database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "LevelMenu/Title0/button0",
                    text="Shop", color=3, action="open_shop"))
 
     LM['LevelMenu/Title0/button1'] = LM['LevelMenu/Title0'].add(
-        MenuButton(LM['LevelMenu/Title0'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][50][0], 6),
+        MenuButton(LM['LevelMenu/Title0'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][67][0], 6),
                    (database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "LevelMenu/Title0/button1",
                    text="Armory", color=3, action="open_armory"))
-
-
 
 
     ### ACTIVE
@@ -97,7 +95,7 @@ def create_world_menu(database):
     LM['LevelMenu/Title0/Title2'] = LM['LevelMenu/Title0'].add(
         MenuTitle(LM['LevelMenu/Title0'].px_start_xy, database,
                   (18, 1),
-                  (6, 6), "LevelMenu/Title0/Title2", "Resources",
+                  (5, 6), "LevelMenu/Title0/Title2", "Resources",
                   tile_size_xy=database["double_tile_size_xy"], draggable=False))
 
     LM['LevelMenu/Title0/Title2/TextFood'] = LM['LevelMenu/Title0/Title2'].add(
@@ -111,6 +109,11 @@ def create_world_menu(database):
     LM['LevelMenu/Title0/Title2/TextGems_change'] = LM['LevelMenu/Title0/Title2'].add(
         MenuText(LM['LevelMenu/Title0/Title2'].px_start_xy, database, (7, 5), "LevelMenu/Title0/Title2/TextGems_change", "",variable_name="gems_change"))
 
+    LM['LevelMenu/Title0/Title3'] = LM['LevelMenu/Title0'].add(
+        MenuTitle(LM['LevelMenu/Title0'].px_start_xy, database,
+                  (24, 1),
+                  (9, 6), "LevelMenu/Title0/Title3", "Details",
+                  tile_size_xy=database["double_tile_size_xy"], draggable=False))
 
     ### WORLDS
     #lvl_menu_grid=([10,40,70],[10,75])
@@ -137,9 +140,18 @@ def create_world_menu(database):
 
             LM['LevelMenu/Title'+str(index)+'/buttonStartLvl'+str(index)] = LM['LevelMenu/Title'+str(index)].add(
                 MenuButton(LM['LevelMenu/Title'+str(index)].px_start_xy, database,
-                           (database["resolution_in_tiles_percent_xy"][7][0], database["resolution_in_tiles_percent_xy"][(lvl_menu_size_xy[1]*2)-6][1]),
-                           (database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), 'LevelMenu/Title'+str(index)+'/buttonStartLvl'+str(index),
+                           (database["resolution_in_tiles_percent_xy"][10][0], database["resolution_in_tiles_percent_xy"][(lvl_menu_size_xy[1]*2)-6][1]),
+                           (database["resolution_in_tiles_percent_xy"][6][0] * 4, 8), 'LevelMenu/Title'+str(index)+'/buttonStartLvl'+str(index),
                            text="To battle!", color=3, action="start_battle"))
+
+            LM['LevelMenu/Title'+str(index)+'/GridMobs'] = LM['LevelMenu/Title'+str(index)].add(
+                GuiGrid(LM['LevelMenu/Title'+str(index)].px_start_xy, database, (0.5, 6.75), (4, 1),
+                        'LevelMenu/Title'+str(index)+'/GridMobs', tile_size_xy=database["double_tile_size_xy"]))
+
+            LM['LevelMenu/Title' + str(index) + '/GridPrices'] = LM['LevelMenu/Title' + str(index)].add(
+                GuiGrid(LM['LevelMenu/Title' + str(index)].px_start_xy, database, (8.5, 6.75), (3, 1),
+                        'LevelMenu/Title' + str(index) + '/GridPrices', tile_size_xy=database["double_tile_size_xy"]))
+
             index+=1
 
 
