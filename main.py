@@ -120,14 +120,17 @@ while True:
             pass
             #after_wave(victory=False)
 
-        if len(mobs_wave_units) ==0 and len(wave_mob)==0 and len(mobs)==0:
+
+        if len(levels_list[database["current_level"]].waves)<= database["wave_number"] and len(wave_mob)==0 and len(mobs)==0:
             is_game_on=False
             All_menus_groups_ordered = []
+            turret_group=[]
             #after_wave(victory=True)
 
         ### TURRETS
-    turret_group.update(mobs, database)
-    turret_group.draw(screen)
+    if turret_group!=[]:
+        turret_group.update(mobs, database)
+        turret_group.draw(screen)
 
 
 

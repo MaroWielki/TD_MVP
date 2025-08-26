@@ -55,7 +55,8 @@ def create_world_menu(database):
                                                            tile_size_xy=database["double_tile_size_xy"],
                                                            draggable=True))
 
-    LM['LevelMenu/Title0/Text0']=LM['LevelMenu/Title0'].add(MenuText(LM['LevelMenu/Title0'].px_start_xy, database, (1, 7), "LevelMenu/Title0/Text0","init txt"))
+
+
 
     LM['LevelMenu/Title0/button0'] = LM['LevelMenu/Title0'].add(
         MenuButton(LM['LevelMenu/Title0'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][45][0], 3),
@@ -102,7 +103,7 @@ def create_world_menu(database):
         3: "img/forest_fire.png",
         4: "img/island.png",
         5: "img/desert.png",
-        6: "img/graveyard.png"
+        6: "img/road.png"
         }
     index=1
     for coords_x in range(3):
