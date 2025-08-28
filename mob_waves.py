@@ -49,4 +49,3 @@ levels_list[6].add_wave(wave2)
 levels_list[6].add_wave(wave3)
 levels_list[6].add_wave(wave4)
 
-print(levels_list[1].waves[0].bunches[0].mob)

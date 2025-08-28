@@ -179,6 +179,50 @@ mob_path2_data={
  'FINISH': [500, 20]
 }
 animation_sprites={}
+
+animation_sprites["gem_sprite"] = {
+'IDLE': {
+'path': "img/items/gem.png",
+'frame_window_width':16,
+'frame_window_height':16,
+'animation_orientation':"horizontal",
+'border':0,
+'anim_fps':6,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':1,
+'color_key':(0,0,0)
+}}
+animation_sprites["chicken_sprite"] = {
+'IDLE': {
+'path': "img/items/chicken.png",
+'frame_window_width':16,
+'frame_window_height':16,
+'animation_orientation':"horizontal",
+'border':0,
+'anim_fps':6,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':1,
+'color_key':(0,0,0)
+}}
+animation_sprites["steak_sprite"] = {
+'IDLE': {
+'path': "img/items/steak.png",
+'frame_window_width':16,
+'frame_window_height':16,
+'animation_orientation':"horizontal",
+'border':0,
+'anim_fps':6,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':1,
+'color_key':(0,0,0)
+}}
+
 animation_sprites["bomb_sprite"] = {
 'IDLE': {
 'path': "img/bomg.png",

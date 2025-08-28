@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="reworking level menu">
+    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="add more maps">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_menus.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_menus.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lvl_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/lvl_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mob_waves.py" beforeDir="false" afterPath="$PROJECT_DIR$/mob_waves.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tst2.py" beforeDir="false" afterPath="$PROJECT_DIR$/tst2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -307,7 +310,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756240119292</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="add more maps">
+      <option name="closed" value="true" />
+      <created>1756396769295</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1756396769295</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,7 +336,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="printing map and generalizing it" />
     <MESSAGE value="loading different maps" />
     <MESSAGE value="adding mobs" />
     <MESSAGE value="adding debug and generate wave button and end lvl logic" />
@@ -350,7 +360,8 @@
     <MESSAGE value="WORKING VERSION" />
     <MESSAGE value="adding food cost and gems cost and reworking level selection menu" />
     <MESSAGE value="reworking level menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="reworking level menu" />
+    <MESSAGE value="add more maps" />
+    <option name="LAST_COMMIT_MESSAGE" value="add more maps" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

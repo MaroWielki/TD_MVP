@@ -266,7 +266,7 @@ while True:
 
 
                 database["current_level"]=int(events.dict["button_name"][-1])
-                print(levels_dict[levels_list[database["current_level"]].road_map]["filename"])
+
                 map, road, building_allowed_map, mob_path, background = load_level(levels_dict[levels_list[database["current_level"]].road_map]["filename"],road_tiles, database)
 
 
