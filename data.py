@@ -100,7 +100,20 @@ levels_dict={
  },
  "zigzagc": {
   "filename": "road_map2c_40x28.png"
+ },
+ "bulb": {
+  "filename": "road_mapBULBc_40x28.png"
+ },
+ "cos": {
+  "filename": "road_mapCOSc_40x28.png"
+ },
+ "long": {
+  "filename": "road_mapLONGc_40x28.png"
+ },
+ "zmap": {
+  "filename": "road_mapZc_40x28.png"
  }
+
 }
 
 
@@ -210,6 +223,74 @@ animation_sprites["arrow_sprite"] = {
 'color_key':(0,0,0)
 }
 }
+animation_sprites["spider_sprite"] = {
+
+'IDLE': {
+'path': "img/mobs/spider/spider_down.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':4,
+'color_key':(255,255,255)
+},
+'WALK_DOWN': {
+'path': "img/mobs/spider/spider_down.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':4,
+'img_per_row_or_col':4,
+'color_key':(255,255,255)
+},
+'WALK_UP': {
+'path': "img/mobs/spider/spider_up.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':4,
+'img_per_row_or_col':4,
+'color_key':(255,255,255)
+},
+'WALK_LEFT': {
+'path': "img/mobs/spider/spider_left.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':4,
+'img_per_row_or_col':4,
+'color_key':(255,255,255)
+},
+'WALK_RIGHT': {
+'path': "img/mobs/spider/spider_right.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':4,
+'img_per_row_or_col':4,
+'color_key':(255,255,255)
+}}
+
 ### GOBLIN
 animation_sprites["goblin_sprite"] = {
 'WALK_DOWN': {
@@ -281,6 +362,19 @@ animation_sprites["goblin_sprite"] = {
 ### /GOBLIN
 ### SKELETON
 animation_sprites["skeleton_sprite"] = {
+'IDLE': {
+'path': "img/zombie_n_skeleton2.png",
+'frame_window_width':32,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':0,
+'anim_fps':10,
+'start_x':96,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':6,
+'color_key':(255,255,255)
+},
 'WALK_DOWN': {
 'path': "img/zombie_n_skeleton2.png",
 'frame_window_width':32,
