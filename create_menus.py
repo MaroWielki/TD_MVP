@@ -318,3 +318,38 @@ def create_wave_turret_details(wave_menu,selected_turret,database,destroy=False)
             wave_menu.pop(xx)
 
 
+def create_victory_menu(database):
+    LM = {}
+    victory_menu = pygame.sprite.Group()
+    victory_menu.add(MenuTitle(get_xy((0, 0), database["tile_size_xy"], 0, 0), database,
+                             (database["resolution_in_tiles_percent_xy"][7][0],
+                              database["resolution_in_tiles_percent_xy"][10][1]),
+                             (database["resolution_in_tiles_percent_xy"][11][0],
+                              database["resolution_in_tiles_percent_xy"][10][1]), "VictoryMenu", "Victory",
+                             tile_size_xy=database["quadrupal_tile_size_xy"], draggable=False))
+    LM['VictoryMenu'] = get_member_by_name(victory_menu.sprites(), "VictoryMenu")
+
+    LM['VictoryMenu/Text0'] = LM['VictoryMenu'].add(
+        MenuText(LM['VictoryMenu'].px_start_xy, database, (2, 5), "VictoryMenu/Text0",
+                 "Congratulations! Here are your prices:"))
+
+    LM['VictoryMenu/gridPrices'] = LM['VictoryMenu'].add(
+        GuiGrid(LM['VictoryMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][4][0], 2), (4, 1),
+                "VictoryMenu", tile_size_xy=database["quadrupal_tile_size_xy"]))
+
+    lvl=database["current_level"]
+    for i in range(len(database["world_prices_and_enemies"]["prices"][lvl-1])):
+        LM['VictoryMenu/gridPrices/ItemPrice'+str(i)] = LM[
+            'VictoryMenu/gridPrices'].add(
+            ItemMenu(LM['VictoryMenu/gridPrices'].px_start_xy, database, (i, 0),
+                     'VictoryMenu/gridPrices' + str(i),
+                     tile_size_xy=database["quadrupal_tile_size_xy"],
+                     item_name=database["world_prices_and_enemies"]["prices"][lvl-1][i],
+                     parent_grid=LM['VictoryMenu/gridPrices'], draggable=False))
+
+    LM['VictoryMenu/button0'] = LM['VictoryMenu'].add(
+        MenuButton(LM['VictoryMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], database["resolution_in_tiles_percent_xy"][25][1]),
+                   (database["resolution_in_tiles_percent_xy"][16][0] * 4, 16), "VictoryMenu/button0",
+                   text="OK", color=3, action="start_new_game"))
+
+    return victory_menu, LM

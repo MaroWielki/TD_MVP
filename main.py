@@ -2,6 +2,8 @@
 
 
 from sys import exit
+
+import pygame.sprite
 from pygame import K_ESCAPE
 import menus_utils
 #from menus_utils import *
@@ -126,18 +128,18 @@ while True:
             pass
             #after_wave(victory=False)
 
-
-        if len(levels_list[database["current_level"]].waves)<= database["wave_number"] and len(wave_mob)==0 and len(mobs)==0:
+        if True:
+        #if len(levels_list[database["current_level"]].waves)<= database["wave_number"] and len(wave_mob)==0 and len(mobs)==0:
             is_game_on=False
             All_menus_groups_ordered = []
-            turret_group=[]
-            #after_wave(victory=True)
+            turret_group=pygame.sprite.Group()
+            All_menus_groups_ordered.append(create_victory_menu(database))
+            projectiles=pygame.sprite.Group()
 
         ### TURRETS
     if turret_group!=[]:
         turret_group.update(mobs, database)
         turret_group.draw(screen)
-
 
 
 
