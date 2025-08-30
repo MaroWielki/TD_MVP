@@ -9,7 +9,7 @@ from create_menus import *
 
 from lvl_utils import *
 from data import *
-from mob_waves import *
+#from mob_waves import *
 
 pygame.init()
 pygame.display.set_caption("Marek")
@@ -54,7 +54,7 @@ database = {
     "gems_change":0,
     "gems": 1,
     "wave_shop_items":[],
-    "available_turrets":["archer","catapult","cyclop"],
+    "available_turrets":["archer"],
     "gold_change":"",
     "wave_number": 0,
 
@@ -255,6 +255,7 @@ while True:
             if events.dict["action"]=="start_new_game":
                 All_menus_groups_ordered= []
                 All_menus_groups_ordered.append(create_world_menu(database))
+                levels_list = wave_generator(database["world_prices_and_enemies"]["enemies"])
 
             if events.dict["action"]=="start_battle":
                 database["wave_shop_items"]=[]

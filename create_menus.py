@@ -146,13 +146,32 @@ def create_world_menu(database):
                            (database["resolution_in_tiles_percent_xy"][6][0] * 4, 8), 'LevelMenu/Title'+str(index)+'/buttonStartLvl'+str(index),
                            text="To battle!", color=3, action="start_battle"))
 
+            ### MOBS GRID
             LM['LevelMenu/Title'+str(index)+'/GridMobs'] = LM['LevelMenu/Title'+str(index)].add(
                 GuiGrid(LM['LevelMenu/Title'+str(index)].px_start_xy, database, (0.5, 6.75), (4, 1),
                         'LevelMenu/Title'+str(index)+'/GridMobs', tile_size_xy=database["double_tile_size_xy"]))
 
+            for i in range(len(database["world_prices_and_enemies"]["enemies"][index-1])):
+                LM['LevelMenu/Title'+str(index)+'/GridMobs/ItemEnemy'+str(i)] = LM['LevelMenu/Title'+str(index)+'/GridMobs'].add(
+                    ItemMenu(LM['LevelMenu/Title'+str(index)+'/GridMobs'].px_start_xy, database, (i, 0),
+                             'LevelMenu/Title'+str(index)+'/GridMobs/ItemEnemy'+str(i),
+                             tile_size_xy=database["double_tile_size_xy"], item_name=database["world_prices_and_enemies"]["enemies"][index-1][i],
+                             parent_grid=LM['LevelMenu/Title'+str(index)+'/GridMobs'],draggable=False))
+
+
+
+
+            ### PRICES GRID
             LM['LevelMenu/Title' + str(index) + '/GridPrices'] = LM['LevelMenu/Title' + str(index)].add(
                 GuiGrid(LM['LevelMenu/Title' + str(index)].px_start_xy, database, (8.5, 6.75), (3, 1),
                         'LevelMenu/Title' + str(index) + '/GridPrices', tile_size_xy=database["double_tile_size_xy"]))
+
+            for i in range(len(database["world_prices_and_enemies"]["prices"][index-1])):
+                LM['LevelMenu/Title'+str(index)+'/GridPrices/ItemEnemy'+str(i)] = LM['LevelMenu/Title'+str(index)+'/GridPrices'].add(
+                    ItemMenu(LM['LevelMenu/Title'+str(index)+'/GridPrices'].px_start_xy, database, (i, 0),
+                             'LevelMenu/Title'+str(index)+'/GridPrices/ItemEnemy'+str(i),
+                             tile_size_xy=database["double_tile_size_xy"], item_name=database["world_prices_and_enemies"]["prices"][index-1][i],
+                             parent_grid=LM['LevelMenu/Title'+str(index)+'/GridPrices'],draggable=False))
 
             index+=1
 

@@ -1,4 +1,4 @@
 from random import randint
 
-for i in range(10):
-    print(randint(1,3))
+for i in range(1,7):
+    print(i)
