@@ -124,12 +124,16 @@ while True:
 
         wave_menu['WaveMenu/Info/Debug1'].update(txt=str(pygame.mouse.get_pos()))
 
-        if database['lives']<1:
-            pass
-            #after_wave(victory=False)
-
         if True:
-        #if len(levels_list[database["current_level"]].waves)<= database["wave_number"] and len(wave_mob)==0 and len(mobs)==0:
+        #if database['lives']<1:
+            is_game_on = False
+            All_menus_groups_ordered = []
+            turret_group = pygame.sprite.Group()
+            All_menus_groups_ordered.append(create_defeat_menu(database))
+            projectiles = pygame.sprite.Group()
+
+        #if True:
+        if len(levels_list[database["current_level"]].waves)<= database["wave_number"] and len(wave_mob)==0 and len(mobs)==0:
             is_game_on=False
             All_menus_groups_ordered = []
             turret_group=pygame.sprite.Group()
@@ -258,6 +262,10 @@ while True:
                 All_menus_groups_ordered= []
                 All_menus_groups_ordered.append(create_world_menu(database))
                 levels_list = wave_generator(database["world_prices_and_enemies"]["enemies"])
+
+            if events.dict["action"]=="mainmenu":
+                All_menus_groups_ordered = []
+                All_menus_groups_ordered.append(create_main_menu(database))
 
             if events.dict["action"]=="start_battle":
                 database["wave_shop_items"]=[]

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="generate wave logic">
+    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="victory window">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/create_menus.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_menus.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
@@ -45,7 +45,7 @@
     "Python.create_menus.executor": "Run",
     "Python.data.executor": "Run",
     "Python.lvl_utils.executor": "Run",
-    "Python.main.executor": "Debug",
+    "Python.main.executor": "Run",
     "Python.menus_utils.executor": "Run",
     "Python.tst.executor": "Run",
     "Python.tst2.executor": "Run",
@@ -330,7 +330,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756556122402</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="victory window">
+      <option name="closed" value="true" />
+      <created>1756586409036</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1756586409036</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,7 +356,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adding debug and generate wave button and end lvl logic" />
     <MESSAGE value="allowed map somewhat working (needs refactoring)" />
     <MESSAGE value="added projectile and scaling object" />
     <MESSAGE value="gonna try to anchor to center" />
@@ -373,7 +380,8 @@
     <MESSAGE value="add more maps" />
     <MESSAGE value="adding enemies and prices to world" />
     <MESSAGE value="generate wave logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="generate wave logic" />
+    <MESSAGE value="victory window" />
+    <option name="LAST_COMMIT_MESSAGE" value="victory window" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TD_MVP$tst.coverage" NAME="tst Coverage Results" MODIFIED="1755719961203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

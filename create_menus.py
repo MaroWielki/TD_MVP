@@ -353,3 +353,27 @@ def create_victory_menu(database):
                    text="OK", color=3, action="start_new_game"))
 
     return victory_menu, LM
+
+
+def create_defeat_menu(database):
+    LM = {}
+    defeat_menu = pygame.sprite.Group()
+    defeat_menu.add(MenuTitle(get_xy((0, 0), database["tile_size_xy"], 0, 0), database,
+                             (database["resolution_in_tiles_percent_xy"][7][0],
+                              database["resolution_in_tiles_percent_xy"][10][1]),
+                             (database["resolution_in_tiles_percent_xy"][11][0],
+                              database["resolution_in_tiles_percent_xy"][10][1]), "DefeatMenu", "Defeat",
+                             tile_size_xy=database["quadrupal_tile_size_xy"], draggable=False))
+    LM['DefeatMenu'] = get_member_by_name(defeat_menu.sprites(), "DefeatMenu")
+
+    LM['DefeatMenu/Text0'] = LM['DefeatMenu'].add(
+        MenuText(LM['DefeatMenu'].px_start_xy, database, (2, 5), "DefeatMenu/Text0",
+                 "You have been defeated! Try harder next time"))
+
+
+    LM['DefeatMenu/button0'] = LM['DefeatMenu'].add(
+        MenuButton(LM['DefeatMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], database["resolution_in_tiles_percent_xy"][25][1]),
+                   (database["resolution_in_tiles_percent_xy"][16][0] * 4, 16), "DefeatMenu/button0",
+                   text="OK", color=3, action="mainmenu"))
+
+    return defeat_menu, LM
