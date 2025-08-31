@@ -124,21 +124,26 @@ while True:
 
         wave_menu['WaveMenu/Info/Debug1'].update(txt=str(pygame.mouse.get_pos()))
 
-        if True:
-        #if database['lives']<1:
+        ### DEFEAT
+        #if True:
+        if database['lives']<1:
             is_game_on = False
             All_menus_groups_ordered = []
             turret_group = pygame.sprite.Group()
             All_menus_groups_ordered.append(create_defeat_menu(database))
             projectiles = pygame.sprite.Group()
+            mobs = pygame.sprite.Group()
 
+        ### VICTORY
         #if True:
-        if len(levels_list[database["current_level"]].waves)<= database["wave_number"] and len(wave_mob)==0 and len(mobs)==0:
+        if len(levels_list[database["current_level"]].waves)<= database["wave_number"] and len(wave_mob)==0 and len(mobs)==0 and database['lives']>-1:
             is_game_on=False
             All_menus_groups_ordered = []
             turret_group=pygame.sprite.Group()
             All_menus_groups_ordered.append(create_victory_menu(database))
             projectiles=pygame.sprite.Group()
+            mobs = pygame.sprite.Group()
+            grand_prices(database,database["world_prices_and_enemies"]["prices"][database["current_level"]-1])
 
         ### TURRETS
     if turret_group!=[]:
@@ -206,6 +211,8 @@ while True:
 
 
     ### EVENTS
+
+
     for events in pygame.event.get():
 
         ###### MOUSE DOWN
@@ -378,7 +385,7 @@ while True:
     # s.fill("red")
     # screen.blit(s, (0, 0))
     #
-
+    #pygame.event.clear()
     pygame.display.update()
     clock.tick(database["fps"])
 

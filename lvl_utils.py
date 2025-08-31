@@ -680,3 +680,12 @@ def update_shop_details(menu,database):
         menu["LevelMenu/Title0/Title2/TextGems_change"].update(txt=str(database["gems_change"]))
     else:
         menu["LevelMenu/Title0/Title2/TextGems_change"].update(txt="")
+
+def grand_prices(database,prices):
+    for price in prices:
+        if price=="chicken":
+            database["food"]+=1
+        if price=="steak":
+            database["food"]+=3
+        if price=="gems":
+            database["gems"]+=1
