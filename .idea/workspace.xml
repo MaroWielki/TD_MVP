@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="defeat menu">
-      <change beforePath="$PROJECT_DIR$/.idea/TD_MVP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TD_MVP.iml" afterDir="false" />
+    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="add prices after victory">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_menus.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_menus.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lvl_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/lvl_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -349,7 +347,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756587140025</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="add prices after victory">
+      <option name="closed" value="true" />
+      <created>1756668523857</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1756668523857</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -367,7 +373,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added projectile and scaling object" />
     <MESSAGE value="gonna try to anchor to center" />
     <MESSAGE value="anchor to center done" />
     <MESSAGE value="sync" />
@@ -392,7 +397,19 @@
     <MESSAGE value="generate wave logic" />
     <MESSAGE value="victory window" />
     <MESSAGE value="defeat menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="defeat menu" />
+    <MESSAGE value="add prices after victory" />
+    <option name="LAST_COMMIT_MESSAGE" value="add prices after victory" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lvl_utils.py</url>
+          <line>702</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TD_MVP$tst.coverage" NAME="tst Coverage Results" MODIFIED="1755719961203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

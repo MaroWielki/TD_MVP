@@ -51,7 +51,7 @@ database = {
     "resolution_in_tiles_percent_xy":resolution_in_tiles_percent_xy,
     "lives": 10,
     "gold": 300,
-    "food": 10,
+    "food": 2,
     "food_change":0,
     "gems_change":0,
     "gems": 1,
@@ -276,29 +276,23 @@ while True:
 
             if events.dict["action"]=="start_battle":
                 database["wave_shop_items"]=[]
+                subtract_costs(database,All_menus_groups_ordered[0][1]['LevelMenu/Title0/Title0/gridActive'])
+
                 for item in All_menus_groups_ordered[0][1]['LevelMenu/Title0/Title0/gridActive'].members_group.sprites():
                     database["wave_shop_items"].append(item.item_name)
 
                 All_menus_groups_ordered = []
                 is_game_on=True
 
-
                 database["current_level"]=int(events.dict["button_name"][-1])
 
                 map, road, building_allowed_map, mob_path, background = load_level(levels_dict[levels_list[database["current_level"]].road_map]["filename"],road_tiles, database)
-
-
-                # if "Title1" in events.dict["button_name"]:
-                #     map, road, building_allowed_map,mob_path,background= load_level(levels_dict["zigzagc"]["filename"], road_tiles, database)
-                # else:
-                #     map, road,building_allowed_map,mob_path,background = load_level(levels_dict["umapc"]["filename"], road_tiles, database)
-
 
                 database["building_allowed_map"]=building_allowed_map
                 tmp=create_wave_menu(database)
                 All_menus_groups_ordered.append(tmp)
                 wave_menu=tmp[1]
-                mobs_wave_units = [7, 15, 30, 45, 100]
+
 
                 database["wave_number"]=1
                 wave_mob = generate_wave2(database,levels_list)
@@ -373,10 +367,12 @@ while True:
 
         ##### QUIT
         if events.type == pygame.QUIT:
+            pygame.event.clear()
             pygame.quit()
             exit()
         if events.type == pygame.KEYDOWN:
             if events.key == K_ESCAPE:
+                pygame.event.clear()
                 pygame.quit()
                 exit()
 
@@ -385,7 +381,7 @@ while True:
     # s.fill("red")
     # screen.blit(s, (0, 0))
     #
-    #pygame.event.clear()
+
     pygame.display.update()
     clock.tick(database["fps"])
 

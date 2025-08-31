@@ -681,6 +681,13 @@ def update_shop_details(menu,database):
     else:
         menu["LevelMenu/Title0/Title2/TextGems_change"].update(txt="")
 
+    if -database["gems_change"] >database["gems"] or -database["food_change"] >database["food"]:
+        for index in range(1,7):
+            menu['LevelMenu/Title'+str(index)+'/buttonStartLvl'+str(index)].is_active=False
+    else:
+        for index in range(1, 7):
+            menu['LevelMenu/Title' + str(index) + '/buttonStartLvl' + str(index)].is_active = True
+
 def grand_prices(database,prices):
     for price in prices:
         if price=="chicken":
@@ -689,3 +696,10 @@ def grand_prices(database,prices):
             database["food"]+=3
         if price=="gems":
             database["gems"]+=1
+
+def subtract_costs(database,costs):
+    database["food"]+=database["food_change"]
+    database["gems"] += database["gems_change"]
+    # for active in costs.members_group:
+    #     database["food_change"] -= active.data["food_cost"]
+    #     database["gems_change"] -= active.data["gems_cost"]
