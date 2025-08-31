@@ -211,10 +211,16 @@ while True:
 
 
     ### EVENTS
-
-
-    for events in pygame.event.get():
-
+    ev=[]
+    ### CZYZBY PODLACZONY JOY ROBIŁ PROBLEMY ???
+    # try:
+    #     ev=pygame.event.get()
+    # except Exception as e: print(e)
+    # finally:
+    #     pass
+    ev = pygame.event.get()
+    for events in ev:
+        #print(events)
         ###### MOUSE DOWN
         if events.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos=pygame.mouse.get_pos()
@@ -367,20 +373,14 @@ while True:
 
         ##### QUIT
         if events.type == pygame.QUIT:
-            pygame.event.clear()
             pygame.quit()
             exit()
         if events.type == pygame.KEYDOWN:
             if events.key == K_ESCAPE:
-                pygame.event.clear()
                 pygame.quit()
                 exit()
 
-    # s = pygame.Surface((1366, 768))
-    # s.set_alpha(100)
-    # s.fill("red")
-    # screen.blit(s, (0, 0))
-    #
+
 
     pygame.display.update()
     clock.tick(database["fps"])

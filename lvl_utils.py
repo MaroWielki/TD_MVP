@@ -696,6 +696,8 @@ def grand_prices(database,prices):
             database["food"]+=3
         if price=="gems":
             database["gems"]+=1
+            print("asd")
+
 
 def subtract_costs(database,costs):
     database["food"]+=database["food_change"]
