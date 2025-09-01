@@ -69,4 +69,5 @@ def wave_generator(input):
             wave = MobWave()
             wave.add(BunchOfMobs(12,item_data[mob]["sprite"]))
             levels_list[index+1].add_wave(wave)
+
     return levels_list

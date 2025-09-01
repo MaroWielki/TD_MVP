@@ -40,7 +40,7 @@ turret_init_database={
                  "food_price":10,
                  "buy_price":50,
                  "sell_price":50,
-                 "upgrade_price":100,
+                 "upgrade_price":50,
                  "target_type":"most_hp",
                  "projectile_type":"arrow",
 "projectile_speed":10,
@@ -50,7 +50,7 @@ turret_init_database={
         {"dmg": 50,
          "dmg_upgrade": 10,
          "dmg_change": "",
-         "atsp": 4000,
+         "atsp": 3000,
          "atsp_upgrade": -200,
          "atsp_change": "",
          "range": 150,
@@ -69,10 +69,10 @@ turret_init_database={
         {"dmg": 25,
          "dmg_upgrade": 10,
          "dmg_change": "",
-         "atsp": 1500,
+         "atsp": 3000,
          "atsp_upgrade": -200,
          "atsp_change": "",
-         "range": 200,
+         "range": 400,
          "range_upgrade": 10,
          "range_change": "",
          "buy_price": 150,
@@ -182,6 +182,20 @@ animation_sprites={}
 animation_sprites["random_turret_sprite"] = {
 'IDLE': {
 'path': "img/items/random_turret.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':0,
+'anim_fps':6,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':1,
+'color_key':(0,0,0)
+}}
+animation_sprites["victory_sprite"] = {
+'IDLE': {
+'path': "img/items/victory.png",
 'frame_window_width':32,
 'frame_window_height':32,
 'animation_orientation':"horizontal",
@@ -362,6 +376,72 @@ animation_sprites["spider_sprite"] = {
 'color_key':(255,255,255)
 }}
 
+animation_sprites["eye_sprite"] = {
+'IDLE': {
+'path': "img/mobs/eye/eye_down.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':4,
+'color_key':(255,255,255)
+},
+'WALK_DOWN': {
+'path': "img/mobs/eye/eye_down.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':9,
+'img_per_row_or_col':9,
+'color_key':(255,255,255)
+},
+'WALK_UP': {
+'path': "img/mobs/eye/eye_up.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':9,
+'img_per_row_or_col':9,
+'color_key':(255,255,255)
+},
+'WALK_LEFT': {
+'path': "img/mobs/eye/eye_left.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':9,
+'img_per_row_or_col':9,
+'color_key':(255,255,255)
+},
+'WALK_RIGHT': {
+'path': "img/mobs/eye/eye_right.png",
+'frame_window_width':32,
+'frame_window_height':32,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':9,
+'img_per_row_or_col':9,
+'color_key':(255,255,255)
+}}
 ### GOBLIN
 animation_sprites["goblin_sprite"] = {
 'WALK_DOWN': {
