@@ -136,7 +136,7 @@ def create_world_menu(database):
                             (database["resolution_in_tiles_percent_xy"][lvl_menu_grid[0][coords_x]][0],
                              database["resolution_in_tiles_percent_xy"][lvl_menu_grid[1][coords_y]][1]),
                             (database["resolution_in_tiles_percent_xy"][lvl_menu_size_xy[0]][0],
-                             database["resolution_in_tiles_percent_xy"][lvl_menu_size_xy[1]][1]), "Title"+str(index), "Title"+str(index),
+                             database["resolution_in_tiles_percent_xy"][lvl_menu_size_xy[1]][1]), "Title"+str(index), "Level "+str(index),
                             tile_size_xy=database["double_tile_size_xy"], draggable=False,background=bg[index]))
 
             LM['LevelMenu/Title'+str(index)+'/buttonStartLvl'+str(index)] = LM['LevelMenu/Title'+str(index)].add(

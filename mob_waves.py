@@ -63,11 +63,23 @@ def wave_generator(input):
     levels_list[5] = Level("zmap")
     levels_list[6] = Level("long")
 
-    for index in range(0,6):
+    mobs_in_bunch = {"spider": 6, "skeleton": 2, "goblin": 3, "eye": 1}
+    waves_in_lvl = {1: 3, 2: 4, 3: 5, 4: 6, 5: 7, 6: 8}
+    bunches_in_wave = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 4,7:7,8:8}
 
-        for mob in input[index]:
-            wave = MobWave()
-            wave.add(BunchOfMobs(12,item_data[mob]["sprite"]))
-            levels_list[index+1].add_wave(wave)
+
+    for lvl_index in range(1,7):
+        for wave_index in range(waves_in_lvl[lvl_index]):
+            wave=MobWave()
+            for bunch_index in range(bunches_in_wave[wave_index+1]):
+                mob=input[lvl_index-1][randint(0,len(input[lvl_index-1])-1)]
+                wave.add(BunchOfMobs(mobs_in_bunch[mob],item_data[mob]["sprite"]))
+            levels_list[lvl_index].add_wave(wave)
+
+
+        # for mob in input[index]:
+        #     wave = MobWave()
+        #     wave.add(BunchOfMobs(12,item_data[mob]["sprite"]))
+        #     levels_list[index+1].add_wave(wave)
 
     return levels_list

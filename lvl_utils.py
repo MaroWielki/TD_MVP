@@ -49,8 +49,9 @@ class AnimationSingle:
 
 
 class AnimationData:
-    def __init__(self,kw):
+    def __init__(self,kw,sprite_name=None):
         self.animationdata={}
+        self.name=sprite_name
         for key in kw:
             self.animationdata[key]=AnimationSingle(key,kw[key])
 
@@ -294,7 +295,11 @@ class MobPath:
 class MobSprite(pygame.sprite.Sprite):
     def __init__(self,data :AnimationData,fps:int,  x: int,y:int,path = None,move_speed=0,init_animation="IDLE",init_anim_speed=0,path_offset=[0,0],init_hp:int = None):
         pygame.sprite.Sprite.__init__(self)
-        self.init_hp=init_hp
+        if init_hp!= None:
+            self.init_hp=init_hp
+        else:
+            pass
+
         self.hp = init_hp
         self.move_speed = move_speed
         self.reached_finish=False
@@ -584,7 +589,7 @@ def generate_wave2(database:dict,levels_list:list):
 
     for bunch in wave.bunches:
         for i in range(bunch.number):
-            ret_wave.append((floor(uniform(timestart,timeend)),AnimationData(animation_sprites[bunch.mob])))
+            ret_wave.append((floor(uniform(timestart,timeend)),AnimationData(animation_sprites[bunch.mob],bunch.mob)))
 
 
     return ret_wave
@@ -606,7 +611,7 @@ def spawn_mobs(wave_mob,mobs,database,mob_path1_data):
             mob_path_1 = MobPath(mob_path1_data["START"], mob_path1_data["FINISH"], mob_path1_data["POINTS"])
             mobs.add(
                 MobSprite(w_mob[1], database["fps"], mob_path_1.start[0] + pth_off[0], mob_path_1.start[1] + pth_off[1],
-                          mob_path_1, 2, path_offset=pth_off, init_hp=30))
+                          mob_path_1, move_speed=mob_database[w_mob[1].name]["speed"], path_offset=pth_off,init_hp=mob_database[w_mob[1].name]["init_hp"]))
     wave_mob = [x for x in wave_mob if x[0] > tmp_time]
     return mobs,wave_mob
 
@@ -694,7 +699,7 @@ def grand_prices(database,prices):
             database["food"]+=1
         if price=="steak":
             database["food"]+=3
-        if price=="gems":
+        if price=="gem":
             database["gems"]+=1
         if price=="catapult":
             database["available_turrets"].append(price)
