@@ -2,7 +2,7 @@ import pygame
 from math import floor,sin, cos, atan2, radians, degrees
 from random import uniform, randint
 from data import turret_init_database, animation_sprites
-
+from gui_tiles import *
 
 class Level:
     def __init__(self,road_map):
@@ -696,7 +696,14 @@ def grand_prices(database,prices):
             database["food"]+=3
         if price=="gems":
             database["gems"]+=1
-            print("asd")
+        if price=="catapult":
+            database["available_turrets"].append(price)
+        if price=="archer":
+            database["available_turrets"].append(price)
+        if price=="cyclop":
+            database["available_turrets"].append(price)
+
+
 
 
 def subtract_costs(database,costs):

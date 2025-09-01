@@ -338,13 +338,33 @@ def create_victory_menu(database):
 
     lvl=database["current_level"]
     for i in range(len(database["world_prices_and_enemies"]["prices"][lvl-1])):
-        LM['VictoryMenu/gridPrices/ItemPrice'+str(i)] = LM[
+
+        if database["world_prices_and_enemies"]["prices"][lvl-1][i][:6] != "random":
+            LM['VictoryMenu/gridPrices/ItemPrice'+str(i)] = LM[
+                'VictoryMenu/gridPrices'].add(
+                ItemMenu(LM['VictoryMenu/gridPrices'].px_start_xy, database, (i, 0),
+                         'VictoryMenu/gridPrices' + str(i),
+                         tile_size_xy=database["quadrupal_tile_size_xy"],
+                         item_name=database["world_prices_and_enemies"]["prices"][lvl-1][i],
+                         parent_grid=LM['VictoryMenu/gridPrices'], draggable=False))
+
+        if database["world_prices_and_enemies"]["prices"][lvl-1][i] =="random_turret":
+
+            tur = None
+            while tur is None:
+                tur = available_turrets[randint(0, len(available_turrets)-1)]
+                if tur in database["available_turrets"]:
+                    tur=None
+            database["world_prices_and_enemies"]["prices"][lvl-1][i]=tur
+
+            LM['VictoryMenu/gridPrices/ItemPrice'+str(i)] = LM[
             'VictoryMenu/gridPrices'].add(
             ItemMenu(LM['VictoryMenu/gridPrices'].px_start_xy, database, (i, 0),
                      'VictoryMenu/gridPrices' + str(i),
                      tile_size_xy=database["quadrupal_tile_size_xy"],
                      item_name=database["world_prices_and_enemies"]["prices"][lvl-1][i],
                      parent_grid=LM['VictoryMenu/gridPrices'], draggable=False))
+
 
     LM['VictoryMenu/button0'] = LM['VictoryMenu'].add(
         MenuButton(LM['VictoryMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], database["resolution_in_tiles_percent_xy"][25][1]),
