@@ -195,8 +195,6 @@ while True:
                 update_shop_details(menu=group[1],database=database)
 
 
-
-
         groups, MMs = zip(*All_menus_groups_ordered)
         MMs=list(MMs)
         detect_menu_mouse_hoover(MMs)
@@ -236,7 +234,7 @@ while True:
 
             if events.button == 1:
                 handle_LMB_down(colliding_objects,mouse_pos)
-
+                print(colliding_objects)
                 bring_root_to_front(colliding_objects, All_menus_groups_ordered)
 
             if events.button == 3:
