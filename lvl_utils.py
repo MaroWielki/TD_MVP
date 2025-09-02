@@ -723,11 +723,30 @@ def update_armory_mm_details(menu,database):
     #menu["LevelMenu/Title0/Title2/TextFood"].update(txt="Food: " + str(database["food"]))
     menu["ArmoryMenu/Title1/TextGems"].update(txt=str(database["gems"]))
 
+    for index_1 in range(len(database["available_turrets"])):
+        for what in ["dmg", "atsp", "range"]:
+            if what == "dmg": what_1 = "DMG"
+            if what == "atsp": what_1 = "ATSP"
+            if what == "range": what_1 = "Range"
+            menu["ArmoryMenu/grid" + str(index_1) + "/Text" + what_1 + ""].update(txt=what_1+": "+str(turret_init_database[database["available_turrets"][index_1]][what]))
+
 
     if database["gems_change"] !=0:
         menu["ArmoryMenu/Title1/TextGems_change"].update(txt=str(database["gems_change"]))
     else:
         menu["ArmoryMenu/Title1/TextGems_change"].update(txt="")
+
+    if database["armory_change"] != ():
+        if database["armory_change"][1] == "dmg": what = "DMG"
+        if database["armory_change"][1] == "atsp": what = "ATSP"
+        if database["armory_change"][1] == "range": what = "Range"
+        text_change_name = "ArmoryMenu/grid" + str(database["armory_change"][0]) + "/Text" + what + "_change"
+
+        menu[text_change_name].update(txt=str(database["armory_change"][2]))
+    else:
+        for index_1 in range(len(database["available_turrets"])):
+            for what in ["DMG","ATSP","Range"]:
+                menu["ArmoryMenu/grid" + str(index_1) + "/Text" + what + "_change"].update(txt="")
 
     if -database["gems_change"] >database["gems"] :
         for index in range(len(database["available_turrets"])):

@@ -61,6 +61,7 @@ database = {
     "food_change":0,
     "gems_change":0,
     "gems": init_gems,
+    "armory_change":(),
     "wave_shop_items":[],
     #"available_turrets":["archer"],
     "available_turrets":["archer","cyclop","catapult"],
@@ -210,6 +211,8 @@ while True:
                 update_armory_mm_details(menu=group[1],database=database)
                 database["food_change"] = 0
                 database["gems_change"] = 0
+
+                database["armory_change"]=()
 
 
 
@@ -404,6 +407,25 @@ while True:
             if events.dict["action"]=="set_gems_change":
                 database["gems_change"]=events.dict["gems_change"]
 
+            if events.dict["action"]=="set_armory_change":
+                but_name=events.dict["name"]
+                turret_index = int(but_name[15:16])
+                if but_name[-3:]=="DMG":
+                    upgrade_what="dmg"
+                    upgrade_value="dmg_upgrade"
+
+                if but_name[-3:]=="TSP":
+                    upgrade_what="atsp"
+                    upgrade_value="atsp_upgrade"
+                if but_name[-3:]=="nge":
+                    upgrade_what="range"
+                    upgrade_value="range_upgrade"
+                tmp=turret_init_database[database["available_turrets"][turret_index]][upgrade_value]
+
+                database["armory_change"]=(turret_index,upgrade_what,turret_init_database[database["available_turrets"][turret_index]][upgrade_value])
+
+
+
             if events.dict["action"] == "upgrade_lives":
                 database["init_lives"]+=2
                 database["gems"]-=1
@@ -428,9 +450,6 @@ while True:
 
                 turret_init_database[database["available_turrets"][turret_index]][upgrade_what]+=tmp
                 database["gems"]-=1
-
-
-
 
 
 
