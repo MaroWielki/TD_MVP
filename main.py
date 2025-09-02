@@ -40,7 +40,8 @@ for p in range(150):
                                          floor(resolution_in_tiles[1] * p / 100))
 init_gold=200
 init_food=2
-init_gems=3
+
+init_gems=0
 init_lives=5
 database = {
     "fps": 60,
@@ -63,8 +64,8 @@ database = {
     "gems": init_gems,
     "armory_change":(),
     "wave_shop_items":[],
-    #"available_turrets":["archer"],
-    "available_turrets":["archer","cyclop","catapult"],
+    "available_turrets":["archer"],
+    #"available_turrets":["archer","cyclop","catapult"],
     "gold_change":"",
     "wave_number": 0,
 
@@ -141,6 +142,7 @@ while True:
             All_menus_groups_ordered.append(create_defeat_menu(database))
             projectiles = pygame.sprite.Group()
             mobs = pygame.sprite.Group()
+            selected_turret=None
 
         ### VICTORY
         #if True:
@@ -155,6 +157,7 @@ while True:
             projectiles=pygame.sprite.Group()
             mobs = pygame.sprite.Group()
             grand_prices(database,database["world_prices_and_enemies"]["prices"][database["current_level"]-1])
+            selected_turret = None
 
         ### TURRETS
     if turret_group!=[]:
