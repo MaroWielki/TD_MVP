@@ -39,6 +39,9 @@ for p in range(150):
     resolution_in_tiles_percent_xy[p] = (floor(resolution_in_tiles[0] * p / 100),
                                          floor(resolution_in_tiles[1] * p / 100))
 init_gold=200
+init_food=2
+init_gems=3
+init_lives=5
 database = {
     "fps": 60,
     "resolution_xy": resolution_xy,
@@ -50,12 +53,14 @@ database = {
     #"resolution_in_tiles": (floor(resolution_xy[0] / tile_size_xy[0]), floor(resolution_xy[1] / tile_size_xy[1])),
     "resolution_in_tiles":resolution_in_tiles,
     "resolution_in_tiles_percent_xy":resolution_in_tiles_percent_xy,
-    "lives": 10,
+    "lives": init_lives,
+    "init_lives": init_lives,
     "gold": init_gold,
-    "food": 2,
+    "init_gold": init_gold,
+    "food": init_food,
     "food_change":0,
     "gems_change":0,
-    "gems": 1,
+    "gems": init_gems,
     "wave_shop_items":[],
     "available_turrets":["archer"],
     "gold_change":"",
@@ -176,7 +181,7 @@ while True:
             database['lives']-=1
         if mob.hp<=0:
             mobs.remove(mob)
-            database['gold']+=10
+            database['gold']+=mob_database[mob.data.name]["award"]
 
     ### PROJECTILES
     for projectile in projectiles.sprites():
@@ -196,6 +201,14 @@ while True:
             group[0].update(allowed_map=database["building_allowed_map"],database=database)
             if "LevelMenu/Title0/Title2/TextFood" in group[1].keys():
                 update_shop_details(menu=group[1],database=database)
+            if "ShopMenu/Title1/TextGems" in group[1].keys():
+                update_shop_mm_details(menu=group[1],database=database)
+                database["food_change"] = 0
+                database["gems_change"] = 0
+            if "ArmoryMenu/Title1/TextGems" in group[1].keys():
+                update_armory_mm_details(menu=group[1],database=database)
+                database["food_change"] = 0
+                database["gems_change"] = 0
 
 
 
@@ -290,10 +303,23 @@ while True:
             if events.dict["action"]=="mainmenu":
                 All_menus_groups_ordered = []
                 All_menus_groups_ordered.append(create_main_menu(database))
+                database["food"] = init_food
+                database["gems"] = init_gems
+
+
+            if events.dict["action"]=="open_shop":
+                All_menus_groups_ordered = []
+                All_menus_groups_ordered.append(create_shop_menu(database))
+
+            if events.dict["action"]=="open_armory":
+                All_menus_groups_ordered = []
+                All_menus_groups_ordered.append(create_armory_menu(database))
 
             if events.dict["action"]=="start_battle":
                 database["wave_shop_items"]=[]
-                database["gold"]=init_gold
+                database["gold"]=database["init_gold"]
+                database["lives"] = database["init_lives"]
+
                 subtract_costs(database,All_menus_groups_ordered[0][1]['LevelMenu/Title0/Title0/gridActive'])
 
                 for item in All_menus_groups_ordered[0][1]['LevelMenu/Title0/Title0/gridActive'].members_group.sprites():
@@ -374,6 +400,17 @@ while True:
 
             if events.dict["action"]=="set_gold_change":
                 database["gold_change"]=events.dict["gold_change"]
+            if events.dict["action"]=="set_gems_change":
+                database["gems_change"]=events.dict["gems_change"]
+
+            if events.dict["action"] == "upgrade_lives":
+                database["init_lives"]+=2
+                database["gems"]-=1
+            if events.dict["action"] == "upgrade_gold":
+                database["init_gold"]+=50
+                database["gems"]-=1
+
+
 
 
             if events.dict["action"] == "create_explosion":

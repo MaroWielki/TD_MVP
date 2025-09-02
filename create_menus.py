@@ -421,3 +421,90 @@ def create_game_victory_menu(database):
                    text="OK", color=3, action="mainmenu"))
 
     return defeat_menu, LM
+
+def create_shop_menu(database):
+    LM = {}
+    shop_menu = pygame.sprite.Group()
+    shop_menu.add(MenuTitle(get_xy((0, 0), database["tile_size_xy"], 0, 0), database,
+                             (database["resolution_in_tiles_percent_xy"][7][0],
+                              database["resolution_in_tiles_percent_xy"][10][1]),
+                             (database["resolution_in_tiles_percent_xy"][11][0],
+                              database["resolution_in_tiles_percent_xy"][10][1]), "ShopMenu", "Upgrade",
+                             tile_size_xy=database["quadrupal_tile_size_xy"], draggable=False))
+    LM['ShopMenu'] = get_member_by_name(shop_menu.sprites(), "ShopMenu")
+
+    LM['ShopMenu/Title1']=LM['ShopMenu'].add(MenuTitle(get_xy((0, 0), database["tile_size_xy"], 0, 0), database,
+                             (database["resolution_in_tiles_percent_xy"][25][0],
+                              database["resolution_in_tiles_percent_xy"][5][1]),
+                             (database["resolution_in_tiles_percent_xy"][7][0],
+                              database["resolution_in_tiles_percent_xy"][7][1]), "ShopMenu/Title1", "Gems",
+                             tile_size_xy=database["double_tile_size_xy"], draggable=False))
+
+    LM['ShopMenu/Title1/TextGems'] = LM['ShopMenu/Title1'].add(
+        MenuText(LM['ShopMenu'].px_start_xy, database, (2, 2), "ShopMenu/Title1/TextGems",
+                 "a"))
+
+    LM['ShopMenu/Title1/TextGems_change']=LM['ShopMenu/Title1'].add(MenuText(LM['ShopMenu'].px_start_xy, database, (4, 2), "ShopMenu/Title1/TextGems_change",
+                 "a",variable_name="gems_change"))
+
+
+    LM['ShopMenu/Text0'] = LM['ShopMenu'].add(
+        MenuText(LM['ShopMenu'].px_start_xy, database, (2, 5), "ShopMenu/Text0",
+                 "What would you like to buy?"))
+
+    LM['ShopMenu/button1'] = LM['ShopMenu'].add(
+        MenuButton(LM['ShopMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][5][0], database["resolution_in_tiles_percent_xy"][15][1]),
+                   (database["resolution_in_tiles_percent_xy"][16][0] * 4, 16), "ShopMenu/button1",
+                   text="Starting gold + 50", color=3, action="upgrade_gold"))
+    LM['ShopMenu/button2'] = LM['ShopMenu'].add(
+        MenuButton(LM['ShopMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][24][0], database["resolution_in_tiles_percent_xy"][15][1]),
+                   (database["resolution_in_tiles_percent_xy"][16][0] * 4, 16), "ShopMenu/button2",
+                   text="Lives + 2", color=3, action="upgrade_lives"))
+
+    LM['ShopMenu/button0'] = LM['ShopMenu'].add(
+        MenuButton(LM['ShopMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], database["resolution_in_tiles_percent_xy"][25][1]),
+                   (database["resolution_in_tiles_percent_xy"][16][0] * 4, 16), "ShopMenu/button0",
+                   text="OK", color=3, action="start_new_game"))
+
+    return shop_menu, LM
+
+
+def create_armory_menu(database):
+    LM = {}
+    armory_menu = pygame.sprite.Group()
+    armory_menu.add(MenuTitle(get_xy((0, 0), database["tile_size_xy"], 0, 0), database,
+                             (database["resolution_in_tiles_percent_xy"][7][0],
+                              database["resolution_in_tiles_percent_xy"][10][1]),
+                             (database["resolution_in_tiles_percent_xy"][11][0],
+                              database["resolution_in_tiles_percent_xy"][10][1]), "ArmoryMenu", "Armory",
+                             tile_size_xy=database["quadrupal_tile_size_xy"], draggable=False))
+    LM['ArmoryMenu'] = get_member_by_name(armory_menu.sprites(), "ArmoryMenu")
+
+    LM['ArmoryMenu/Title1'] = LM['ArmoryMenu'].add(MenuTitle(get_xy((0, 0), database["tile_size_xy"], 0, 0), database,
+                                                         (database["resolution_in_tiles_percent_xy"][25][0],
+                                                          database["resolution_in_tiles_percent_xy"][5][1]),
+                                                         (database["resolution_in_tiles_percent_xy"][7][0],
+                                                          database["resolution_in_tiles_percent_xy"][7][1]),
+                                                         "ArmoryMenu/Title1", "Gems",
+                                                         tile_size_xy=database["double_tile_size_xy"], draggable=False))
+
+    LM['ArmoryMenu/Title1/TextGems'] = LM['ArmoryMenu/Title1'].add(
+        MenuText(LM['ArmoryMenu'].px_start_xy, database, (2, 2), "ArmoryMenu/Title1/TextGems",
+                 "a"))
+
+    LM['ArmoryMenu/Title1/TextGems_change'] = LM['ArmoryMenu/Title1'].add(
+        MenuText(LM['ArmoryMenu'].px_start_xy, database, (4, 2), "ArmoryMenu/Title1/TextGems_change",
+                 "a", variable_name="gems_change"))
+
+
+    LM['ArmoryMenu/Text0'] = LM['ArmoryMenu'].add(
+        MenuText(LM['ArmoryMenu'].px_start_xy, database, (2, 5), "ArmoryMenu/Text0",
+                 "What would you like to upgrade?"))
+
+
+    LM['ArmoryMenu/button0'] = LM['ArmoryMenu'].add(
+        MenuButton(LM['ArmoryMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], database["resolution_in_tiles_percent_xy"][25][1]),
+                   (database["resolution_in_tiles_percent_xy"][16][0] * 4, 16), "ArmoryMenu/button0",
+                   text="OK", color=3, action="start_new_game"))
+
+    return armory_menu, LM

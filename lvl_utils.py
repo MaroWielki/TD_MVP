@@ -693,6 +693,56 @@ def update_shop_details(menu,database):
         for index in range(1, 7):
             menu['LevelMenu/Title' + str(index) + '/buttonStartLvl' + str(index)].is_active = True
 
+def update_shop_mm_details(menu,database):
+
+    #menu["LevelMenu/Title0/Title2/TextFood"].update(txt="Food: " + str(database["food"]))
+    menu["ShopMenu/Title1/TextGems"].update(txt=str(database["gems"]))
+
+
+    if database["gems_change"] !=0:
+        menu["ShopMenu/Title1/TextGems_change"].update(txt=str(database["gems_change"]))
+    else:
+        menu["ShopMenu/Title1/TextGems_change"].update(txt="")
+
+    if -database["gems_change"] >database["gems"] :
+        for index in range(1,3):
+            menu['ShopMenu/button'+str(index)].is_active=False
+    else:
+        for index in range(1, 3):
+            menu['ShopMenu/button'+str(index)].is_active=True
+
+    # if -database["gems_change"] >database["gems"] or -database["food_change"] >database["food"]:
+    #     for index in range(1,7):
+    #         menu['LevelMenu/Title'+str(index)+'/buttonStartLvl'+str(index)].is_active=False
+    # else:
+    #     for index in range(1, 7):
+    #         menu['LevelMenu/Title' + str(index) + '/buttonStartLvl' + str(index)].is_active = True
+
+def update_armory_mm_details(menu,database):
+
+    #menu["LevelMenu/Title0/Title2/TextFood"].update(txt="Food: " + str(database["food"]))
+    menu["ArmoryMenu/Title1/TextGems"].update(txt=str(database["gems"]))
+
+
+    if database["gems_change"] !=0:
+        menu["ArmoryMenu/Title1/TextGems_change"].update(txt=str(database["gems_change"]))
+    else:
+        menu["ArmoryMenu/Title1/TextGems_change"].update(txt="")
+
+    # if -database["gems_change"] >database["gems"] :
+    #     for index in range(1,3):
+    #         menu['ArmoryMenu/button'+str(index)].is_active=False
+    # else:
+    #     for index in range(1, 3):
+    #         menu['ArmoryMenu/button'+str(index)].is_active=True
+
+    # if -database["gems_change"] >database["gems"] or -database["food_change"] >database["food"]:
+    #     for index in range(1,7):
+    #         menu['LevelMenu/Title'+str(index)+'/buttonStartLvl'+str(index)].is_active=False
+    # else:
+    #     for index in range(1, 7):
+    #         menu['LevelMenu/Title' + str(index) + '/buttonStartLvl' + str(index)].is_active = True
+
 def grand_prices(database,prices):
     for price in prices:
         if price=="chicken":
