@@ -141,7 +141,10 @@ while True:
             is_game_on=False
             All_menus_groups_ordered = []
             turret_group=pygame.sprite.Group()
-            All_menus_groups_ordered.append(create_victory_menu(database))
+            if "victory" not in database["world_prices_and_enemies"]["prices"][database["current_level"]-1]:
+                All_menus_groups_ordered.append(create_victory_menu(database))
+            else:
+                All_menus_groups_ordered.append(create_game_victory_menu(database))
             projectiles=pygame.sprite.Group()
             mobs = pygame.sprite.Group()
             grand_prices(database,database["world_prices_and_enemies"]["prices"][database["current_level"]-1])

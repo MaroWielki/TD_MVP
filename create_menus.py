@@ -374,6 +374,7 @@ def create_victory_menu(database):
     return victory_menu, LM
 
 
+
 def create_defeat_menu(database):
     LM = {}
     defeat_menu = pygame.sprite.Group()
@@ -393,6 +394,30 @@ def create_defeat_menu(database):
     LM['DefeatMenu/button0'] = LM['DefeatMenu'].add(
         MenuButton(LM['DefeatMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], database["resolution_in_tiles_percent_xy"][25][1]),
                    (database["resolution_in_tiles_percent_xy"][16][0] * 4, 16), "DefeatMenu/button0",
+                   text="OK", color=3, action="mainmenu"))
+
+    return defeat_menu, LM
+
+
+def create_game_victory_menu(database):
+    LM = {}
+    defeat_menu = pygame.sprite.Group()
+    defeat_menu.add(MenuTitle(get_xy((0, 0), database["tile_size_xy"], 0, 0), database,
+                             (database["resolution_in_tiles_percent_xy"][7][0],
+                              database["resolution_in_tiles_percent_xy"][10][1]),
+                             (database["resolution_in_tiles_percent_xy"][11][0],
+                              database["resolution_in_tiles_percent_xy"][10][1]), "GameVictoryMenu", "Victory",
+                             tile_size_xy=database["quadrupal_tile_size_xy"], draggable=False))
+    LM['GameVictoryMenu'] = get_member_by_name(defeat_menu.sprites(), "GameVictoryMenu")
+
+    LM['GameVictoryMenu/Text0'] = LM['GameVictoryMenu'].add(
+        MenuText(LM['GameVictoryMenu'].px_start_xy, database, (2, 5), "GameVictoryMenu/Text0",
+                 "Congratulations! You have won the game"))
+
+
+    LM['GameVictoryMenu/button0'] = LM['GameVictoryMenu'].add(
+        MenuButton(LM['GameVictoryMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], database["resolution_in_tiles_percent_xy"][25][1]),
+                   (database["resolution_in_tiles_percent_xy"][16][0] * 4, 16), "GameVictoryMenu/button0",
                    text="OK", color=3, action="mainmenu"))
 
     return defeat_menu, LM
