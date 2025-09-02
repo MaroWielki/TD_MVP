@@ -38,7 +38,7 @@ resolution_in_tiles_percent_xy = {}
 for p in range(150):
     resolution_in_tiles_percent_xy[p] = (floor(resolution_in_tiles[0] * p / 100),
                                          floor(resolution_in_tiles[1] * p / 100))
-
+init_gold=200
 database = {
     "fps": 60,
     "resolution_xy": resolution_xy,
@@ -51,7 +51,7 @@ database = {
     "resolution_in_tiles":resolution_in_tiles,
     "resolution_in_tiles_percent_xy":resolution_in_tiles_percent_xy,
     "lives": 10,
-    "gold": 300,
+    "gold": init_gold,
     "food": 2,
     "food_change":0,
     "gems_change":0,
@@ -290,6 +290,7 @@ while True:
 
             if events.dict["action"]=="start_battle":
                 database["wave_shop_items"]=[]
+                database["gold"]=init_gold
                 subtract_costs(database,All_menus_groups_ordered[0][1]['LevelMenu/Title0/Title0/gridActive'])
 
                 for item in All_menus_groups_ordered[0][1]['LevelMenu/Title0/Title0/gridActive'].members_group.sprites():
