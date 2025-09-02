@@ -62,7 +62,8 @@ database = {
     "gems_change":0,
     "gems": init_gems,
     "wave_shop_items":[],
-    "available_turrets":["archer"],
+    #"available_turrets":["archer"],
+    "available_turrets":["archer","cyclop","catapult"],
     "gold_change":"",
     "wave_number": 0,
 
@@ -409,6 +410,26 @@ while True:
             if events.dict["action"] == "upgrade_gold":
                 database["init_gold"]+=50
                 database["gems"]-=1
+
+            #   TO TRZEBABY PRZENIESC DO FUNKCJI
+            if events.dict["action"] == "armory_upgrade_turret":
+                turret_index=int(events.dict["button_name"][15:16])
+                if events.dict["button_name"][-3:]=="DMG":
+                    upgrade_what="dmg"
+                    upgrade_value="dmg_upgrade"
+
+                if events.dict["button_name"][-3:]=="TSP":
+                    upgrade_what="atsp"
+                    upgrade_value="atsp_upgrade"
+                if events.dict["button_name"][-3:]=="nge":
+                    upgrade_what="range"
+                    upgrade_value="range_upgrade"
+                tmp=turret_init_database[database["available_turrets"][turret_index]][upgrade_value]
+
+                turret_init_database[database["available_turrets"][turret_index]][upgrade_what]+=tmp
+                database["gems"]-=1
+
+
 
 
 

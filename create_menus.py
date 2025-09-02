@@ -476,7 +476,7 @@ def create_armory_menu(database):
                              (database["resolution_in_tiles_percent_xy"][7][0],
                               database["resolution_in_tiles_percent_xy"][10][1]),
                              (database["resolution_in_tiles_percent_xy"][11][0],
-                              database["resolution_in_tiles_percent_xy"][10][1]), "ArmoryMenu", "Armory",
+                              database["resolution_in_tiles_percent_xy"][15][1]), "ArmoryMenu", "Armory",
                              tile_size_xy=database["quadrupal_tile_size_xy"], draggable=False))
     LM['ArmoryMenu'] = get_member_by_name(armory_menu.sprites(), "ArmoryMenu")
 
@@ -501,9 +501,45 @@ def create_armory_menu(database):
         MenuText(LM['ArmoryMenu'].px_start_xy, database, (2, 5), "ArmoryMenu/Text0",
                  "What would you like to upgrade?"))
 
+    for index in range(len(database["available_turrets"])):
+        LM['ArmoryMenu/grid'+str(index)] =LM['ArmoryMenu'].add(GuiGrid(LM['ArmoryMenu'].px_start_xy, database, (0.5+(index*2.75), 2),(1,1), "ArmoryMenu/grid"+str(index),tile_size_xy=database["quadrupal_tile_size_xy"]))
+
+        LM['ArmoryMenu/grid' + str(index)+"/Item"] = LM['ArmoryMenu/grid' + str(index)].add(ItemMenu(LM['ArmoryMenu/grid' + str(index)].px_start_xy, database, (0, 0),  'ArmoryMenu/grid' + str(index)+"/Item",tile_size_xy=database["quadrupal_tile_size_xy"],item_name=database["available_turrets"][index],parent_grid=LM['ArmoryMenu/grid' + str(index)]))
+
+        LM['ArmoryMenu/grid' + str(index) +"ButtonDMG"]=LM['ArmoryMenu/grid'+str(index)].add(MenuButton(LM['ArmoryMenu/grid'+str(index)].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][4][0], database["resolution_in_tiles_percent_xy"][0][1]),
+                   (database["resolution_in_tiles_percent_xy"][5][0] * 4, 7), 'ArmoryMenu/grid' + str(index) +"ButtonDMG",
+                   text="DMG", color=3, action="armory_upgrade_turret"))
+        LM['ArmoryMenu/grid' + str(index) +"ButtonRange"]=LM['ArmoryMenu/grid'+str(index)].add(MenuButton(LM['ArmoryMenu/grid'+str(index)].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][4][0], database["resolution_in_tiles_percent_xy"][4][1]),
+                   (database["resolution_in_tiles_percent_xy"][5][0] * 4, 7), 'ArmoryMenu/grid' + str(index) +"ButtonRange",
+                   text="Range", color=3, action="armory_upgrade_turret"))
+        LM['ArmoryMenu/grid' + str(index) +"ButtonATSP"]=LM['ArmoryMenu/grid'+str(index)].add(MenuButton(LM['ArmoryMenu/grid'+str(index)].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][4][0], database["resolution_in_tiles_percent_xy"][8][1]),
+                   (database["resolution_in_tiles_percent_xy"][5][0] * 4, 7), 'ArmoryMenu/grid' + str(index) +"ButtonATSP",
+                   text="ATSP", color=3, action="armory_upgrade_turret"))
+
+        LM['ArmoryMenu/grid' + str(index) +"/TextDMG"] = LM['ArmoryMenu/grid' + str(index)].add(
+            MenuText(LM['ArmoryMenu/grid' + str(index)].px_start_xy, database, (0, 6), 'ArmoryMenu/grid' + str(index) +"/TextDMG",
+                     "DMG: 1000"))
+        LM['ArmoryMenu/grid' + str(index) +"/TextDMG_change"] = LM['ArmoryMenu/grid' + str(index)].add(
+            MenuText(LM['ArmoryMenu/grid' + str(index)].px_start_xy, database, (7, 6), 'ArmoryMenu/grid' + str(index) +"/TextDMG_change",
+                     "+100"))
+
+        LM['ArmoryMenu/grid' + str(index) +"/TextRange"] = LM['ArmoryMenu/grid' + str(index)].add(
+            MenuText(LM['ArmoryMenu/grid' + str(index)].px_start_xy, database, (0, 8), 'ArmoryMenu/grid' + str(index) +"/TextRange",
+                     "Range: 1000"))
+        LM['ArmoryMenu/grid' + str(index) +"/TextRange_change"] = LM['ArmoryMenu/grid' + str(index)].add(
+            MenuText(LM['ArmoryMenu/grid' + str(index)].px_start_xy, database, (7, 8), 'ArmoryMenu/grid' + str(index) +"/TextRange_change",
+                     "+100"))
+
+        LM['ArmoryMenu/grid' + str(index) +"/TextATSP"] = LM['ArmoryMenu/grid' + str(index)].add(
+            MenuText(LM['ArmoryMenu/grid' + str(index)].px_start_xy, database, (0, 10), 'ArmoryMenu/grid' + str(index) +"/TextATSP",
+                     "ATSP: 1000"))
+        LM['ArmoryMenu/grid' + str(index) +"/TextATSP_change"] = LM['ArmoryMenu/grid' + str(index)].add(
+            MenuText(LM['ArmoryMenu/grid' + str(index)].px_start_xy, database, (7, 10), 'ArmoryMenu/grid' + str(index) +"/TextATSP_change",
+                     "+ 100"))
+
 
     LM['ArmoryMenu/button0'] = LM['ArmoryMenu'].add(
-        MenuButton(LM['ArmoryMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], database["resolution_in_tiles_percent_xy"][25][1]),
+        MenuButton(LM['ArmoryMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], database["resolution_in_tiles_percent_xy"][45][1]),
                    (database["resolution_in_tiles_percent_xy"][16][0] * 4, 16), "ArmoryMenu/button0",
                    text="OK", color=3, action="start_new_game"))
 

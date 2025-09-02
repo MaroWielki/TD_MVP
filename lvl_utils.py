@@ -729,12 +729,16 @@ def update_armory_mm_details(menu,database):
     else:
         menu["ArmoryMenu/Title1/TextGems_change"].update(txt="")
 
-    # if -database["gems_change"] >database["gems"] :
-    #     for index in range(1,3):
-    #         menu['ArmoryMenu/button'+str(index)].is_active=False
-    # else:
-    #     for index in range(1, 3):
-    #         menu['ArmoryMenu/button'+str(index)].is_active=True
+    if -database["gems_change"] >database["gems"] :
+        for index in range(len(database["available_turrets"])):
+            menu['ArmoryMenu/grid' + str(index) +"ButtonATSP"].is_active=False
+            menu['ArmoryMenu/grid' + str(index) + "ButtonDMG"].is_active = False
+            menu['ArmoryMenu/grid' + str(index) + "ButtonRange"].is_active = False
+    else:
+        for index in range(len(database["available_turrets"])):
+            menu['ArmoryMenu/grid' + str(index) + "ButtonATSP"].is_active = True
+            menu['ArmoryMenu/grid' + str(index) + "ButtonDMG"].is_active = True
+            menu['ArmoryMenu/grid' + str(index) + "ButtonRange"].is_active = True
 
     # if -database["gems_change"] >database["gems"] or -database["food_change"] >database["food"]:
     #     for index in range(1,7):

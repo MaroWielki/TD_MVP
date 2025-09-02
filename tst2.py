@@ -1,4 +1,2 @@
-from random import randint
-
-for i in range(10):
-    print(randint(0,3))
+a="ArmoryMenu/grid2ButtonDMG"
+print(a[-3:])
