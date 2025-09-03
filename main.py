@@ -175,8 +175,7 @@ class GuiCheckBoxTile:
 import pygame
 from math import floor,sin, cos, atan2, radians, degrees
 from random import uniform, randint
-from data import turret_init_database, animation_sprites
-from gui_tiles import *
+
 
 class Level:
     def __init__(self,road_map):
@@ -965,8 +964,6 @@ def subtract_costs(database,costs):
     #     database["food_change"] -= active.data["food_cost"]
     #     database["gems_change"] -= active.data["gems_cost"]
 
-from gui_tiles import item_data
-from lvl_utils import *
 
 # levels_list={}
 #
