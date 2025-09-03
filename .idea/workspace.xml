@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="WORKING WEB VERSION">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/pygbag.yml" afterDir="false" />
-    </list>
+    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="sync" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -434,7 +432,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756897219546</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="sync">
+      <option name="closed" value="true" />
+      <created>1756897644399</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1756897644399</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -483,13 +489,13 @@
     <MESSAGE value="subtract cost after lvl start" />
     <MESSAGE value="JOY PROBLEMS?" />
     <MESSAGE value="Random Turret price" />
-    <MESSAGE value="sync" />
     <MESSAGE value="game victory menu" />
     <MESSAGE value="add shop menu" />
     <MESSAGE value="add armory menu" />
     <MESSAGE value="working armory" />
     <MESSAGE value="WORKING WEB VERSION" />
-    <option name="LAST_COMMIT_MESSAGE" value="WORKING WEB VERSION" />
+    <MESSAGE value="sync" />
+    <option name="LAST_COMMIT_MESSAGE" value="sync" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TD_MVP$tst.coverage" NAME="tst Coverage Results" MODIFIED="1755719961203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
