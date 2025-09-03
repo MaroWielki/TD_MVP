@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="WORKING WEB VERSION" />
+    <list default="true" id="5cdc6555-626a-42d9-8978-25a821d02b58" name="Changes" comment="WORKING WEB VERSION">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/pygbag.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
