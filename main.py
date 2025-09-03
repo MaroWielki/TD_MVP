@@ -136,7 +136,6 @@ class Item:
         self.image=pygame.transform.scale(pygame.image.load("img/items/"+name+".png"),(tile_size_xy[0]*self.data["scale"],tile_size_xy[1]*self.data["scale"]))
 
 
-
 class GuiTiles1:
     def __init__(self,tile_size):
         folder="img/GUI/1 Interface/"
