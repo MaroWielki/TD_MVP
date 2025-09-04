@@ -5,8 +5,8 @@ from sys import exit
 
 import pygame.sprite
 from pygame import K_ESCAPE
-from  menus_utils import *
-#from menus_utils import *
+#import menus_utils
+from menus_utils import *
 from create_menus import *
 
 
