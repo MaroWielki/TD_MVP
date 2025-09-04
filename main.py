@@ -258,7 +258,7 @@ while True:
             colliding_objects=find_colliding_objects(mouse_pos,MMs,turret_group.sprites())
 
 
-            if selected_turret is not None and (colliding_objects == [] or menus_utils.MenuTitle not in [type(a) for a in colliding_objects]):
+            if selected_turret is not None and (colliding_objects == [] or MenuTitle not in [type(a) for a in colliding_objects]):
 
                 selected_turret.bordered=False
                 create_wave_turret_details(wave_menu,selected_turret,database,destroy=True)
