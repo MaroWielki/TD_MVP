@@ -349,9 +349,6 @@ class ItemMenu(pygame.sprite.Sprite):
             self.image = self.img_gray
 
 
-
-
-
         self.new_px_parent_xy=None
 
 
@@ -360,7 +357,7 @@ class ItemMenu(pygame.sprite.Sprite):
         surface.blit(self.image,self.rect)
 
     def hoover(self, **kwargs):
-        pass
+        sent_action_event("item_menu_hoovered",name=self.name)
 
     def LMB_down(self):
         ## Put item
@@ -904,7 +901,11 @@ def sent_action_event(action:str,**kwargs):
             "action": "armory_upgrade_turret",
             "button_name": kwargs.get("button_name", None)
         }
-
+    if action=="item_menu_hoovered":
+        ev_dic = {
+            "action": "item_menu_hoovered",
+            "name": kwargs.get("name", None)
+        }
 
     if action == "create_test_menu":
         ev_dic = {

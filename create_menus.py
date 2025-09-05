@@ -116,6 +116,19 @@ def create_world_menu(database):
                   (9, 6), "LevelMenu/Title0/Title3", "Details",
                   tile_size_xy=database["double_tile_size_xy"], draggable=False))
 
+    LM['LevelMenu/Title0/Title3/TextLine0'] = LM['LevelMenu/Title0/Title3'].add(
+        MenuText(LM['LevelMenu/Title0/Title3'].px_start_xy, database, (1, 2), "LevelMenu/Title0/Title2/TextLine0", "Choose turrets"))
+    LM['LevelMenu/Title0/Title3/TextLine1'] = LM['LevelMenu/Title0/Title3'].add(
+        MenuText(LM['LevelMenu/Title0/Title3'].px_start_xy, database, (1, 4), "LevelMenu/Title0/Title2/TextLine1",
+                 "Line 1"))
+    LM['LevelMenu/Title0/Title3/TextLine2'] = LM['LevelMenu/Title0/Title3'].add(
+        MenuText(LM['LevelMenu/Title0/Title3'].px_start_xy, database, (1, 6), "LevelMenu/Title0/Title2/TextLine2",
+                 "Line 3"))
+    LM['LevelMenu/Title0/Title3/TextLine3'] = LM['LevelMenu/Title0/Title3'].add(
+        MenuText(LM['LevelMenu/Title0/Title3'].px_start_xy, database, (1, 8), "LevelMenu/Title0/Title2/TextLine3",
+                 "Line 4"))
+
+
     ### WORLDS
     #lvl_menu_grid=([10,40,70],[10,75])
     lvl_menu_grid=([5,20,35],[5,37])  # Halved becouse double sized

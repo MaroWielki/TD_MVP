@@ -686,7 +686,7 @@ def update_shop_details(menu,database):
     else:
         menu["LevelMenu/Title0/Title2/TextGems_change"].update(txt="")
 
-    if -database["gems_change"] >database["gems"] or -database["food_change"] >database["food"]:
+    if -database["gems_change"] >database["gems"] or -database["food_change"] >database["food"] or len(menu["LevelMenu/Title0/Title0/gridActive"].members_group)<1:
         for index in range(1,7):
             menu['LevelMenu/Title'+str(index)+'/buttonStartLvl'+str(index)].is_active=False
     else:

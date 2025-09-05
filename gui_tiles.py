@@ -35,22 +35,38 @@ item_data={
     "random_turret":{
         "size":(1,1),
         "scale": 1,
-        "sprite": "random_turret_sprite"
+        "sprite": "random_turret_sprite",
+    "description":"random turret",
+        "description1": "",
+"description2": "",
+"description3": ""
     },
     "victory": {
         "size": (1, 1),
         "scale": 1,
-        "sprite": "victory_sprite"
+        "sprite": "victory_sprite",
+        "description":"game victory",
+        "description1": "",
+"description2": "",
+"description3": ""
     },
     "random_item": {
         "size": (1, 1),
         "scale": 1,
-        "sprite": "random_item_sprite"
+        "sprite": "random_item_sprite",
+        "description":" random item",
+        "description1": "",
+"description2": "",
+"description3": ""
     },
     "eye": {
         "size": (1, 1),
         "scale": 1,
-        "sprite": "eye_sprite"
+        "sprite": "eye_sprite",
+        "description":"Eye of despair",
+        "description1": "",
+"description2": "",
+"description3": ""
     },
     "shirt":{
         "size":(2,2),
@@ -59,32 +75,57 @@ item_data={
     "gem":{
         "size":(1,1),
         "scale": 1,
-        "sprite": "gem_sprite"
+        "sprite": "gem_sprite",
+        "description":"+ 1 gem",
+        "description1": "",
+"description2": "",
+"description3": ""
     },
     "chicken": {
         "size": (1, 1),
         "scale": 1,
-        "sprite": "chicken_sprite"
+        "sprite": "chicken_sprite",
+        "description":"+1 food",
+        "description1": "",
+"description2": "",
+"description3": ""
     },
     "steak": {
         "size": (1, 1),
         "scale": 1,
-        "sprite": "steak_sprite"
+        "sprite": "steak_sprite",
+        "description":"+3 food",
+        "description1": "",
+"description2": "",
+"description3": ""
     },
     "goblin": {
         "size": (1, 1),
         "scale": 1,
-        "sprite": "goblin_sprite"
+        "sprite": "goblin_sprite",
+        "description":"fearsome goblin",
+        "description1": "",
+"description2": "",
+"description3": ""
     },
     "spider": {
         "size": (1, 1),
         "scale": 1,
-        "sprite": "spider_sprite"
+        "sprite": "spider_sprite",
+        "description":"spider sprinter",
+        "description1": "",
+"description2": "",
+"description3": ""
     },
     "skeleton": {
         "size": (1, 1),
         "scale": 1,
         "sprite": "skeleton_sprite"
+,
+        "description":"good old skeleton",
+        "description1": "",
+"description2": "",
+"description3": ""
     },
 
 
@@ -95,7 +136,11 @@ item_data={
         "cost": 100,
         "food_cost":3,
 "gems_cost":0,
-        "name":"catapult"
+        "name":"catapult",
+        "description":"catapult",
+        "description1":"cost: 3 food",
+"description2": "",
+"description3": ""
     },
     "archer": {
         "size": (1, 1),
@@ -104,7 +149,11 @@ item_data={
         "cost": 50,
 "food_cost":2,
 "gems_cost":0,
-        "name":"archer"
+        "name":"archer",
+        "description": "archer",
+        "description1": "cost: 2 food",
+"description2": "",
+"description3": ""
     },
     "cyclop": {
         "size": (1, 1),
@@ -113,7 +162,11 @@ item_data={
         "cost": 100,
 "food_cost":2,
         "gems_cost":0,
-        "name": "cyclop"
+        "name": "cyclop",
+        "description": "cyclop",
+        "description1": "cost: 2 food",
+"description2": "",
+"description3": ""
     }
 
 }

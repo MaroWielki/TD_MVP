@@ -202,6 +202,8 @@ while True:
     ### MENUS
     if All_menus_groups_ordered != []:
 
+
+
         for group in All_menus_groups_ordered:
             group[0].update(allowed_map=database["building_allowed_map"],database=database)
             if "LevelMenu/Title0/Title2/TextFood" in group[1].keys():
@@ -233,6 +235,12 @@ while True:
                 if type(mm[mmm])==ItemMenu:
                     mm[mmm].draw(screen)
 
+        ### Another ugly hack to clear the details when not hoovering over anything
+        if 'LevelMenu/Title0/Title3/TextLine0' in MMs[0].keys():
+            MMs[0]['LevelMenu/Title0/Title3/TextLine0'].update(txt="")
+            MMs[0]['LevelMenu/Title0/Title3/TextLine1'].update(txt="")
+            MMs[0]['LevelMenu/Title0/Title3/TextLine2'].update(txt="")
+            MMs[0]['LevelMenu/Title0/Title3/TextLine3'].update(txt="")
 
     ### DEBUG PRINT ALLOWED MAP
     # if database["building_allowed_map"] != {}:
@@ -404,6 +412,17 @@ while True:
                 selected_turret=events.dict["turret"]
                 selected_turret.bordered=True
                 create_wave_turret_details(wave_menu,selected_turret,database)
+
+            if events.dict["action"]=="item_menu_hoovered":
+                print(item_data[MMs[0][events.dict["name"]].item_name])
+                if 'LevelMenu/Title0/Title3/TextLine0' in MMs[0].keys():
+                    MMs[0]['LevelMenu/Title0/Title3/TextLine0'].update(txt=item_data[MMs[0][events.dict["name"]].item_name]["description"])
+                    MMs[0]['LevelMenu/Title0/Title3/TextLine1'].update(
+                        txt=item_data[MMs[0][events.dict["name"]].item_name]["description1"])
+                    MMs[0]['LevelMenu/Title0/Title3/TextLine2'].update(
+                        txt=item_data[MMs[0][events.dict["name"]].item_name]["description2"])
+                    MMs[0]['LevelMenu/Title0/Title3/TextLine3'].update(
+                        txt=item_data[MMs[0][events.dict["name"]].item_name]["description3"])
 
             if events.dict["action"]=="set_gold_change":
                 database["gold_change"]=events.dict["gold_change"]
