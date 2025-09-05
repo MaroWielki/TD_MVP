@@ -38,8 +38,8 @@ resolution_in_tiles_percent_xy = {}
 for p in range(150):
     resolution_in_tiles_percent_xy[p] = (floor(resolution_in_tiles[0] * p / 100),
                                          floor(resolution_in_tiles[1] * p / 100))
-init_gold=250
-init_food=2
+init_gold=300
+init_food=5
 
 init_gems=0
 init_lives=5
@@ -135,7 +135,7 @@ while True:
 
         ### DEFEAT
         #if True:
-        if database['lives']<1:
+        if database['lives']<0:
             is_game_on = False
             All_menus_groups_ordered = []
             turret_group = pygame.sprite.Group()
