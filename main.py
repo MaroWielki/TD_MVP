@@ -38,7 +38,7 @@ resolution_in_tiles_percent_xy = {}
 for p in range(150):
     resolution_in_tiles_percent_xy[p] = (floor(resolution_in_tiles[0] * p / 100),
                                          floor(resolution_in_tiles[1] * p / 100))
-init_gold=200
+init_gold=250
 init_food=2
 
 init_gems=0

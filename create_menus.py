@@ -351,7 +351,7 @@ def create_victory_menu(database):
         if database["world_prices_and_enemies"]["prices"][lvl-1][i] =="random_turret":
 
             tur = None
-            while tur is None and len(database["available_turrets"])<available_turrets:
+            while tur is None and len(database["available_turrets"])<len(available_turrets):
                 tur = available_turrets[randint(0, len(available_turrets)-1)]
                 if tur in database["available_turrets"]:
                     tur=None
