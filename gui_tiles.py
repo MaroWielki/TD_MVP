@@ -7,6 +7,46 @@ available_bosses_price=["victory"]
 available_prices=["chicken","steak","gem","random_turret"]
 #available_prices=["chicken","steak","gem","random_turret","random_item"]
 
+prices_chances={
+1:
+                    {
+                        "chicken":80,
+                        "steak":10,
+                        "gem":5,
+                        "random_turret":5
+                    },
+2:
+                    {
+                        "chicken":70,
+                        "steak":20,
+                        "gem":5,
+                        "random_turret":5
+                    },
+3:
+                    {
+                        "chicken":60,
+                        "steak":30,
+                        "gem":5,
+                        "random_turret":5
+                    },
+4:
+                    {
+                        "chicken":50,
+                        "steak":10,
+                        "gem":10,
+                        "random_turret":10
+                    },
+5:
+                    {
+                        "chicken":10,
+                        "steak":50,
+                        "gem":20,
+                        "random_turret":20
+                    },
+6:
+    {
+                "victory":100, }
+}
 
 mob_database={
     "goblin_sprite":{
@@ -168,7 +208,6 @@ item_data={
 "description2": "",
 "description3": ""
     }
-
 }
 
 

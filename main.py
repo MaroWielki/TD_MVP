@@ -414,7 +414,6 @@ while True:
                 create_wave_turret_details(wave_menu,selected_turret,database)
 
             if events.dict["action"]=="item_menu_hoovered":
-                print(item_data[MMs[0][events.dict["name"]].item_name])
                 if 'LevelMenu/Title0/Title3/TextLine0' in MMs[0].keys():
                     MMs[0]['LevelMenu/Title0/Title3/TextLine0'].update(txt=item_data[MMs[0][events.dict["name"]].item_name]["description"])
                     MMs[0]['LevelMenu/Title0/Title3/TextLine1'].update(

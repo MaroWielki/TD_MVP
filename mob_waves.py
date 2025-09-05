@@ -63,9 +63,9 @@ def wave_generator(input):
     levels_list[5] = Level("zmap")
     levels_list[6] = Level("long")
 
-    mobs_in_bunch = {"spider": 12, "skeleton": 4, "goblin": 5, "eye": 2}
+    mobs_in_bunch = {"spider": 12, "skeleton": 4, "goblin": 5, "eye": 4}
     waves_in_lvl = {1: 3, 2: 4, 3: 5, 4: 6, 5: 7, 6: 8}
-    bunches_in_wave = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 4,7:7,8:8}
+    bunches_in_wave = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 4,7:7,8:10}
 
 
     for lvl_index in range(1,7):

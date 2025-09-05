@@ -1020,16 +1020,26 @@ def generate_world_prices_and_enemies():
 
     #ret_wave=wave_generator(ret["enemies"])
 
-    for i in range(5):
-        ret["prices"][i]=[]
-        for j in range(len(available_prices)):
-            if randint(0,1)==1 and len(ret["prices"][i])<3:
-                ret["prices"][i].append(available_prices[j])
-        if len(ret["prices"][i])==0: ret["prices"][i].append(available_prices[randint(0,len(available_prices)-1)])
+    # V1
+    # for i in range(5):
+    #     ret["prices"][i]=[]
+    #     for j in range(len(available_prices)):
+    #         if randint(0,1)==1 and len(ret["prices"][i])<3:
+    #             ret["prices"][i].append(available_prices[j])
+    #     if len(ret["prices"][i])==0: ret["prices"][i].append(available_prices[randint(0,len(available_prices)-1)])
+    #
+    # i=5
+    # ret["prices"][i]=["victory"]
 
+    # V2
+    for i in range(5):
+        ret["prices"][i] = []
+        for price in prices_chances[i+1]:
+            if randint(0,100) <prices_chances[i+1][price]:
+                ret["prices"][i].append(price)
+        if len(ret["prices"][i])==0: ret["prices"][i].append("chicken")
     i=5
     ret["prices"][i]=["victory"]
-
 
     return ret
 
