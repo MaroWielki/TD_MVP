@@ -42,6 +42,7 @@ init_gold=300
 init_food=5
 
 init_gems=0
+
 init_lives=5
 database = {
     "fps": 60,

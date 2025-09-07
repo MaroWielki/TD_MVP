@@ -386,7 +386,7 @@ class MobSprite(pygame.sprite.Sprite):
 
 def cropp_img(path,frame_window_width,frame_window_height,border,start_x,start_y,frames_count,img_per_row_or_col,animation_orientation,color_key,px_scale_to_xy=None,init_rotation=0):
     pieces = []
-    img = pygame.image.load(path)
+    img = pygame.image.load(path).convert_alpha()
     img.set_colorkey(color_key)
     frame_index=0
     while frame_index<frames_count:

@@ -168,16 +168,17 @@ road_tiles_old = {
 "Xwa":"img/road/road_13.png"
 }
 
-mob_path1_data={
- 'START' : [64,20],
- 'POINTS': [[64,476],[476,476],[476,0]],
- 'FINISH' : [476,0]
-}
-mob_path2_data={
- 'START': [20, 20],
- 'POINTS': [[20, 320], [400, 320], [400, 120],[300,120],[300,220],[500,220],[500,20]],
- 'FINISH': [500, 20]
-}
+# mob_path1_data={
+#  'START' : [64,20],
+#  'POINTS': [[64,476],[476,476],[476,0]],
+#  'FINISH' : [476,0]
+# }
+# mob_path2_data={
+#  'START': [20, 20],
+#  'POINTS': [[20, 320], [400, 320], [400, 120],[300,120],[300,220],[500,220],[500,20]],
+#  'FINISH': [500, 20]
+# }
+
 animation_sprites={}
 animation_sprites["random_turret_sprite"] = {
 'IDLE': {
@@ -308,8 +309,414 @@ animation_sprites["arrow_sprite"] = {
 'color_key':(0,0,0)
 }
 }
-animation_sprites["spider_sprite"] = {
 
+
+animation_sprites["human_sprite"] = {
+'IDLE': {
+'path': "img/mobs/human/human_run_down.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_DOWN': {
+'path': "img/mobs/human/human_run_down.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':8,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_UP': {
+'path': "img/mobs/human/human_run_up.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':8,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_LEFT': {
+'path': "img/mobs/human/human_run_left.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':8,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_RIGHT': {
+'path': "img/mobs/human/human_run_right.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':8,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+}}
+
+animation_sprites["wolf_sprite"] = {
+'IDLE': {
+'path': "img/mobs/wolf/wolf_running-8-frames_north.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_DOWN': {
+'path': "img/mobs/wolf/wolf_running-8-frames_south.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':8,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_UP': {
+'path': "img/mobs/wolf/wolf_running-8-frames_north.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':8,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_LEFT': {
+'path': "img/mobs/wolf/wolf_running-8-frames_west.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':8,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_RIGHT': {
+'path': "img/mobs/wolf/wolf_running-8-frames_east.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':8,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+}}
+
+animation_sprites["soldier_sprite"] = {
+'IDLE': {
+'path': "img/mobs/soldier/medival_knight_with_heavy_armour_walking-3_east.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_DOWN': {
+'path': "img/mobs/soldier/medival_knight_with_heavy_armour_walking-3_south.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':6,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_UP': {
+'path': "img/mobs/soldier/medival_knight_with_heavy_armour_walking-3_north.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':6,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_LEFT': {
+'path': "img/mobs/soldier/medival_knight_with_heavy_armour_walking-3_west.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':6,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_RIGHT': {
+'path': "img/mobs/soldier/medival_knight_with_heavy_armour_walking-3_east.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':6,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+}}
+
+
+animation_sprites["goblin_sprite"] = {
+'IDLE': {
+'path': "img/mobs/zombie/zombie_run_down.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_DOWN': {
+'path': "img/mobs/zombie/zombie_walk_down.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':8,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_UP': {
+'path': "img/mobs/zombie/zombie_walk_up.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':8,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_LEFT': {
+'path': "img/mobs/zombie/zombie_walk_left.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':8,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_RIGHT': {
+'path': "img/mobs/zombie/zombie_walk_right.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':8,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+}}
+
+
+animation_sprites["snake_sprite"] = {
+'IDLE': {
+'path': "img/mobs/snake/snake_walking-10_east.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':6,
+'color_key':(255,255,255)
+},
+'WALK_DOWN': {
+'path': "img/mobs/snake/snake_walking-10_south.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':6,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_UP': {
+'path': "img/mobs/snake/snake_walking-10_north.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':6,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_LEFT': {
+'path': "img/mobs/snake/snake_walking-10_west.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':6,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_RIGHT': {
+'path': "img/mobs/snake/snake_walking-10_east.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':6,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+}}
+
+animation_sprites["skeleton_sprite"] = {
+'IDLE': {
+'path': "img/mobs/skeleton/skeleton_with_sword_walk-1_east.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_DOWN': {
+'path': "img/mobs/skeleton/skeleton_with_sword_walk-1_south.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':6,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_UP': {
+'path': "img/mobs/skeleton/skeleton_with_sword_walk-1_north.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':6,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_LEFT': {
+'path': "img/mobs/skeleton/skeleton_with_sword_walk-1_west.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':6,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+},
+'WALK_RIGHT': {
+'path': "img/mobs/skeleton/skeleton_with_sword_walk-1_east.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':1,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':6,
+'img_per_row_or_col':8,
+'color_key':(255,255,255)
+}}
+
+
+animation_sprites["spider_sprite"] = {
 'IDLE': {
 'path': "img/mobs/spider/spider_down.png",
 'frame_window_width':32,
@@ -442,145 +849,7 @@ animation_sprites["eye_sprite"] = {
 'img_per_row_or_col':9,
 'color_key':(255,255,255)
 }}
-### GOBLIN
-animation_sprites["goblin_sprite"] = {
-'WALK_DOWN': {
-'path': "img/zombie_n_skeleton2.png",
-'frame_window_width':32,
-'frame_window_height':64,
-'animation_orientation':"horizontal",
-'border':0,
-'anim_fps':10,
-'start_x':0,
-'start_y':0,
-'frames_count':3,
-'img_per_row_or_col':3,
-'color_key':(255,255,255)
-},
-'IDLE': {
-'path': "img/zombie_n_skeleton2.png",
-'frame_window_width':32,
-'frame_window_height':64,
-'animation_orientation':"horizontal",
-'border':0,
-'anim_fps':10,
-'start_x':0,
-'start_y':0,
-'frames_count':3,
-'img_per_row_or_col':3,
-'color_key':(255,255,255)
-},
-'WALK_LEFT': {
-'path': "img/zombie_n_skeleton2.png",
-'frame_window_width':32,
-'frame_window_height':64,
-'animation_orientation':"horizontal",
-'border':0,
-'anim_fps':10,
-'start_x':0,
-'start_y':64,
-'frames_count':3,
-'img_per_row_or_col':3,
-'color_key':(255,255,255)
- },
-'WALK_RIGHT': {
-'path': "img/zombie_n_skeleton2.png",
-'frame_window_width':32,
-'frame_window_height':64,
-'animation_orientation':"horizontal",
-'border':0,
-'anim_fps':10,
-'start_x':0,
-'start_y':128,
-'frames_count':3,
-'img_per_row_or_col':3,
-'color_key':(255,255,255)
-},
-'WALK_UP': {
-'path': "img/zombie_n_skeleton2.png",
-'frame_window_width':32,
-'frame_window_height':64,
-'animation_orientation':"horizontal",
-'border':0,
-'anim_fps':10,
-'start_x':0,
-'start_y':192,
-'frames_count':3,
-'img_per_row_or_col':3,
-'color_key':(255,255,255)
-}
-}
-### /GOBLIN
-### SKELETON
-animation_sprites["skeleton_sprite"] = {
-'IDLE': {
-'path': "img/zombie_n_skeleton2.png",
-'frame_window_width':32,
-'frame_window_height':64,
-'animation_orientation':"horizontal",
-'border':0,
-'anim_fps':10,
-'start_x':96,
-'start_y':0,
-'frames_count':1,
-'img_per_row_or_col':6,
-'color_key':(255,255,255)
-},
-'WALK_DOWN': {
-'path': "img/zombie_n_skeleton2.png",
-'frame_window_width':32,
-'frame_window_height':64,
-'animation_orientation':"horizontal",
-'border':0,
-'anim_fps':10,
-'start_x':96,
-'start_y':0,
-'frames_count':6,
-'img_per_row_or_col':6,
-'color_key':(255,255,255)
-},
-'WALK_LEFT': {
-'path': "img/zombie_n_skeleton2.png",
-'frame_window_width':32,
-'frame_window_height':64,
-'animation_orientation':"horizontal",
-'border':0,
-'anim_fps':10,
-'start_x':96,
-'start_y':64,
-'frames_count':6,
-'img_per_row_or_col':6,
-'color_key':(255,255,255)
-},
-'WALK_RIGHT': {
-'path': "img/zombie_n_skeleton2.png",
-'frame_window_width':32,
-'frame_window_height':64,
-'animation_orientation':"horizontal",
-'border':0,
-'anim_fps':10,
-'start_x':96,
-'start_y':128,
-'frames_count':6,
-'img_per_row_or_col':6,
-'color_key':(255,255,255)
-},
-'WALK_UP': {
-'path': "img/zombie_n_skeleton2.png",
-'frame_window_width':32,
-'frame_window_height':64,
-'animation_orientation':"horizontal",
-'border':0,
-'anim_fps':10,
-'start_x':96,
-'start_y':192,
-'frames_count':6,
-'img_per_row_or_col':6,
-'color_key':(255,255,255)
-},
-}
 
-### /SKELETON
 
 animation_sprites["catapult_sprite"]={
  'FIRE':{
@@ -612,6 +881,8 @@ animation_sprites["catapult_sprite"]={
 }
 }
 
+
+
 animation_sprites["cyclop_sprite"]={
  'FIRE':{
 'path': "img/Turrets/cyclop/cyclop.png",
@@ -641,6 +912,36 @@ animation_sprites["cyclop_sprite"]={
 'color_key':(0,0,0)
 }
 }
+
+animation_sprites["archer1_sprite"]={
+ 'FIRE':{
+'path': "img/Turrets/archer1/archer1.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':0,
+'fire_at_frame':13,
+'anim_fps':10,
+'start_x':0,
+'start_y':0,
+'frames_count':14,
+'img_per_row_or_col':7,
+'color_key':(100,100,100)
+},
+'IDLE': {
+'path': "img/Turrets/archer1/archer1.png",
+'frame_window_width':64,
+'frame_window_height':64,
+'animation_orientation':"horizontal",
+'border':0,
+'anim_fps':5,
+'start_x':0,
+'start_y':0,
+'frames_count':1,
+'img_per_row_or_col':1,
+'color_key':(100,100,100)
+}}
+
 ### ARCHER
 animation_sprites["archer_sprite"]={
 'WALK_RIGHT': {

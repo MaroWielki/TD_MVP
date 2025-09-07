@@ -46,7 +46,7 @@ def get_font_size_no_bigger_then(fnt:str,px_height:int,fnt_sizes:dict):
 
 def cropp_img2(path,frame_size_xy:tuple,start_xy,frames_count,row_step, col_step,img_per_row_or_col,color_key,frame_size_scaleto_xy:tuple=None):
     pieces = []
-    img = pygame.image.load(path)
+    img = pygame.image.load(path).convert_alpha()
     img.set_colorkey(color_key)
     frame_index=0
     while frame_index<frames_count:

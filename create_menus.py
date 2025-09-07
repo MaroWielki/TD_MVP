@@ -135,12 +135,20 @@ def create_world_menu(database):
 
     lvl_menu_size_xy=(12,15)
 
-    bg={1:"img/graveyard.png",
+    # bg={1:"img/graveyard.png",
+    #     2: "img/volcano.png",
+    #     3: "img/forest_fire.png",
+    #     #4: "img/island.png",
+    #     4: "img/pictures/island.png",
+    #     5: "img/desert.png",
+    #     6: "img/road.png"
+    #     }
+    bg={1:"img/pictures/skeletons.png",
         2: "img/volcano.png",
-        3: "img/forest_fire.png",
-        4: "img/island.png",
+        3: "img/pictures/wzgorza.png",
+        4: "img/pictures/island.png",
         5: "img/desert.png",
-        6: "img/road.png"
+        6: "img/pictures/zamek.png"
         }
     index=1
     for coords_x in range(3):

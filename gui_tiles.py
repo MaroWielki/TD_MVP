@@ -1,7 +1,7 @@
 import pygame
 
 available_turrets=["archer","catapult","cyclop"]
-available_enemies=["goblin","spider","skeleton"]
+available_enemies=["goblin","spider","skeleton","human","snake","soldier",]
 available_bosses=["eye"]
 available_bosses_price=["victory"]
 available_prices=["chicken","steak","gem","random_turret"]
@@ -54,6 +54,30 @@ mob_database={
         "speed":1,
         "award": 10
     },
+    "human_sprite":{
+        "init_hp": 85,
+        "speed": 2,
+        "award": 15
+
+    },
+    "snake_sprite": {
+        "init_hp": 75,
+        "speed": 1.75,
+        "award": 15
+
+    },
+    "soldier_sprite": {
+        "init_hp": 150,
+        "speed": 1.25,
+        "award": 20
+
+    },
+    "wolf_sprite": {
+        "init_hp": 60,
+        "speed": 2.25,
+        "award": 15
+
+    },
     "skeleton_sprite":{
         "init_hp":75,
         "speed":2,
@@ -104,6 +128,42 @@ item_data={
         "scale": 1,
         "sprite": "eye_sprite",
         "description":"Eye of despair",
+        "description1": "",
+"description2": "",
+"description3": ""
+    },
+    "human":{
+        "size": (1, 1),
+        "scale": 1,
+        "sprite": "human_sprite",
+        "description":"Lost Human",
+        "description1": "",
+"description2": "",
+"description3": ""
+    },
+    "soldier":{
+        "size": (1, 1),
+        "scale": 1,
+        "sprite": "soldier_sprite",
+        "description":"Heavy knight",
+        "description1": "",
+"description2": "",
+"description3": ""
+    },
+    "snake":{
+        "size": (1, 1),
+        "scale": 1,
+        "sprite": "snake_sprite",
+        "description":"Ninja",
+        "description1": "",
+"description2": "",
+"description3": ""
+    },
+    "wolf":{
+        "size": (1, 1),
+        "scale": 1,
+        "sprite": "wolf_sprite",
+        "description":"Warewolf",
         "description1": "",
 "description2": "",
 "description3": ""
@@ -185,7 +245,7 @@ item_data={
     "archer": {
         "size": (1, 1),
         "scale": 1,
-        "sprite":"archer_sprite",
+        "sprite":"archer1_sprite",
         "cost": 50,
 "food_cost":2,
 "gems_cost":0,
@@ -216,7 +276,9 @@ class Item:
     def __init__(self, tile_size_xy:tuple,name):
         self.name=name
         self.data=item_data[name]
-        self.image=pygame.transform.scale(pygame.image.load("img/items/"+name+".png"),(tile_size_xy[0]*self.data["scale"],tile_size_xy[1]*self.data["scale"]))
+        img=pygame.image.load("img/items/"+name+".png")
+        img.set_colorkey((255,255,255))
+        self.image=pygame.transform.scale(img,(tile_size_xy[0]*self.data["scale"],tile_size_xy[1]*self.data["scale"]))
 
 
 
