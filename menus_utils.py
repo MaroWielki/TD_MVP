@@ -324,9 +324,10 @@ class ItemMenu(pygame.sprite.Sprite):
                                                                   self.parent_grid.tile_size_xy)
 
         #self.legal_to_place=True
-        if self.occupy_grid_start_in_tiles_xy[0]<0 or self.occupy_grid_start_in_tiles_xy[1]<0:
-            pass
-            #self.legal_to_place = False
+        if self.occupy_grid_start_in_tiles_xy[0]<0 or self.occupy_grid_start_in_tiles_xy[1]<0 or self.occupy_grid_start_in_tiles_xy[0]>=self.parent_grid.size_in_tiles_xy[0] or self.occupy_grid_start_in_tiles_xy[1]>=self.parent_grid.size_in_tiles_xy[1] :
+            #pass
+            if self.build_or_place_on_grid=="place":
+                self.legal_to_place = False
         tmp=False
         for x in range(self.data["size"][0]):
             for y in range(self.data["size"][1]):
