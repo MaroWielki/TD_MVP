@@ -642,6 +642,8 @@ class MenuButton(pygame.sprite.Sprite):
         if self.action == "armory_upgrade_turret":
             sent_action_event("set_armory_change", name=self.name)
             print(self.name)
+        if self.action == "start_battle":
+            sent_action_event("start_battle_hoover", name=self.name)
 
 
     def LMB_down(self):
@@ -876,6 +878,11 @@ def sent_action_event(action:str,**kwargs):
             "action": "close_root_menu",
             "button_name": button_name
         }
+
+    if action=="start_battle_hoover":
+        ev_dic = {
+            "action": "start_battle_hoover"
+        }
     if action=="quit_game":
         ev_dic = {
             "action": "quit_game"
@@ -1006,15 +1013,24 @@ def generate_world_prices_and_enemies():
     ret["enemies"]={}
     ret["prices"]={}
     #Enemies
-    for i in range(5):
-        ret["enemies"][i]=[]
-        for j in range(len(available_enemies)):
-            if randint(0,1)==1:
-                ret["enemies"][i].append(available_enemies[j])
-            if len(ret["enemies"][i]) == 0: ret["enemies"][i].append(available_enemies[randint(0, len(available_enemies)-1)])
 
-    i=5
-    ret["enemies"][i]= ["eye","goblin","skeleton","spider"]
+    # for i in range(5):
+    #     ret["enemies"][i]=[]
+    #     for j in range(len(available_enemies)):
+    #         if randint(0,1)==1:
+    #             ret["enemies"][i].append(available_enemies[j])
+    #         if len(ret["enemies"][i]) == 0: ret["enemies"][i].append(available_enemies[randint(0, len(available_enemies)-1)])
+    # i=5
+    # ret["enemies"][i]= ["eye","goblin","skeleton","spider"]
+    #
+
+    ### V2
+    for i in range(6):
+        ret["enemies"][i] = []
+        for enemy in enemies_chances[i+1]:
+            if randint(0, 100) < enemies_chances[i + 1][enemy]:
+                ret["enemies"][i].append(enemy)
+        if len(ret["enemies"][i]) == 0: ret["enemies"][i].append("skeleton")
 
 
 
@@ -1030,6 +1046,11 @@ def generate_world_prices_and_enemies():
     #
     # i=5
     # ret["prices"][i]=["victory"]
+
+
+
+
+
 
     # V2
     for i in range(5):

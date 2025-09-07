@@ -331,6 +331,13 @@ while True:
                 All_menus_groups_ordered = []
                 All_menus_groups_ordered.append(create_armory_menu(database))
 
+            if events.dict["action"]=="start_battle_hoover":
+                if "LevelMenu/Title0/Title0/gridActive" in All_menus_groups_ordered[0][1].keys():
+                    if len(All_menus_groups_ordered[0][1]['LevelMenu/Title0/Title0/gridActive'].members_group)==0:
+                        MMs[0]['LevelMenu/Title0/Title3/TextLine0'].update(txt="You need at lease one")
+                        MMs[0]['LevelMenu/Title0/Title3/TextLine1'].update(txt="active turret to start")
+                        MMs[0]['LevelMenu/Title0/Title3/TextLine2'].update(txt="the battle")
+
             if events.dict["action"]=="start_battle":
                 database["wave_shop_items"]=[]
                 database["gold"]=database["init_gold"]

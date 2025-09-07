@@ -52,7 +52,7 @@ enemies_chances={
 1:
                     {
                         "spider":60,
-                        "skeleton":70,
+                        "skeleton":100,
                         "human":5,
                         "wolf":0,
                         "snake":0,
@@ -63,7 +63,7 @@ enemies_chances={
 2:
                     {
                         "spider":60,
-                        "skeleton":40,
+                        "skeleton":100,
                         "human":30,
                         "wolf":10,
                         "snake":0,
@@ -77,7 +77,7 @@ enemies_chances={
                         "skeleton":20,
                         "human":40,
                         "wolf":20,
-                        "snake":40,
+                        "snake":100,
                         "goblin":0,
                         "soldier":0,
                         "eye":0
@@ -89,7 +89,7 @@ enemies_chances={
                         "human":0,
                         "wolf":60,
                         "snake":20,
-                        "goblin":60,
+                        "goblin":100,
                         "soldier":10,
                         "eye":0
                     },
@@ -101,7 +101,7 @@ enemies_chances={
                         "wolf":40,
                         "snake":20,
                         "goblin":30,
-                        "soldier":70,
+                        "soldier":100,
                         "eye":0
                     },
 6:

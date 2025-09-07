@@ -356,21 +356,23 @@ class MobSprite(pygame.sprite.Sprite):
             if abs(self.x - (self.path.finish[0]+self.path_offset[0]))<=self.move_speed and abs(self.y - (self.path.finish[1]+self.path_offset[1]))<=self.move_speed:
                 self.reached_finish=True
             else:
-                if self.x < self.path.points[self.path_point_index][0]+self.path_offset[0]:
+                if self.x+self.move_speed < self.path.points[self.path_point_index][0]+self.path_offset[0]:
                     dx=self.move_speed
                     self.animation_name="WALK_RIGHT"
-                if self.x > self.path.points[self.path_point_index][0]+self.path_offset[0]:
+                elif self.x-self.move_speed > self.path.points[self.path_point_index][0]+self.path_offset[0]:
                     dx=-self.move_speed
                     self.animation_name="WALK_LEFT"
-                if self.y < self.path.points[self.path_point_index][1]+self.path_offset[1]:
+                elif self.y+self.move_speed < self.path.points[self.path_point_index][1]+self.path_offset[1]:
                     dy=self.move_speed
                     self.animation_name="WALK_DOWN"
-                if self.y > self.path.points[self.path_point_index][1]+self.path_offset[1]:
+                elif self.y-self.move_speed > self.path.points[self.path_point_index][1]+self.path_offset[1]:
                     dy=-self.move_speed
                     self.animation_name="WALK_UP"
 
+
                 if abs(self.x - (self.path.points[self.path_point_index][0]+self.path_offset[0]))<=self.move_speed and abs(self.y - (self.path.points[self.path_point_index][1]+self.path_offset[1]))<=self.move_speed:
                     self.path_point_index+=1
+
 
         if x is not None and y is not None:
             self.x = x
@@ -607,7 +609,8 @@ def spawn_mobs(wave_mob,mobs,database,mob_path1_data):
     tmp_time = pygame.time.get_ticks()
     for w_mob in wave_mob:
         if tmp_time >= w_mob[0]:
-            pth_off = [randint(-2, 2) * 2, randint(-2, 2) * 2]
+            rnd=randint(-2, 2)
+            pth_off = [rnd * mob_database[w_mob[1].name]["speed"],rnd * mob_database[w_mob[1].name]["speed"]]
             mob_path_1 = MobPath(mob_path1_data["START"], mob_path1_data["FINISH"], mob_path1_data["POINTS"])
             mobs.add(
                 MobSprite(w_mob[1], database["fps"], mob_path_1.start[0] + pth_off[0], mob_path_1.start[1] + pth_off[1],
