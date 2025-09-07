@@ -391,9 +391,13 @@ while True:
 
 
                 database["gold"]+=events.dict["parent_object"].db["sell_price"]
+                print(events.dict["parent_object"])
                 events.dict["parent_object"].remove(turret_group)
+
                 building_allowed_map=exclude_from_build_map(building_allowed_map, turret.rect,include=True)
+                create_wave_turret_details(wave_menu, selected_turret, database, destroy=True)
                 selected_turret=None
+
 
             if events.dict["action"] == "upgrade_turret":
                 if database["gold"] >= events.dict["parent_object"].db["upgrade_price"]:

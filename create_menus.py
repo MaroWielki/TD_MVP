@@ -16,8 +16,7 @@ def create_main_menu(database):
     MM['MainMenu/button1'] = MM['MainMenu'].add(
         MenuButton(MM['MainMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], 2), (database["resolution_in_tiles_percent_xy"][20][0]*4, 8), "MainMenu/button1", text="Start new game", color=3,action="start_new_game"))
 
-    MM['MainMenu/button2'] = MM['MainMenu'].add(
-        MenuButton(MM['MainMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], 5), (database["resolution_in_tiles_percent_xy"][20][0]*4, 8), "MainMenu/button2", text="Restart", color=3,action="restart_game"))
+    #MM['MainMenu/button2'] = MM['MainMenu'].add(MenuButton(MM['MainMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], 5), (database["resolution_in_tiles_percent_xy"][20][0]*4, 8), "MainMenu/button2", text="Restart", color=3,action="restart_game"))
 
     MM['MainMenu/button3'] = MM['MainMenu'].add(
         MenuButton(MM['MainMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], 8), (database["resolution_in_tiles_percent_xy"][20][0]*4, 8), "MainMenu/button3", text="Quit", color=3,action="quit_game"))
@@ -50,7 +49,7 @@ def create_world_menu(database):
         database["resolution_in_tiles_percent_xy"][lvl_menu_grid[1][coords_y]][1]),
                                                            (database["resolution_in_tiles_percent_xy"][40][0],
                                                             database["resolution_in_tiles_percent_xy"][15][1]),
-                                                           "LevelMenu/Title0", "Title0",
+                                                           "LevelMenu/Title0", "Your household",
                                                            tile_size_xy=database["double_tile_size_xy"],
                                                            draggable=True))
 
