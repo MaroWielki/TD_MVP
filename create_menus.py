@@ -144,10 +144,10 @@ def create_world_menu(database):
     #     6: "img/road.png"
     #     }
     bg={1:"img/pictures/skeletons.png",
-        2: "img/volcano.png",
+        2: "img/pictures/volcano.png",
         3: "img/pictures/wzgorza.png",
         4: "img/pictures/island.png",
-        5: "img/desert.png",
+        5: "img/pictures/desert.png",
         6: "img/pictures/zamek.png"
         }
     index=1

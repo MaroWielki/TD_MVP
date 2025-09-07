@@ -48,40 +48,109 @@ prices_chances={
                 "victory":100, }
 }
 
+enemies_chances={
+1:
+                    {
+                        "spider":60,
+                        "skeleton":70,
+                        "human":5,
+                        "wolf":0,
+                        "snake":0,
+                        "goblin":0,
+                        "soldier":0,
+                        "eye":0
+                    },
+2:
+                    {
+                        "spider":60,
+                        "skeleton":40,
+                        "human":30,
+                        "wolf":10,
+                        "snake":0,
+                        "goblin":0,
+                        "soldier":0,
+                        "eye":0
+                    },
+3:
+                    {
+                        "spider":60,
+                        "skeleton":20,
+                        "human":40,
+                        "wolf":20,
+                        "snake":40,
+                        "goblin":0,
+                        "soldier":0,
+                        "eye":0
+                    },
+4:
+                    {
+                        "spider":30,
+                        "skeleton":0,
+                        "human":0,
+                        "wolf":60,
+                        "snake":20,
+                        "goblin":60,
+                        "soldier":10,
+                        "eye":0
+                    },
+5:
+                    {
+                        "spider":80,
+                        "skeleton":0,
+                        "human":0,
+                        "wolf":40,
+                        "snake":20,
+                        "goblin":30,
+                        "soldier":70,
+                        "eye":0
+                    },
+6:
+    {
+        "spider": 0,
+        "skeleton": 0,
+        "human": 0,
+        "wolf": 100,
+        "snake": 0,
+        "goblin": 100,
+        "soldier": 100,
+        "eye": 100
+    }
+}
+
 mob_database={
     "goblin_sprite":{
-        "init_hp":100,
+        "init_hp":125,
         "speed":1,
-        "award": 10
+        "award": 15
     },
     "human_sprite":{
         "init_hp": 85,
         "speed": 2,
-        "award": 15
+        "award": 10
 
     },
     "snake_sprite": {
-        "init_hp": 75,
+        "init_hp": 85,
         "speed": 1.75,
         "award": 15
 
     },
     "soldier_sprite": {
-        "init_hp": 150,
+        "init_hp": 200,
         "speed": 1.25,
         "award": 20
 
     },
     "wolf_sprite": {
-        "init_hp": 60,
-        "speed": 2.25,
-        "award": 15
+        "init_hp": 45,
+        "speed": 3,
+        "award": 10
 
     },
     "skeleton_sprite":{
-        "init_hp":75,
+        "init_hp":50,
         "speed":2,
-        "award": 15
+        "award": 10
     },
     "spider_sprite":{
         "init_hp":25,

@@ -43,8 +43,8 @@ turret_init_database={
                  "upgrade_price":25,
                  "target_type":"most_hp",
                  "projectile_type":"arrow",
-"projectile_speed":10,
-                 "sprite_name":"archer_sprite"
+"projectile_speed":5,
+                 "sprite_name":"archer1_sprite"
         },
     "catapult":
         {"dmg": 50,
@@ -306,7 +306,7 @@ animation_sprites["arrow_sprite"] = {
 'start_y':0,
 'frames_count':1,
 'img_per_row_or_col':1,
-'color_key':(0,0,0)
+'color_key':(255,255,102)
 }
 }
 
@@ -536,7 +536,7 @@ animation_sprites["goblin_sprite"] = {
 'anim_fps':10,
 'start_x':0,
 'start_y':0,
-'frames_count':8,
+'frames_count':6,
 'img_per_row_or_col':8,
 'color_key':(255,255,255)
 },
@@ -549,7 +549,7 @@ animation_sprites["goblin_sprite"] = {
 'anim_fps':10,
 'start_x':0,
 'start_y':0,
-'frames_count':8,
+'frames_count':6,
 'img_per_row_or_col':8,
 'color_key':(255,255,255)
 },
@@ -562,7 +562,7 @@ animation_sprites["goblin_sprite"] = {
 'anim_fps':10,
 'start_x':0,
 'start_y':0,
-'frames_count':8,
+'frames_count':6,
 'img_per_row_or_col':8,
 'color_key':(255,255,255)
 },
@@ -575,7 +575,7 @@ animation_sprites["goblin_sprite"] = {
 'anim_fps':10,
 'start_x':0,
 'start_y':0,
-'frames_count':8,
+'frames_count':6,
 'img_per_row_or_col':8,
 'color_key':(255,255,255)
 }}
