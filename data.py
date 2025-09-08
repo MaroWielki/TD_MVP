@@ -43,7 +43,7 @@ turret_init_database={
                  "upgrade_price":25,
                  "target_type":"most_hp",
                  "projectile_type":"arrow",
-"projectile_speed":5,
+"projectile_speed":10,
                  "sprite_name":"archer1_sprite"
         },
     "catapult":
@@ -62,7 +62,7 @@ turret_init_database={
          "upgrade_price": 50,
          "target_type": "most_hp",
          "projectile_type":"bomb",
-    "projectile_speed":5,
+    "projectile_speed":10,
          "sprite_name": "catapult_sprite"
          },
     "cyclop":

@@ -11,36 +11,36 @@ prices_chances={
 1:
                     {
                         "chicken":80,
-                        "steak":10,
-                        "gem":10,
+                        "steak":20,
+                        "gem":15,
                         "random_turret":5
                     },
 2:
                     {
                         "chicken":70,
                         "steak":30,
-                        "gem":15,
+                        "gem":20,
                         "random_turret":5
                     },
 3:
                     {
                         "chicken":60,
                         "steak":40,
-                        "gem":25,
+                        "gem":30,
                         "random_turret":20
                     },
 4:
                     {
                         "chicken":50,
                         "steak":60,
-                        "gem":35,
+                        "gem":40,
                         "random_turret":25
                     },
 5:
                     {
                         "chicken":50,
                         "steak":50,
-                        "gem":40,
+                        "gem":50,
                         "random_turret":30
                     },
 6:
