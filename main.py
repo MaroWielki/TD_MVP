@@ -159,6 +159,7 @@ while True:
             projectiles=pygame.sprite.Group()
             mobs = pygame.sprite.Group()
             grand_prices(database,database["world_prices_and_enemies"]["prices"][database["current_level"]-1])
+            database["reroll_cost"]=0
             selected_turret = None
 
         ### TURRETS
@@ -322,8 +323,13 @@ while True:
                         database["reroll_cost"]+=1
                 else:
                     All_menus_groups_ordered= []
-                    All_menus_groups_ordered.append(create_world_menu(database))
-                    levels_list = wave_generator(database["world_prices_and_enemies"]["enemies"])
+                    if events.dict["button_name"]!="ShopMenu/button0" and events.dict["button_name"]!="ArmoryMenu/button0":
+                        regenerate=True
+                    else:
+                        regenerate=False
+                    All_menus_groups_ordered.append(create_world_menu(database,regenerate=regenerate))
+                    if regenerate:
+                        levels_list = wave_generator(database["world_prices_and_enemies"]["enemies"])
 
             if events.dict["action"]=="mainmenu":
                 All_menus_groups_ordered = []

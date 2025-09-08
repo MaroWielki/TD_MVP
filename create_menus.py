@@ -25,8 +25,9 @@ def create_main_menu(database):
 
 
 
-def create_world_menu(database):
-    database["world_prices_and_enemies"]=generate_world_prices_and_enemies()
+def create_world_menu(database,regenerate=True):
+    if regenerate: database["world_prices_and_enemies"]=generate_world_prices_and_enemies()
+
     LM = {}
     level_menu = pygame.sprite.Group()
 
