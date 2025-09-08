@@ -66,6 +66,11 @@ def create_world_menu(database):
                    (database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "LevelMenu/Title0/button1",
                    text="Armory", color=3, action="open_armory"))
 
+    LM['LevelMenu/Title0/button2'] = LM['LevelMenu/Title0'].add(
+        MenuButton(LM['LevelMenu/Title0'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][67][0], 9),
+                   (database["resolution_in_tiles_percent_xy"][10][0] * 4, 8), "LevelMenu/Title0/button2",
+                   text="Reroll", color=3, action="start_new_game"))
+
 
     ### ACTIVE
     LM['LevelMenu/Title0/Title0'] = LM['LevelMenu/Title0'].add(
@@ -116,16 +121,16 @@ def create_world_menu(database):
                   tile_size_xy=database["double_tile_size_xy"], draggable=False))
 
     LM['LevelMenu/Title0/Title3/TextLine0'] = LM['LevelMenu/Title0/Title3'].add(
-        MenuText(LM['LevelMenu/Title0/Title3'].px_start_xy, database, (1, 2), "LevelMenu/Title0/Title2/TextLine0", "Choose turrets"))
+        MenuText(LM['LevelMenu/Title0/Title3'].px_start_xy, database, (1, 2), "LevelMenu/Title0/Title2/TextLine0", ""))
     LM['LevelMenu/Title0/Title3/TextLine1'] = LM['LevelMenu/Title0/Title3'].add(
         MenuText(LM['LevelMenu/Title0/Title3'].px_start_xy, database, (1, 4), "LevelMenu/Title0/Title2/TextLine1",
-                 "Line 1"))
+                 ""))
     LM['LevelMenu/Title0/Title3/TextLine2'] = LM['LevelMenu/Title0/Title3'].add(
         MenuText(LM['LevelMenu/Title0/Title3'].px_start_xy, database, (1, 6), "LevelMenu/Title0/Title2/TextLine2",
-                 "Line 3"))
+                 ""))
     LM['LevelMenu/Title0/Title3/TextLine3'] = LM['LevelMenu/Title0/Title3'].add(
         MenuText(LM['LevelMenu/Title0/Title3'].px_start_xy, database, (1, 8), "LevelMenu/Title0/Title2/TextLine3",
-                 "Line 4"))
+                 ""))
 
 
     ### WORLDS
@@ -377,9 +382,8 @@ def create_victory_menu(database):
                     tur=None
             database["world_prices_and_enemies"]["prices"][lvl-1][i]=tur
 
-            LM['VictoryMenu/gridPrices/ItemPrice'+str(i)] = LM[
-            'VictoryMenu/gridPrices'].add(
-            ItemMenu(LM['VictoryMenu/gridPrices'].px_start_xy, database, (i, 0),
+            if tur is not None:
+                LM['VictoryMenu/gridPrices/ItemPrice'+str(i)] = LM['VictoryMenu/gridPrices'].add(ItemMenu(LM['VictoryMenu/gridPrices'].px_start_xy, database, (i, 0),
                      'VictoryMenu/gridPrices' + str(i),
                      tile_size_xy=database["quadrupal_tile_size_xy"],
                      item_name=database["world_prices_and_enemies"]["prices"][lvl-1][i],

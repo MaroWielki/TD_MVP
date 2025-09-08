@@ -252,6 +252,7 @@ class ItemMenu(pygame.sprite.Sprite):
             self.tile_size_xy=tile_size_xy
         self.legal_to_place=True
         self.name=name
+        self.build_or_place_on_grid=None
         self.draggable=draggable
         self.item_name=item_name
         self.build_or_place=""
@@ -645,6 +646,8 @@ class MenuButton(pygame.sprite.Sprite):
             print(self.name)
         if self.action == "start_battle":
             sent_action_event("start_battle_hoover", name=self.name)
+        if self.action == "start_new_game":
+            sent_action_event("reroll_hoover", name=self.name)
 
 
     def LMB_down(self):
@@ -894,7 +897,13 @@ def sent_action_event(action:str,**kwargs):
         }
     if action=="start_new_game":
         ev_dic = {
-            "action": "start_new_game"
+            "action": "start_new_game",
+            "button_name": kwargs.get("button_name", None)
+
+        }
+    if action=="reroll_hoover":
+        ev_dic={
+            "action": "reroll_hoover"
         }
     if action=="upgrade_gold":
         ev_dic = {

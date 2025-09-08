@@ -12,36 +12,36 @@ prices_chances={
                     {
                         "chicken":80,
                         "steak":10,
-                        "gem":5,
+                        "gem":10,
                         "random_turret":5
                     },
 2:
                     {
                         "chicken":70,
-                        "steak":20,
-                        "gem":5,
+                        "steak":30,
+                        "gem":15,
                         "random_turret":5
                     },
 3:
                     {
                         "chicken":60,
-                        "steak":30,
-                        "gem":5,
-                        "random_turret":5
+                        "steak":40,
+                        "gem":25,
+                        "random_turret":20
                     },
 4:
                     {
                         "chicken":50,
-                        "steak":10,
-                        "gem":10,
-                        "random_turret":10
+                        "steak":60,
+                        "gem":35,
+                        "random_turret":25
                     },
 5:
                     {
-                        "chicken":10,
+                        "chicken":50,
                         "steak":50,
-                        "gem":20,
-                        "random_turret":20
+                        "gem":40,
+                        "random_turret":30
                     },
 6:
     {
@@ -303,7 +303,7 @@ item_data={
         "scale":1,
         "sprite":"catapult_sprite",
         "cost": 100,
-        "food_cost":3,
+        "food_cost":2,
 "gems_cost":0,
         "name":"catapult",
         "description":"catapult",
@@ -316,7 +316,7 @@ item_data={
         "scale": 1,
         "sprite":"archer1_sprite",
         "cost": 50,
-"food_cost":2,
+"food_cost":1,
 "gems_cost":0,
         "name":"archer",
         "description": "archer",

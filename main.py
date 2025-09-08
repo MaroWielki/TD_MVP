@@ -39,7 +39,7 @@ for p in range(150):
     resolution_in_tiles_percent_xy[p] = (floor(resolution_in_tiles[0] * p / 100),
                                          floor(resolution_in_tiles[1] * p / 100))
 init_gold=300
-init_food=5
+init_food=3
 
 init_gems=0
 
@@ -64,6 +64,7 @@ database = {
     "gems_change":0,
     "gems": init_gems,
     "armory_change":(),
+    "reroll_cost":0,
     "wave_shop_items":[],
     "available_turrets":["archer"],
     #"available_turrets":["archer","cyclop","catapult"],
@@ -312,16 +313,23 @@ while True:
                 exit()
 
             if events.dict["action"]=="start_new_game":
-                All_menus_groups_ordered= []
-                All_menus_groups_ordered.append(create_world_menu(database))
-                levels_list = wave_generator(database["world_prices_and_enemies"]["enemies"])
+                if "LevelMenu/Title0/button2" == events.dict["button_name"]:
+                    if database["food"]-database["reroll_cost"]>=0:
+                        All_menus_groups_ordered= []
+                        All_menus_groups_ordered.append(create_world_menu(database))
+                        levels_list = wave_generator(database["world_prices_and_enemies"]["enemies"])
+                        database["food"]-=database["reroll_cost"]
+                        database["reroll_cost"]+=1
+                else:
+                    All_menus_groups_ordered= []
+                    All_menus_groups_ordered.append(create_world_menu(database))
+                    levels_list = wave_generator(database["world_prices_and_enemies"]["enemies"])
 
             if events.dict["action"]=="mainmenu":
                 All_menus_groups_ordered = []
                 All_menus_groups_ordered.append(create_main_menu(database))
                 database["food"] = init_food
                 database["gems"] = init_gems
-
 
             if events.dict["action"]=="open_shop":
                 All_menus_groups_ordered = []
@@ -330,6 +338,11 @@ while True:
             if events.dict["action"]=="open_armory":
                 All_menus_groups_ordered = []
                 All_menus_groups_ordered.append(create_armory_menu(database))
+
+            if events.dict["action"] == "reroll_hoover":
+                if 'LevelMenu/Title0/Title3/TextLine0' in All_menus_groups_ordered[0][1].keys():
+                    All_menus_groups_ordered[0][1]['LevelMenu/Title0/Title3/TextLine0'].update(txt="Reroll prices and enemies")
+                    All_menus_groups_ordered[0][1]['LevelMenu/Title0/Title3/TextLine1'].update(txt="food cost: "+str(database["reroll_cost"]))
 
             if events.dict["action"]=="start_battle_hoover":
                 if "LevelMenu/Title0/Title0/gridActive" in All_menus_groups_ordered[0][1].keys():
@@ -366,12 +379,12 @@ while True:
                 #wave_mob = generate_wave(levels_list[database["current_level"]].waves(database["wave_number"]).number, AnimationData(levels_list[database["current_level"]].waves(database["wave_number"]).mob), pygame.time.get_ticks(),pygame.time.get_ticks() + (10 * 1000))
 
                 wave_menu['WaveMenu/Stats/Gold'].update(txt="Gold: " + str(database["gold"]))
-                wave_menu['WaveMenu/Stats/Wave'].update(txt="Wave: " + str(database["wave_number"]))
+                wave_menu['WaveMenu/Stats/Wave'].update(txt="Wave: " + str(database["wave_number"])+" / "+str(len(levels_list[database["current_level"]].waves)))
 
             if events.dict["action"]=="next_wave":
                 if database["wave_number"] < len(levels_list[database["current_level"]].waves):
                     database["wave_number"] += 1
-                    wave_menu['WaveMenu/Stats/Wave'].update(txt="Wave: " + str(database["wave_number"]))
+                    wave_menu['WaveMenu/Stats/Wave'].update(txt="Wave: " + str(database["wave_number"])+" / "+str(len(levels_list[database["current_level"]].waves)))
 
                     wave_mob+= generate_wave2(database,levels_list)
                         #wave_mob+= generate_wave(levels_list[database["current_level"]].waves(database["wave_number"]).number, AnimationData(levels_list[database["current_level"]].waves(database["wave_number"]).mob), pygame.time.get_ticks(),pygame.time.get_ticks() + (10 * 1000))
