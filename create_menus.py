@@ -115,6 +115,9 @@ def create_world_menu(database,regenerate=True):
     LM['LevelMenu/Title0/Title2/TextGems_change'] = LM['LevelMenu/Title0/Title2'].add(
         MenuText(LM['LevelMenu/Title0/Title2'].px_start_xy, database, (7, 5), "LevelMenu/Title0/Title2/TextGems_change", "",variable_name="gems_change"))
 
+    LM['LevelMenu/Title0/Title2/TextDay'] = LM['LevelMenu/Title0/Title2'].add(
+        MenuText(LM['LevelMenu/Title0/Title2'].px_start_xy, database, (1, 7), "LevelMenu/Title0/Title2/TextDay", "Day: "))
+
     LM['LevelMenu/Title0/Title3'] = LM['LevelMenu/Title0'].add(
         MenuTitle(LM['LevelMenu/Title0'].px_start_xy, database,
                   (24, 1),
@@ -419,7 +422,7 @@ def create_defeat_menu(database):
     LM['DefeatMenu/button0'] = LM['DefeatMenu'].add(
         MenuButton(LM['DefeatMenu'].px_start_xy, database, (database["resolution_in_tiles_percent_xy"][15][0], database["resolution_in_tiles_percent_xy"][25][1]),
                    (database["resolution_in_tiles_percent_xy"][16][0] * 4, 16), "DefeatMenu/button0",
-                   text="OK", color=3, action="mainmenu"))
+                   text="OK", color=3, action="start_new_game")) #mainmenu
 
     return defeat_menu, LM
 
@@ -437,7 +440,7 @@ def create_game_victory_menu(database):
 
     LM['GameVictoryMenu/Text0'] = LM['GameVictoryMenu'].add(
         MenuText(LM['GameVictoryMenu'].px_start_xy, database, (2, 5), "GameVictoryMenu/Text0",
-                 "Congratulations! You have won the game"))
+                 "Congratulations! You have won the game in "+str(database["day"])+" days."))
 
 
     LM['GameVictoryMenu/button0'] = LM['GameVictoryMenu'].add(

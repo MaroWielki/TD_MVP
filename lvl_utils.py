@@ -680,6 +680,7 @@ def update_shop_details(menu,database):
         database["gems_change"] -= active.data["gems_cost"]
     menu["LevelMenu/Title0/Title2/TextFood"].update(txt="Food: " + str(database["food"]))
     menu["LevelMenu/Title0/Title2/TextGems"].update(txt="Gems: " + str(database["gems"]))
+    menu["LevelMenu/Title0/Title2/TextDay"].update(txt="Day: " + str(database["day"]))
     if database["food_change"] !=0:
         menu["LevelMenu/Title0/Title2/TextFood_change"].update(txt=str(database["food_change"]))
     else:

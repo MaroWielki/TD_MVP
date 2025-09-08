@@ -65,6 +65,7 @@ database = {
     "gems": init_gems,
     "armory_change":(),
     "reroll_cost":0,
+    "day":1,
     "wave_shop_items":[],
     "available_turrets":["archer"],
     #"available_turrets":["archer","cyclop","catapult"],
@@ -142,6 +143,8 @@ while True:
             All_menus_groups_ordered = []
             turret_group = pygame.sprite.Group()
             All_menus_groups_ordered.append(create_defeat_menu(database))
+            database["reroll_cost"] = 0
+            database["day"] += 1
             projectiles = pygame.sprite.Group()
             mobs = pygame.sprite.Group()
             selected_turret=None
@@ -160,6 +163,7 @@ while True:
             mobs = pygame.sprite.Group()
             grand_prices(database,database["world_prices_and_enemies"]["prices"][database["current_level"]-1])
             database["reroll_cost"]=0
+            database["day"]+=1
             selected_turret = None
 
         ### TURRETS
@@ -336,6 +340,7 @@ while True:
                 All_menus_groups_ordered.append(create_main_menu(database))
                 database["food"] = init_food
                 database["gems"] = init_gems
+                database["day"]=1
 
             if events.dict["action"]=="open_shop":
                 All_menus_groups_ordered = []
